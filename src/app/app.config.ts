@@ -1,8 +1,24 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormlyModule } from '@ngx-formly/core';
 
 import { routes } from './app.routes';
+import { InputFieldType } from './formly/components/formly-textarea/input';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    importProvidersFrom([
+      FormlyModule.forRoot({ types: [{ name: 'input', component:  InputFieldType}] }),
+      BrowserModule,
+      BrowserAnimationsModule
+    ]),
+  ],
 };
