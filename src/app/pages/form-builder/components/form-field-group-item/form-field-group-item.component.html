@@ -1,0 +1,62 @@
+<div
+  class="relative px-4 pl-6 py-2 group border border-transparent hover:border-indigo-500/50 animate__animated"
+  (click)="openMenuForSelectedField($event)"
+  (clickOutside)="closeMenuForSelectedField()"
+  [ngClass]="{
+    active: formBuilderTypesService.selectedField()?.id === field.id,
+    animate__bounce: removeElement
+  }"
+  appClickOutside
+>
+  <header
+    class="flex items-center w-[40px] justify-center absolute top-[50%] translate-y-[-50%] -right-[64px] bg-white z-10"
+    style="border-radius: 100px; box-shadow: 0 0 4px 0 #0000002b"
+    *ngIf="formBuilderTypesService.selectedField()?.id === field.id"
+  >
+    <ul class="flex flex-col items-center py-2 gap-1">
+      <li
+        class="w-[32px] h-[32px] hover:bg-indigo-500/20 rounded-full flex items-center justify-center"
+      >
+        <button class="w-[20px] h-[20px]">
+          <ng-icon
+            name="ionSettingsOutline"
+            class="text-dark-900 dark:text-white w-full h-full text-[20px]"
+          ></ng-icon>
+        </button>
+      </li>
+      <li
+        class="w-[32px] h-[32px] hover:bg-indigo-500/20 rounded-full flex items-center justify-center"
+        (click)="cloneField()"
+      >
+        <button class="w-[20px] h-[20px]">
+          <ng-icon
+            name="ionCopyOutline"
+            class="text-dark-900 dark:text-white w-full h-full text-[20px]"
+          ></ng-icon>
+        </button>
+      </li>
+      <li
+        class="w-[32px] h-[32px] hover:bg-red-500/20 active:scale-105 rounded-full flex items-center justify-center"
+        (click)="removeField($event)"
+      >
+        <button class="w-[20px] h-[20px]">
+          <ng-icon
+            name="heroTrash"
+            class="text-red-500 w-full h-full text-[20px]"
+          ></ng-icon>
+        </button>
+      </li>
+    </ul>
+  </header>
+  <div
+    class="w-4 items-center handle h-full handle absolute left-1 top-[50%] translate-y-[-50%] cursor-grab hidden group-hover:flex group-[.active]:flex"
+  >
+    <img
+      src="./assets/icons/drag.svg"
+      alt="drag"
+      class="object-contain w-4 h-4 pointer-events-none select-none"
+    />
+  </div>
+
+  <formly-form [fields]="[field]"></formly-form>
+</div>

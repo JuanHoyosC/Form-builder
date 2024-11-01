@@ -1,0 +1,27 @@
+
+:host ::ng-deep {
+    .p-panel.p-panel-toggleable .p-panel-header {
+        padding: 0;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+    }
+
+    .p-panel .p-panel-content {
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        padding-top: 16px;
+    }
+
+    .p-panel .p-panel-header .p-panel-header-icon {
+        background-color: transparent;
+        width: 16px;
+        height: 16px;
+        border-radius: 0;
+    }
+
+    .p-panel .p-panel-header .p-panel-header-icon:enabled:hover {
+        background-color: transparent;
+    }
+}

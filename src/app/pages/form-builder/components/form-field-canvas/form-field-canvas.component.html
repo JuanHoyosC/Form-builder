@@ -1,0 +1,21 @@
+<main
+  [nxtSortablejs]="formBuilderTypesService.fields().fieldGroup"
+  [config]="sortableConfig"
+  sortablejsContainer
+  appDropZone
+  [fieldGroup]="formBuilderTypesService.fields().fieldGroup"
+>
+  <section
+    *ngFor="let field of formBuilderTypesService.fields().fieldGroup"
+    class="w-full mb-2"
+  >
+    @if(!field.fieldGroup) {
+    <app-form-field-group-item
+      [field]="field"
+      [fieldGroup]="formBuilderTypesService.fields().fieldGroup"
+    ></app-form-field-group-item>
+    } @else {
+    <app-form-field-group [field]="field"></app-form-field-group>
+    }
+  </section>
+</main>

@@ -22,8 +22,11 @@
     "@ng-icons/heroicons": "^29.5.1",
     "@ng-icons/ionicons": "^29.5.1",
     "@ngx-formly/core": "^6.3.10",
+    "@types/sortablejs": "^1.15.8",
+    "nxt-sortablejs": "^18.0.0",
     "primeng": "^17.18.11",
     "rxjs": "~7.8.0",
+    "sortablejs": "^1.15.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },

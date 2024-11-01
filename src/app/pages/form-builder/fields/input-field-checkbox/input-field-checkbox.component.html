@@ -1,0 +1,9 @@
+<label class="flex items-center gap-3">
+  <p-checkbox
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    [binary]="true" 
+    inputId="{{ field.id }}"
+  />
+ <span class="text-dark-900 dark:text-white text-sm"> {{ props.label }}</span>
+</label>

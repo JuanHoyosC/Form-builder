@@ -1,0 +1,15 @@
+<label class="text-dark-900 dark:text-white text-base block mb-2">{{ props.label }}</label>
+<div class="flex flex-col gap-2">
+  @for(option of props.options | formlySelectOptions : field | async; track option.value) {
+    <label class="flex items-center gap-3">
+      <p-radioButton
+        name="{{ field.id }}"
+        [value]="option.value"
+        [formControl]="formControl"
+        [formlyAttributes]="field"
+        inputId="{{ field.id }}"
+      />
+      <span class="text-dark-900 dark:text-white text-sm"> {{ option.label }}</span>
+    </label>
+  }
+</div>

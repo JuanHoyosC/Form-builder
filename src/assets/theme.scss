@@ -1,0 +1,153 @@
+.p-tabview .p-tabview-panels {
+  padding: 0;
+  padding-top: 20px;
+}
+
+.p-tabview .p-tabview-nav {
+  li {
+    width: 100%;
+  }
+
+  &,
+  & .p-tabview-nav-link {
+    background-color: transparent;
+  }
+
+  .p-tabview-nav-link {
+    background-color: transparent;
+    padding: 0.75rem;
+    justify-content: center;
+  }
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  color: theme("colors.indigo.600");
+  border-color: theme("colors.indigo.600");
+}
+
+.p-tabview .p-tabview-panels {
+  background-color: transparent;
+}
+
+.p-tree {
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.p-tree .p-treenode-children {
+  padding: 0 0 0 8px;
+  border-left: 1px dotted #00000030;
+  margin-left: 8px;
+}
+
+.p-tree .p-tree-container .p-treenode {
+  padding: 0.3rem;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content {
+  border-radius: 0;
+  padding: 0;
+  gap: 8px;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight,
+.p-tree
+  .p-tree-container
+  .p-treenode
+  .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
+  background: transparent;
+  color: theme("colors.indigo.600");
+  outline: none;
+}
+
+.p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
+  box-shadow: none;
+}
+
+.p-tree
+  .p-tree-container
+  .p-treenode
+  .p-treenode-content
+  .p-tree-toggler:enabled:hover {
+  color: theme("colors.indigo.600");
+  background: transparent;
+}
+
+.p-tree
+  .p-tree-container
+  .p-treenode
+  .p-treenode-content.p-highlight
+  .p-tree-toggler {
+  color: theme("colors.indigo.600");
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
+  &,
+  &:hover {
+    margin-right: 0;
+    width: 1rem;
+    height: 1rem;
+    background: transparent;
+    border-radius: 0;
+    border: 1px solid #00000030;
+  }
+}
+
+.p-treenode-label {
+  font-size: 14px;
+}
+
+.p-tree-toggler-icon {
+  display: flex;
+}
+
+p-inputnumber,
+.p-inputnumber,
+.p-inputtext,
+.p-password,
+.p-calendarsg {
+  width: 100%;
+}
+
+body.light  {
+  .p-panel .p-panel-header .p-panel-header-icon {
+  color: theme("colors.dark.900");
+  }
+
+
+}
+
+body.dark {
+  .p-panel .p-panel-header .p-panel-header-icon {
+    color: theme("colors.white");
+  }
+
+}
+
+
+.dropZone::before {
+  content: "Drag a element here";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 160px;
+  font-weight: 700;
+  font-size: 14px;
+  background-image: url(/assets/icons/drop.png);
+  background-size: 32px;
+  background-position: center 48px;
+  background-repeat: no-repeat;
+  padding-top: 32px;
+  border-color: transparent;
+  background-color: theme("colors.indigo.500/0.1") !important;
+  border: 1px dotted theme("colors.indigo.500");
+  border-radius: 4px;
+}
+
+.dropZone.active::before {
+  background-color: theme("colors.indigo.500/0.2") !important;
+}

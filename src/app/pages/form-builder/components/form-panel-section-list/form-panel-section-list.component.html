@@ -1,0 +1,20 @@
+<section>
+  <p-panel
+    [toggleable]="true"
+  >
+    <ng-template pTemplate="header">
+      <p class="text-dark-900 dark:text-white text-sm">
+        {{ formPanelList.title }}
+      </p>
+    </ng-template>
+    <article
+      class="flex flex-col gap-3"
+      [nxtSortablejs]="formPanelFieldList"
+      [config]="sortableConfig"
+    >
+      @for(item of formPanelList.items; track item.label) {
+      <app-form-panel-item [item]="item"></app-form-panel-item>
+      }
+    </article>
+  </p-panel>
+</section>
