@@ -1,15 +1,17 @@
 <main
-  class="grid grid-cols-[auto,1fr,auto] h-[calc(100vh-40px)]"
+  class="grid grid-cols-[auto,1fr,auto] h-[calc(100vh-40px)] overflow-hidden"
 >
   <aside class="min-w-fit bg-white dark:bg-dark-900 overflow-y-hidden">
     <app-form-panel></app-form-panel>
   </aside>
-  <section class="bg-gray-200 dark:bg-dark-700 h-full py-10 overflow-y-auto">
+  <section class="relative bg-gray-200 dark:bg-dark-700 h-full py-10 overflow-y-auto">
     <article class="w-1/2 mx-auto block">
       <app-form-field-canvas class="block h-auto w-full bg-white dark:bg-dark-900 rounded-lg shadow-md p-4 overflow-visible"></app-form-field-canvas>
     </article>
+    <app-history-buttons></app-history-buttons>
   </section>
-  <aside class="bg-white dark:bg-dark-900 h-full w-[320px] px-6 py-8">
-    <app-form-field-settings></app-form-field-settings>
+  <aside class="settings bg-white dark:bg-dark-900 h-full transition-all duration-300 " 
+    [ngClass]="{'w-[320px]':formBuilderTypesService.selectedField(), 'w-0': !formBuilderTypesService.selectedField()}">
+    <app-form-field-settings [field]="formBuilderTypesService.selectedField()" *ngIf="formBuilderTypesService.selectedField()"></app-form-field-settings>
   </aside>
 </main>

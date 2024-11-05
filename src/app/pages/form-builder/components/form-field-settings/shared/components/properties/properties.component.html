@@ -1,0 +1,39 @@
+<p-panel [toggleable]="true">
+    <ng-template pTemplate="header">
+      <p class="text-dark-900 dark:text-white text-sm">Propiedades</p>
+    </ng-template>
+
+    <section class="flex flex-col gap-2 px-4">
+        <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+            <span>Label</span>
+            <input type="text" name="label" [(ngModel)]="props.label" pInputText />
+          </label>
+    
+          <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+            <span>Tooltip</span>
+            <input type="text" pInputText />
+          </label>
+
+          <hr/>
+    
+          <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+            <span>Placeholder</span>
+            <input
+              type="text"
+              name="placeholder"
+              [(ngModel)]="props.placeholder"
+              pInputText
+            />
+          </label>
+    
+          <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+            <span>Description</span>
+            <textarea
+              type="text"
+              name="description"
+              [(ngModel)]="props.description"
+              pInputTextarea
+            ></textarea>
+          </label>
+    </section>
+</p-panel>

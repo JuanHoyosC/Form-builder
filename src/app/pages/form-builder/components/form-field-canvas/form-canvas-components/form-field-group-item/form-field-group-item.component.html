@@ -1,12 +1,15 @@
 <div
   class="relative px-4 pl-6 py-2 group border border-transparent hover:border-indigo-500/50 animate__animated"
   (click)="openMenuForSelectedField($event)"
-  (clickOutside)="closeMenuForSelectedField()"
+  (outside)="closeMenuForSelectedField()"
   [ngClass]="{
     active: formBuilderTypesService.selectedField()?.id === field.id,
     animate__bounce: removeElement
   }"
   appClickOutside
+  [ignoreElement]="['.settings']"
+  role="button"
+  tabindex="0"
 >
   <header
     class="flex items-center w-[40px] justify-center absolute top-[50%] translate-y-[-50%] -right-[64px] bg-white z-10"
@@ -27,6 +30,7 @@
       <li
         class="w-[32px] h-[32px] hover:bg-indigo-500/20 rounded-full flex items-center justify-center"
         (click)="cloneField()"
+        tabindex="1"
       >
         <button class="w-[20px] h-[20px]">
           <ng-icon
@@ -38,6 +42,7 @@
       <li
         class="w-[32px] h-[32px] hover:bg-red-500/20 active:scale-105 rounded-full flex items-center justify-center"
         (click)="removeField($event)"
+        tabindex="2"
       >
         <button class="w-[20px] h-[20px]">
           <ng-icon

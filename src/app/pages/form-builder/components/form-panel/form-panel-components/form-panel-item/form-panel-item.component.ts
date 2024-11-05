@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
-import { FormFieldItem } from '../../interfaces/form-builder';
+import { FormFieldItem } from '../../../../interfaces/form-builder';
 
 @Component({
   selector: 'app-form-panel-item',

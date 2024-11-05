@@ -1,7 +1,15 @@
-<input
-  type="text"
-  pInputText
-  [formControl]="formControl"
-  [formlyAttributes]="field"
-  id="{{ field.id }}"
-/>
+<fieldset class="flex flex-col gap-2">
+  <label class="text-sm" for="{{ field.id }}">
+    {{ props.label }}
+  </label>
+  <input
+    id="{{ field.id }}"
+    type="text"
+    pInputText
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    [placeholder]="props.placeholder"
+    [readonly]="props.readonly"
+  />
+  <small class="text-xs text-gray-400">{{ props.description }}</small>
+</fieldset>

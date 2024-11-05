@@ -2,7 +2,7 @@
   class="flex h-full relative transition-[width] duration-500"
   [ngClass]="{ 'w-[368px]': showFormPanelList, 'w-[48px]': !showFormPanelList }"
 >
-<!---- aside menu ---->
+  <!---- aside menu ---->
   <aside
     class="relative z-20 bg-white dark:bg-dark-900 w-[48px] h-full flex flex-col items-center border-r border-gray-100 dark:border-dark-700"
   >
@@ -10,13 +10,17 @@
       @for(item of menu; track item.icon) {
       <li
         class="w-full flex items-center justify-center p-2 py-3 cursor-pointer"
-        [ngClass]="{ 'bg-gray-200 text-dark-900 dark:bg-dark-700 dark:text-white': activeTabIndex === item.activeTabIndex}"
-        (click)="item.handle()"
+        [ngClass]="{
+          'bg-gray-200 text-dark-900 dark:bg-dark-700 dark:text-white':
+            activeTabIndex === item.activeTabIndex
+        }"
       >
-        <ng-icon
-          [name]="item.icon"
-          class="text-lg text-dark-900 dark:text-white w-5 h-5"
-        ></ng-icon>
+        <button (click)="item.handle()">
+          <ng-icon
+            [name]="item.icon"
+            class="text-lg text-dark-900 dark:text-white w-5 h-5"
+          ></ng-icon>
+        </button>
       </li>
       }
     </ul>
@@ -36,7 +40,8 @@
         <app-form-panel-header></app-form-panel-header>
       </div>
       <div class="flex flex-col gap-4">
-        @for(sectionList of formBuilderTypesService.formPanelList; track sectionList.title) {
+        @for(sectionList of formBuilderTypesService.formPanelList; track
+        sectionList.title) {
         <app-form-panel-section-list
           [formPanelList]="sectionList"
         ></app-form-panel-section-list>

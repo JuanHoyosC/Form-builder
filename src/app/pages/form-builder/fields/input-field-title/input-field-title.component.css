@@ -1,0 +1,8 @@
+.title {
+    @apply font-bold break-words leading-tight text-dark-900 outline-none; /* Propiedades de Tailwind */
+  }
+  
+  /* Estilo para el modo oscuro */
+  .dark .title {
+    @apply text-white; /* Usando la clase de Tailwind para el texto blanco en modo oscuro */
+  }

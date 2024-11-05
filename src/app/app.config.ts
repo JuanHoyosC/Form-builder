@@ -6,7 +6,11 @@ import {
 import { provideRouter } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormlyExtension, FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import {
+  FormlyExtension,
+  FormlyFieldConfig,
+  FormlyModule,
+} from '@ngx-formly/core';
 
 import { routes } from './app.routes';
 import { InputFieldTextComponent } from './pages/form-builder/fields/input-field-text/input-field-text.component';
@@ -19,7 +23,39 @@ import { InputFieldTelComponent } from './pages/form-builder/fields/input-field-
 import { InputFieldTitleComponent } from './pages/form-builder/fields/input-field-title/input-field-title.component';
 import { InputFieldCalendarComponent } from './pages/form-builder/fields/input-field-calendar/input-field-calendar.component';
 import { InputFieldGroupComponent } from './pages/form-builder/fields/input-field-group/input-field-group.component';
-import { SortablejsModule } from 'nxt-sortablejs'
+import { SortablejsModule } from 'nxt-sortablejs';
+import { InputFieldParagraphComponent } from './pages/form-builder/fields/input-field-paragraph/input-field-paragraph.component';
+import { DividerComponent } from './pages/form-builder/wrappers/divider/divider.component';
+
+
+export const defaultLabelExtension: FormlyExtension = {
+  prePopulate(field: FormlyFieldConfig): void {
+    if (!field.props?.label) {
+      field.props = { ...field.props, label: 'Default Label' };
+    }
+  },
+};
+
+export const defaultOptionsExtension: FormlyExtension = {
+  prePopulate(field: FormlyFieldConfig): void {
+    if (!field.props?.options) {
+      field.props = {
+        ...field.props,
+        options: [
+          {
+            label: 'option 1',
+            value: 'option 1',
+          },
+          {
+            label: 'option 2',
+            value: 'option 2',
+          },
+        ],
+      };
+    }
+  },
+};
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -29,54 +65,33 @@ export const appConfig: ApplicationConfig = {
         extensions: [
           {
             name: 'default-label',
-            extension: {
-              prePopulate(field: FormlyFieldConfig): void {
-                if (field.props?.label) {
-                  return;
-                }
-                field.props = {
-                  ...field.props,
-                  label: 'Default Label'
-                }
-              },
-            }
-          }
-        ],
+            extension: defaultLabelExtension,
+          },
+          {
+            name: 'default-options',
+            extension: defaultOptionsExtension,
+          },
+        ],
         types: [
           { name: 'calendar', component: InputFieldCalendarComponent },
           { name: 'checkbox', component: InputFieldCheckboxComponent },
           { name: 'email', component: InputFieldEmailComponent },
           { name: 'group', component: InputFieldGroupComponent },
           { name: 'number', component: InputFieldNumberComponent },
+          { name: 'paragraph', component: InputFieldParagraphComponent },
           { name: 'password', component: InputFieldPasswordComponent },
           { name: 'radio', component: InputFieldRadioComponent },
           { name: 'tel', component: InputFieldTelComponent },
           { name: 'text', component: InputFieldTextComponent },
           { name: 'title', component: InputFieldTitleComponent },
         ],
+        wrappers: [{ name: 'divider', component: DividerComponent }]
       }),
       BrowserModule,
       BrowserAnimationsModule,
       SortablejsModule.forRoot({
         animation: 150,
-        
-    })
+      }),
     ]),
   ],
 };
-
-export const defaultLabelExtension: FormlyExtension = {
-  prePopulate(field: FormlyFieldConfig): void {
-    field = {
-      id: crypto.randomUUID(),
-      ...field
-    }
-    if (field.props?.label) {
-      return;
-    }
-    field.props = {
-      ...field.props,
-      label: 'Default Label'
-    }
-  },
-}

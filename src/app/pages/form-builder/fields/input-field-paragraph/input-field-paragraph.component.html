@@ -1,0 +1,12 @@
+<p
+  class="text-base break-words"
+  [ngClass]="{
+    'line-through': props['strikethrough'],
+    underline: props['underline'],
+    italic: props['italic'],
+    'font-bold': props['bold']
+  }"
+  [style.textAlign]="props['align']"
+>
+  {{ props.label }}
+</p>

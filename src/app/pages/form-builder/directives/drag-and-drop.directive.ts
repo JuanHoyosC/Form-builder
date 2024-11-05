@@ -1,19 +1,16 @@
-import { Directive, ElementRef, HostListener, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
-import { FieldGroup } from '../interfaces/form-builder';
+import { Directive, ElementRef, HostListener, Input, OnChanges, Renderer2 } from '@angular/core';
+
 
 @Directive({
   selector: '[appDropZone]',
   standalone: true,
 })
 export class DropZoneDirective implements OnChanges {
-
-  @Input() fieldGroup: FieldGroup;
+  @Input() childrenCount = 0;
   constructor(private el: ElementRef, private renderer: Renderer2) {}
-  ngOnInit() {
-    console.log('sdfsdfsfds 2', this.el.nativeElement, this.fieldGroup)
-  }
 
   ngOnChanges() {
+    console.log(this.childrenCount)
     this.updateDropZoneState();
   }
 
@@ -34,13 +31,13 @@ export class DropZoneDirective implements OnChanges {
 
   @HostListener('drop', ['$event'])
   onDrop() {
+   this.childrenCount = 1;
    this.updateDropZoneState();
    this.updateActiveDropZoneState(false);
   }
 
   private updateDropZoneState(): void {
-    const hasChildren = this.hasChildElements();
-    if (!hasChildren) {
+    if (this.childrenCount === 0) {
       this.renderer.addClass(this.el.nativeElement, 'dropZone');
       this.renderer.addClass(this.el.nativeElement, 'relative');
       this.renderer.addClass(this.el.nativeElement, 'min-h-40');
@@ -58,9 +55,4 @@ export class DropZoneDirective implements OnChanges {
       this.renderer.removeClass(this.el.nativeElement, 'active');
     }
   }
-
-  private hasChildElements(): boolean {
-    return this.el.nativeElement.children.length > 0;
-  }
-
 }

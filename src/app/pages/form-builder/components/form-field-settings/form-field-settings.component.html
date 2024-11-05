@@ -1,1 +1,46 @@
-<p class="text-white">sfsdfdsfdsfdsfds</p>
+<form action="">
+  <app-properties [props]="props"></app-properties>
+  <app-validations [props]="props"></app-validations>
+    <section class="flex flex-col gap-2 px-4">
+      <!-- <div class="flex flex-col gap-2">
+        <label>heading Type</label>
+        <p-selectButton
+          [options]="stateOptions"
+          [(ngModel)]="props.headingType"
+          name="headingType"
+          optionLabel="icon"
+          optionValue="value"
+        >
+          <ng-template let-item pTemplate>
+            <ng-icon [name]="item.icon" class="text-lg"></ng-icon> </ng-template
+        ></p-selectButton>
+      </div>
+
+      <p-selectButton
+        name="align"
+        optionValue="value"
+        [options]="justifyOptions"
+        [(ngModel)]="props.align"
+        optionLabel="icon"
+      >
+        <ng-template let-item pTemplate>
+          <ng-icon [name]="item.icon"></ng-icon>
+        </ng-template>
+      </p-selectButton>
+      {{ props.align }}
+
+      <p-selectButton
+        [options]="textOptions"
+        optionValue="value"
+        [multiple]="true"
+        optionLabel="icon"
+        optionDisabled="disabled"
+        (onChange)="a($event)"
+      >
+        <ng-template let-item pTemplate>
+          <ng-icon [name]="item.icon"></ng-icon>
+        </ng-template>
+      </p-selectButton> -->
+    </section>
+
+</form>

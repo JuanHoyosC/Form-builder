@@ -16,20 +16,19 @@ import {
   heroHashtag,
   heroH1,
   heroEllipsisHorizontal,
-  heroSquares2x2,
   heroChevronLeft,
   heroChevronRight,
   heroRectangleGroup,
   heroQueueList,
+  heroViewColumns,
+  heroDocumentText,
+  heroMinus,
 } from '@ng-icons/heroicons/outline';
-import { FormPanelSectionListComponent } from '../form-panel-section-list/form-panel-section-list.component';
-import { FormPanelHeaderComponent } from '../form-panel-header/form-panel-header.component';
-import { FormFieldList } from '../../interfaces/form-builder';
+import { FormPanelSectionListComponent } from './form-panel-components/form-panel-section-list/form-panel-section-list.component';
+import { FormPanelHeaderComponent } from './form-panel-components/form-panel-header/form-panel-header.component';
 import { TabViewModule } from 'primeng/tabview';
-import { TreeModule } from 'primeng/tree';
-import { FormsModule } from '@angular/forms';
 import { TreeDragDropService, TreeNode } from 'primeng/api';
-import { FormBuilderTypesService } from '../../services/form-builder-types.service';
+import { FormBuilderTypesService } from '../../services/form-builder.service';
 
 @Component({
   selector: 'app-form-panel',
@@ -38,8 +37,6 @@ import { FormBuilderTypesService } from '../../services/form-builder-types.servi
     CommonModule,
     NgIconComponent,
     TabViewModule,
-    TreeModule,
-    FormsModule,
     FormPanelHeaderComponent,
     FormPanelSectionListComponent,
   ],
@@ -54,14 +51,16 @@ import { FormBuilderTypesService } from '../../services/form-builder-types.servi
       ionSquareOutline,
       ionAddOutline,
       ionRemoveOutline,
+      heroDocumentText,
       heroEllipsisHorizontal,
-      heroSquares2x2,
       heroHashtag,
       heroH1,
       heroChevronLeft,
       heroChevronRight,
+      heroMinus,
       heroRectangleGroup,
       heroQueueList,
+      heroViewColumns
     }),
     TreeDragDropService,
     FormBuilderTypesService,
@@ -138,8 +137,8 @@ export class FormPanelComponent {
       },
     },
   ];
-  showFormPanelList: boolean = true;
-  activeTabIndex: number = 0;
+  showFormPanelList = true;
+  activeTabIndex = 0;
 
 
   setMenuArrowIcon() {
@@ -149,8 +148,8 @@ export class FormPanelComponent {
   }
 }
 
-type Menu = {
+interface Menu {
   icon: string;
   activeTabIndex: number | undefined;
   handle: () => void;
-};
+}

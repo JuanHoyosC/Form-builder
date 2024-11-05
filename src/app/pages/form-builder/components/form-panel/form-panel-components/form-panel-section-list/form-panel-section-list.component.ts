@@ -1,11 +1,11 @@
 import { Component, inject, Input, OnChanges } from '@angular/core';
 import { FormPanelItemComponent } from '../form-panel-item/form-panel-item.component';
 import { CommonModule } from '@angular/common';
-import { FormFieldList } from '../../interfaces/form-builder';
+import { FormFieldList } from '../../../../interfaces/form-builder';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { PanelModule } from 'primeng/panel';
-import { FormBuilderTypesService } from '../../services/form-builder-types.service';
+import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { Options } from 'sortablejs';
 
 @Component({

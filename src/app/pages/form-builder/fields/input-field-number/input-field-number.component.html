@@ -1,5 +1,8 @@
-<p-inputNumber
+<label class="flex flex-col gap-2" for="{{ field.id }}">
+  <span>{{ props.label }}</span>
+  <p-inputNumber
   [formControl]="formControl"
   [formlyAttributes]="field"
   inputId="{{ field.id }}"
 />
+</label>

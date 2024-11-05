@@ -103,12 +103,72 @@
   display: flex;
 }
 
+.p-panel.p-panel-toggleable .p-panel-header {
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.p-panel .p-panel-content {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  padding-top: 16px;
+}
+
+.p-panel .p-panel-header .p-panel-header-icon {
+  background-color: transparent;
+  width: 16px;
+  height: 16px;
+  border-radius: 0;
+}
+
+.p-panel .p-panel-header .p-panel-header-icon:enabled:hover {
+  background-color: transparent;
+}
+
+.p-selectbutton {
+  border-radius: 4px;
+}
+
+.p-selectbutton .p-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 14px;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.p-selectbutton .p-button.p-highlight {
+  background-color: theme("colors.indigo.600");
+  border-color: theme("colors.indigo.600");
+  color: #fff;
+}
+
 p-inputnumber,
 .p-inputnumber,
 .p-inputtext,
 .p-password,
-.p-calendarsg {
+.p-calendar {
   width: 100%;
+}
+
+.p-inputtext {
+  font-size: theme('fontSize.sm');
+  background: transparent;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+}
+
+*.p-focus > .p-inputtext, .p-inputtext:enabled:focus {
+  box-shadow: 0 0 0 0.1rem #e1bffe;
+}
+
+.p-inputtext.ng-dirty.ng-invalid { 
+  border-color: red;
 }
 
 body.light  {

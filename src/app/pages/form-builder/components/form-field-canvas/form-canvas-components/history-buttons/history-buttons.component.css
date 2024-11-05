@@ -1,0 +1,9 @@
+.history-button {
+    @apply outline-none active:scale-105 p-1 disabled:text-gray-400 disabled:active:scale-100;
+    width: 1.5rem;
+    height: 1.5rem
+}
+
+ng-icon {
+    @apply text-lg ;
+}

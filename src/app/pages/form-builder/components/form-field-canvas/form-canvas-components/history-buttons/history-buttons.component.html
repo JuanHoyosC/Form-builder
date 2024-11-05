@@ -1,0 +1,18 @@
+<aside
+  class="flex flex-col gap-2 bg-white shadow w-fit p-1 py-4 rounded absolute top-4 right-4"
+>
+  <button
+    class="history-button"
+    [disabled]="!historyService.isUndoEnabled()"
+    (click)="undo()"
+  >
+    <ng-icon name="heroArrowUturnLeft"></ng-icon>
+  </button>
+  <button
+    class="history-button"
+    [disabled]="!historyService.isRedoEnabled()"
+    (click)="redo()"
+  >
+    <ng-icon name="heroArrowUturnRight"></ng-icon>
+  </button>
+</aside>

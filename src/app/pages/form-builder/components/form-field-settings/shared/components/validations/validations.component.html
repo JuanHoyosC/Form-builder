@@ -1,0 +1,54 @@
+<p-panel [toggleable]="true">
+  <ng-template pTemplate="header">
+    <p class="text-dark-900 dark:text-white text-sm">Validations</p>
+  </ng-template>
+  <section class="flex flex-col gap-2 px-4">
+    <div class="flex justify-between items-center gap-2">
+      <span>Required</span>
+      <p-inputSwitch name="required" [(ngModel)]="props.required" />
+    </div>
+
+    <div class="flex justify-between items-center gap-2">
+      <span>Read only</span>
+      <p-inputSwitch name="readonly" [(ngModel)]="props.readonly"/>
+    </div>
+
+    <div class="flex justify-between items-center gap-2">
+      <span>Disabled</span>
+      <p-inputSwitch name="disabled" [(ngModel)]="props.disabled" />
+    </div>
+    <hr />
+
+    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+      <span>Min</span>
+      <input type="number" pInputText />
+    </label>
+
+    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+      <span>Max</span>
+      <input type="number" pInputText />
+    </label>
+
+    <hr />
+    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+      <span>Min length</span>
+      <input type="number" pInputText />
+    </label>
+
+    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+      <span>Max lenght</span>
+      <input type="number" pInputText />
+    </label>
+
+    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+      <span>Exact lenght</span>
+      <input type="number" pInputText />
+    </label>
+
+    <hr />
+    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
+      <span>Regex</span>
+      <input type="number" pInputText />
+    </label>
+  </section>
+</p-panel>

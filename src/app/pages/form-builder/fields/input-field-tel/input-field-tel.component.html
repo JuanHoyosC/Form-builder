@@ -1,3 +1,5 @@
+<label class="flex flex-col gap-2" for="{{ field.id }}">
+  <span>{{ props.label }}</span>
 <p-inputMask
   mask="+99 999-999-9999"
   [formControl]="formControl"
@@ -5,3 +7,4 @@
   inputId="{{ field.id }}"
   slotChar="_"
 />
+</label>

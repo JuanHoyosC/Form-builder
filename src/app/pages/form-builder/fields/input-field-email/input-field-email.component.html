@@ -1,7 +1,10 @@
-<p-inputMask 
+<label class="flex flex-col gap-2">
+  <span>{{ props.label }}</span>
+  <input
+    id="{{ field.id }}"
     [formControl]="formControl"
     [formlyAttributes]="field"
-    inputId="{{ field.id }}" 
-    slotChar="_">
-</p-inputMask>
-<input pInputText [formControl]="formControl" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="email@example.com"/>
+    type="text"
+    pInputText
+  />
+</label>

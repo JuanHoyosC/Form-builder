@@ -3,16 +3,16 @@
   [config]="sortableConfig"
   sortablejsContainer
   appDropZone
-  [fieldGroup]="formBuilderTypesService.fields().fieldGroup"
+  [childrenCount]="formBuilderTypesService.fields().fieldGroup?.length ?? 0"
 >
   <section
-    *ngFor="let field of formBuilderTypesService.fields().fieldGroup"
+    *ngFor="let field of formBuilderTypesService.fields().fieldGroup as fieldGroup"
     class="w-full mb-2"
   >
     @if(!field.fieldGroup) {
     <app-form-field-group-item
       [field]="field"
-      [fieldGroup]="formBuilderTypesService.fields().fieldGroup"
+      [fieldGroup]="fieldGroup"
     ></app-form-field-group-item>
     } @else {
     <app-form-field-group [field]="field"></app-form-field-group>
