@@ -1,0 +1,73 @@
+<p-panel [toggleable]="true">
+  <ng-template pTemplate="header">
+    <p class="text-dark-900 dark:text-white text-sm">Layout</p>
+  </ng-template>
+
+  <section class="flex flex-col gap-2 px-4">
+    <div class="flex justify-between items-center">
+      <app-label-tooltip
+        id="headingType"
+        label="heading Type"
+        tooltip="heading Type"
+      ></app-label-tooltip>
+      <p-selectButton
+        id="headingType"
+        class="no-disabled"
+        name="headingType"
+        optionLabel="icon"
+        optionValue="value"
+        optionDisabled="disabled"
+        [options]="headingLevelOptions"
+        [(ngModel)]="props.headingType"
+        (onChange)="applyDefaultToggleState($event, headingLevelOptions)"
+      >
+        <ng-template let-item pTemplate>
+          <ng-icon [name]="item.icon"></ng-icon> </ng-template
+      ></p-selectButton>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <app-label-tooltip
+        id="alignText"
+        label="Align types"
+        tooltip="Alineación del texto"
+      ></app-label-tooltip>
+
+      <p-selectButton
+        id="alignText"
+        name="align"
+        optionValue="value"
+        [options]="textAlignmentOptions"
+        [(ngModel)]="props.align"
+        optionLabel="icon"
+        class="no-disabled"
+        (onChange)="applyDefaultToggleState($event, textAlignmentOptions)"
+      >
+        <ng-template let-item pTemplate>
+          <ng-icon [name]="item.icon"></ng-icon>
+        </ng-template>
+      </p-selectButton>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <app-label-tooltip
+        id="headingType"
+        label="Font styles"
+        tooltip="Agrega cisas"
+      ></app-label-tooltip>
+      <p-selectButton
+        [options]="textFormattingOptions"
+        optionValue="value"
+        [multiple]="true"
+        optionLabel="icon"
+        optionDisabled="disabled"
+        [(ngModel)]="appliedTextStyles"
+        (onChange)="updateTextFormattingState($event)"
+      >
+        <ng-template let-item pTemplate>
+          <ng-icon [name]="item.icon"></ng-icon>
+        </ng-template>
+      </p-selectButton>
+    </div>
+  </section>
+</p-panel>

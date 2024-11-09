@@ -1,0 +1,10 @@
+:host ::ng-deep {
+    .p-panel .p-panel-header {
+        background-color: #fafbfc;
+        padding: 1rem;
+    }
+
+    .no-disabled .p-disabled, .p-component:disabled {
+        opacity: 1;
+    }
+}
