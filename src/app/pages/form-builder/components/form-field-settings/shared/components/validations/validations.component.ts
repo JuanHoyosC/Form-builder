@@ -6,11 +6,12 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { CustomFormlyFieldProps } from '../../../../../interfaces/form-builder';
 import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
+import { LabelTooltipComponent } from '../../../../../../../shared/components/label-tooltip/label-tooltip.component';
 
 @Component({
   selector: 'app-validations',
   standalone: true,
-  imports: [CommonModule, FormsModule, InputSwitchModule, InputTextModule, PanelModule],
+  imports: [CommonModule, FormsModule, InputSwitchModule, InputTextModule, LabelTooltipComponent, PanelModule],
   templateUrl: './validations.component.html',
   styleUrl: './validations.component.scss'
 })

@@ -1,54 +1,139 @@
 <p-panel [toggleable]="true">
   <ng-template pTemplate="header">
-    <p class="text-dark-900 dark:text-white text-sm">Validations</p>
+    <p class="text-dark-900 dark:text-white text-sm">Validaciones</p>
   </ng-template>
   <section class="flex flex-col gap-2 px-4">
-    <div class="flex justify-between items-center gap-2">
-      <span>Required</span>
-      <p-inputSwitch name="required" [(ngModel)]="props.required" />
+    <div class="flex justify-between items-center">
+      <app-label-tooltip
+        id="required"
+        label="Obligatorio"
+        tooltip="Define si este campo debe completarse obligatoriamente"
+      ></app-label-tooltip>
+      <p-inputSwitch
+        id="required"
+        name="required"
+        [(ngModel)]="props.required"
+        [disabled]="props.disabled || props.readonly || false"
+      />
     </div>
 
-    <div class="flex justify-between items-center gap-2">
-      <span>Read only</span>
-      <p-inputSwitch name="readonly" [(ngModel)]="props.readonly"/>
+    <div class="flex justify-between items-center">
+      <app-label-tooltip
+        id="readonly"
+        label="Solo lectura"
+        tooltip="Habilita el modo de solo lectura si el campo no es obligatorio y no está deshabilitado"
+      ></app-label-tooltip>
+      <p-inputSwitch
+        id="readonly"
+        name="readonly"
+        [(ngModel)]="props.readonly"
+        [disabled]="props.required || props.disabled || false"
+      />
     </div>
 
-    <div class="flex justify-between items-center gap-2">
-      <span>Disabled</span>
-      <p-inputSwitch name="disabled" [(ngModel)]="props.disabled" />
+    <div class="flex justify-between items-center">
+      <app-label-tooltip
+        id="disabled"
+        label="Deshabilitado"
+        tooltip="Desactiva el campo si no es obligatorio o está en modo de solo lectura"
+      ></app-label-tooltip>
+      <p-inputSwitch
+        id="disabled"
+        name="disabled"
+        [(ngModel)]="props.disabled"
+        [disabled]="props.required || props.readonly || false"
+      />
     </div>
-    <hr />
-
-    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-      <span>Min</span>
-      <input type="number" pInputText />
-    </label>
-
-    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-      <span>Max</span>
-      <input type="number" pInputText />
-    </label>
 
     <hr />
-    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-      <span>Min length</span>
-      <input type="number" pInputText />
-    </label>
 
-    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-      <span>Max lenght</span>
-      <input type="number" pInputText />
-    </label>
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="min"
+        label="Mínimo"
+        tooltip="Especifica el valor mínimo permitido para este campo"
+      ></app-label-tooltip>
+      <input
+        id="min"
+        type="number"
+        [max]="props.max ?? 255"
+        [(ngModel)]="props.min"
+        pInputText
+      />
+    </div>
 
-    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-      <span>Exact lenght</span>
-      <input type="number" pInputText />
-    </label>
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="max"
+        label="Máximo"
+        tooltip="Establece el valor máximo permitido para este campo"
+      ></app-label-tooltip>
+      <input
+        id="max"
+        type="number"
+        [min]="props.min ?? 0"
+        [(ngModel)]="props.max"
+        pInputText
+      />
+    </div>
 
     <hr />
-    <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-      <span>Regex</span>
-      <input type="number" pInputText />
-    </label>
+
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="minLength"
+        label="Longitud mínima"
+        tooltip="Define la cantidad mínima de caracteres permitidos en este campo"
+      ></app-label-tooltip>
+      <input
+        id="minLength"
+        type="number"
+        [min]="0"
+        [max]="props.maxLength ?? 255"
+        [(ngModel)]="props.minLength"
+        pInputText
+      />
+    </div>
+
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="maxLength"
+        label="Longitud máxima"
+        tooltip="Define la cantidad máxima de caracteres permitidos en este campo"
+      ></app-label-tooltip>
+      <input
+        id="maxLength"
+        type="number"
+        [min]="props.min ?? 0"
+        [(ngModel)]="props.maxLength"
+        pInputText
+      />
+    </div>
+
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="exactLength"
+        label="Longitud exacta"
+        tooltip="Especifica la cantidad exacta de caracteres requerida para este campo"
+      ></app-label-tooltip>
+      <input
+        id="exactLength"
+        type="number"
+        min="0"
+        [(ngModel)]="props.exactLength"
+        pInputText
+      />
+    </div>
+
+    <hr />
+
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="pattern"
+        label="Expresión regular"
+        tooltip="Introduce una expresión regular para definir un patrón específico de entrada para este campo"
+      ></app-label-tooltip>
+      <input id="pattern" type="text" name="pattern" [(ngModel)]="props.pattern!" pInputText />
+    </div>
   </section>
 </p-panel>
