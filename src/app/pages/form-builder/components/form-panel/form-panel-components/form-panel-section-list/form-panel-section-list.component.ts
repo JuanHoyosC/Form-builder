@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnChanges } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormPanelItemComponent } from '../form-panel-item/form-panel-item.component';
 import { CommonModule } from '@angular/common';
 import { FormFieldList } from '../../../../interfaces/form-builder';
@@ -7,24 +7,74 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { PanelModule } from 'primeng/panel';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { Options } from 'sortablejs';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import {
+  ionCallOutline,
+  ionRadioButtonOnOutline,
+  ionCheckboxOutline,
+  ionMailOutline,
+  ionCalendarNumberOutline,
+  ionTextOutline,
+  ionSquareOutline,
+  ionAddOutline,
+  ionRemoveOutline,
+} from '@ng-icons/ionicons';
+import {
+  heroHashtag,
+  heroH1,
+  heroEllipsisHorizontal,
+  heroViewColumns,
+  heroDocumentText,
+  heroMinus,
+} from '@ng-icons/heroicons/outline';
+import { SearchComponentPipe } from '../../../../pipes/search-component.pipe';
+import { FormPanelSearchComponent } from '../form-panel-search/form-panel-search.component';
+import { FlattenFieldsPipe } from '../../../../pipes/flatten-fields.pipe';
 
 @Component({
   selector: 'app-form-panel-section-list',
   standalone: true,
-  imports: [CommonModule, FormPanelItemComponent, PanelModule, SortablejsModule],
+  imports: [
+    CommonModule,
+    FormPanelItemComponent,
+    FormPanelSearchComponent,
+    NgIconComponent,
+    PanelModule,
+    SortablejsModule,
+    SearchComponentPipe,
+    FlattenFieldsPipe
+  ],
+  providers: [
+    provideIcons({
+      ionCallOutline,
+      ionRadioButtonOnOutline,
+      ionCheckboxOutline,
+      ionMailOutline,
+      ionCalendarNumberOutline,
+      ionTextOutline,
+      ionSquareOutline,
+      ionAddOutline,
+      ionRemoveOutline,
+      heroDocumentText,
+      heroEllipsisHorizontal,
+      heroHashtag,
+      heroH1,
+      heroMinus,
+      heroViewColumns,
+    }),
+  ],
   templateUrl: './form-panel-section-list.component.html',
   styleUrl: './form-panel-section-list.component.scss',
 })
-export class FormPanelSectionListComponent implements OnChanges {
-  @Input() formPanelList: FormFieldList = { title: '', items: [] };
-  formPanelFieldList: FormlyFieldConfig[] = [];
-  formBuilderTypesService = inject(FormBuilderTypesService);
+export class FormPanelSectionListComponent implements OnInit {
+  private readonly formBuilderTypesService = inject(FormBuilderTypesService);
+  formFieldList: FormFieldList[] = [];
+  searchComponent: string = '';
 
-  ngOnChanges(): void {
-    this.formPanelFieldList = this.formPanelList.items.flatMap(
-      (item) => item.field
-    );
+  ngOnInit(): void {
+    this.formFieldList = this.formBuilderTypesService.formFieldList;
   }
+  
   sortableConfig: Options = {
     group: {
       name: 'shared',

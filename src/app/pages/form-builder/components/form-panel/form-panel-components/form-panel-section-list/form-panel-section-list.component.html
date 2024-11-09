@@ -1,20 +1,27 @@
-<section>
-  <p-panel
-    [toggleable]="true"
-  >
+<app-form-panel-search
+  [(searchComponent)]="searchComponent"
+></app-form-panel-search>
+
+<section
+  class="flex flex-col gap-4 px-4 pb-4 overflow-y-auto overflow-x-hidden max-h-[calc(100%-116px)] animate__animated animate__fadeInUpBig animate__faster"
+>
+  @for(sectionList of formFieldList | searchComponent:searchComponent; track
+  sectionList.title) {
+  <p-panel [toggleable]="true">
     <ng-template pTemplate="header">
       <p class="text-dark-900 dark:text-white text-sm">
-        {{ formPanelList.title }}
+        {{ sectionList.title }}
       </p>
     </ng-template>
     <article
       class="flex flex-col gap-3"
-      [nxtSortablejs]="formPanelFieldList"
+      [nxtSortablejs]="sectionList | flattenFields"
       [config]="sortableConfig"
     >
-      @for(item of formPanelList.items; track item.label) {
+      @for(item of sectionList.items; track item.label) {
       <app-form-panel-item [item]="item"></app-form-panel-item>
       }
     </article>
   </p-panel>
+  }
 </section>

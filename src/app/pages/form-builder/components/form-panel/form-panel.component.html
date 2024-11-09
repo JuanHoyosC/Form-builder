@@ -3,51 +3,24 @@
   [ngClass]="{ 'w-[368px]': showFormPanelList, 'w-[48px]': !showFormPanelList }"
 >
   <!---- aside menu ---->
-  <aside
-    class="relative z-20 bg-white dark:bg-dark-900 w-[48px] h-full flex flex-col items-center border-r border-gray-100 dark:border-dark-700"
-  >
-    <ul class="flex flex-col w-full">
-      @for(item of menu; track item.icon) {
-      <li
-        class="w-full flex items-center justify-center p-2 py-3 cursor-pointer"
-        [ngClass]="{
-          'bg-gray-200 text-dark-900 dark:bg-dark-700 dark:text-white':
-            activeTabIndex === item.activeTabIndex
-        }"
-      >
-        <button (click)="item.handle()">
-          <ng-icon
-            [name]="item.icon"
-            class="text-lg text-dark-900 dark:text-white w-5 h-5"
-          ></ng-icon>
-        </button>
-      </li>
-      }
-    </ul>
-  </aside>
+  <app-menu
+    [(showFormPanelList)]="showFormPanelList"
+    [(activeTabIndex)]="activeTabIndex"
+  ></app-menu>
 
   <!---- Content panel ---->
-  <p-tabView
-    class="absolute top-0 left-[48px] block w-[320px] h-full px-4 overflow-hidden z-10 transition-transform duration-500 border-r border-gray-100 dark:border-dark-700"
+  <div
+    class="absolute top-0 left-[48px] block w-[320px] h-full overflow-hidden z-10 transition-transform duration-500 border-r border-gray-100 dark:border-dark-700"
     [ngClass]="{
-      'translate-x-0 overflow-y-auto': showFormPanelList,
       '-translate-x-[120%]': !showFormPanelList
     }"
-    [(activeIndex)]="activeTabIndex"
   >
-    <p-tabPanel header="Components">
-      <div class="mb-6">
-        <app-form-panel-header></app-form-panel-header>
-      </div>
-      <div class="flex flex-col gap-4">
-        @for(sectionList of formBuilderTypesService.formPanelList; track
-        sectionList.title) {
-        <app-form-panel-section-list
-          [formPanelList]="sectionList"
-        ></app-form-panel-section-list>
-        }
-      </div>
-    </p-tabPanel>
-    <p-tabPanel header="Tree"> </p-tabPanel>
-  </p-tabView>
+    @switch (activeTabIndex) { @case (0) {
+    <app-form-panel-section-list></app-form-panel-section-list>
+    } @case (1) {
+    <div class="animate__animated animate__fadeInDownBig animate__faster">
+      dsafasdfsadfsaf
+    </div>
+    } }
+  </div>
 </div>
