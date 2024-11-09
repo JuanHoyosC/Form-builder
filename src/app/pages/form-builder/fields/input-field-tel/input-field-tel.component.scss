@@ -1,0 +1,26 @@
+:host ::ng-deep {
+    .p-inputgroup-addon .p-dropdown .p-dropdown-label { 
+        border: none;
+        box-shadow: none;
+
+        .align-items-center {
+            align-items: center;
+        }
+    }
+
+    p-intl-tel-input .p-inputtext {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .p-inputgroup-addon .p-dropdown .p-dropdown-trigger {
+        padding-right: 1rem;
+    }
+
+    .p-inputgroup-addon .p-dropdown-panel .p-dropdown-items .p-dropdown-item:first-child {
+        font-size: 14px;
+        div {
+            align-items: center;
+        }
+    }
+}

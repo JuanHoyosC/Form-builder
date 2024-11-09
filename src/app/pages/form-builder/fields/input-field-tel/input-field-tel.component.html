@@ -1,10 +1,31 @@
-<label class="flex flex-col gap-2" for="{{ field.id }}">
-  <span>{{ props.label }}</span>
-<p-inputMask
-  mask="+99 999-999-9999"
-  [formControl]="formControl"
-  [formlyAttributes]="field"
-  inputId="{{ field.id }}"
-  slotChar="_"
-/>
-</label>
+<fieldset class="flex flex-col gap-2">
+  <app-label-tooltip
+    [id]="field.id"
+    [label]="props.label"
+    [tooltip]="props['tooltip']"
+    [required]="props.required"
+    *ngIf="props.label"
+  ></app-label-tooltip>
+<p-intl-tel-input
+  [favoriteCountries]="favoriteCountries"
+  [enableAutoCountrySelect]="true"
+  [displayPlaceholder]="true"
+  [selectedCountryISO]="CountryISO.FrenchPolynesia"
+  [phoneValidation]="true"
+  [separateDialCode]="separateDialCode"
+  [numberFormat]="PhoneNumberFormat.INTERNATIONAL"
+  [searchCountryField]="[SearchCountryField.NAME, SearchCountryField.DIALCODE]"
+  cssClass="custom"
+  [formControl]="phone"
+  lang="pt"
+>
+</p-intl-tel-input>
+<div>
+  <strong>Control validation errors:</strong>
+  <pre>{{ phone.errors | json }}</pre>
+</div>
+</fieldset>
+<app-field-description
+  [description]="props.description"
+  *ngIf="props.description"
+></app-field-description>
