@@ -1,0 +1,17 @@
+:host ::ng-deep {
+    ng-icon, ng-icon svg {
+        min-width: 1rem;
+        min-height: 1rem;
+    }
+
+    .option.p-inputtext {
+        border: none;
+        border-radius: 0;
+        padding: 0.5rem 0;
+    }
+
+    .option.p-inputtext:enabled:focus {
+        box-shadow: none;
+        border-bottom: 1px solid  #e1bffe;
+    }
+}

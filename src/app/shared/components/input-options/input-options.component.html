@@ -1,0 +1,38 @@
+<div class="mb-2 font-bold">
+    <app-label-tooltip
+  id="options"
+  label="Options"
+></app-label-tooltip>
+</div>
+
+@for(option of options; track $index) {
+<div class="flex items-center gap-2 border-b border-b-[#d1d2db] mb-2">
+  <input
+    [id]="fieldId + 'label' + $index"
+    type="text"
+    [name]="fieldId + 'label' + $index"
+    placeholder="Label"
+    class="option"
+    [(ngModel)]="option.label"
+    (ngModelChange)="onChange()"
+    pInputText
+  />
+  <ng-icon name="heroArrowLongRight"></ng-icon>
+  <input
+    [id]="fieldId + 'value' + $index"
+    type="text"
+    [name]="fieldId + 'value' + $index"
+    class="option"
+    placeholder="Value"
+    [(ngModel)]="option.value"
+    (ngModelChange)="onChange()"
+    pInputText
+  />
+  @if($count !== 1) {
+  <button class="text-red-500" (click)="removeOption($index)">
+    <ng-icon name="heroTrash"></ng-icon>
+  </button>
+  }
+</div>
+}
+<p-button label="Add option" size="small" (click)="addNewOption()" />
