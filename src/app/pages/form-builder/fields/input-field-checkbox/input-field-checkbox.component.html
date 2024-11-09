@@ -1,9 +1,21 @@
-<label class="flex items-center gap-3" for="{{ field.id }}">
-  <p-checkbox
-    [formControl]="formControl"
-    [formlyAttributes]="field"
-    [binary]="true" 
-    inputId="{{ field.id }}"
-  />
- <span class="text-dark-900 dark:text-white text-sm"> {{ props.label }}</span>
-</label>
+<fieldset class="flex flex-col gap-2">
+  <div class="flex items-center gap-3">
+    <p-checkbox
+      [formControl]="formControl"
+      [formlyAttributes]="field"
+      [binary]="true"
+      inputId="{{ field.id }}"
+    />
+    <app-label-tooltip
+      [id]="field.id"
+      [label]="props.label"
+      [tooltip]="props['tooltip']"
+      [required]="props.required"
+      *ngIf="props.label"
+    ></app-label-tooltip>
+  </div>
+</fieldset>
+<app-field-description
+  [description]="props.description"
+  *ngIf="props.description"
+></app-field-description>

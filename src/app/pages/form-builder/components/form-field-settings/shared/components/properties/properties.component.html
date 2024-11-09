@@ -1,39 +1,73 @@
 <p-panel [toggleable]="true">
-    <ng-template pTemplate="header">
-      <p class="text-dark-900 dark:text-white text-sm">Propiedades</p>
-    </ng-template>
+  <ng-template pTemplate="header">
+    <p class="text-dark-900 dark:text-white text-sm">Propiedades</p>
+  </ng-template>
 
-    <section class="flex flex-col gap-2 px-4">
-        <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-            <span>Label</span>
-            <input type="text" name="label" [(ngModel)]="props.label" pInputText />
-          </label>
-    
-          <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-            <span>Tooltip</span>
-            <input type="text" pInputText />
-          </label>
+  <section class="flex flex-col gap-2 px-4">
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="label"
+        label="Label"
+        tooltip="Introduce el texto que aparecerá como etiqueta junto a tu campo"
+      ></app-label-tooltip>
+      <input
+        id="label"
+        type="text"
+        name="label"
+        [(ngModel)]="props.label"
+        pInputText
+      />
+    </div>
 
-          <hr/>
-    
-          <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-            <span>Placeholder</span>
-            <input
-              type="text"
-              name="placeholder"
-              [(ngModel)]="props.placeholder"
-              pInputText
-            />
-          </label>
-    
-          <label class="grid grid-cols-2 items-center gap-2 text-sm text-dark-900">
-            <span>Description</span>
-            <textarea
-              type="text"
-              name="description"
-              [(ngModel)]="props.description"
-              pInputTextarea
-            ></textarea>
-          </label>
-    </section>
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="tooltip"
+        label="Tooltip"
+        tooltip="Escribe un mensaje breve de ayuda que se mostrará al pasar el cursor sobre el campo"
+      ></app-label-tooltip>
+      <input
+        id="tooltip"
+        type="text"
+        name="tooltip"
+        [(ngModel)]="props.tooltip"
+        pInputText
+      />
+    </div>
+
+    <hr />
+
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="placeholder"
+        label="Placeholder"
+        tooltip="Especifica el texto que aparecerá como sugerencia dentro del campo"
+      ></app-label-tooltip>
+      <input
+        id="placeholder"
+        type="text"
+        name="placeholder"
+        [(ngModel)]="props.placeholder"
+        pInputText
+      />
+    </div>
+
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="description"
+        label="Descripción"
+        tooltip="Añade una descripción o mensaje de ayuda que se mostrará debajo del campo"
+      ></app-label-tooltip>
+      <textarea
+        id="description"
+        type="text"
+        name="description"
+        [(ngModel)]="props.description"
+        pInputTextarea
+        [autoResize]="true"
+        [rows]="1"
+        class="max-h-48 overflow-y-auto"
+        style="overflow-y: auto !important"
+      ></textarea>
+    </div>
+  </section>
 </p-panel>

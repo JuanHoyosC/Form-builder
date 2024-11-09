@@ -1,10 +1,18 @@
-<label class="flex flex-col gap-2">
-  <span>{{ props.label }}</span>
+
+<fieldset class="flex flex-col gap-2">
+  <app-label-tooltip
+    [id]="field.id"
+    [label]="props.label"
+    [tooltip]="props['tooltip']"
+    [required]="props.required"
+    *ngIf="props.label"
+  ></app-label-tooltip>
   <input
-    id="{{ field.id }}"
-    [formControl]="formControl"
-    [formlyAttributes]="field"
-    type="text"
-    pInputText
-  />
-</label>
+  id="{{ field.id }}"
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  type="text"
+  pInputText
+/>
+</fieldset>
+<app-field-description [description]="props.description" *ngIf="props.description"></app-field-description>

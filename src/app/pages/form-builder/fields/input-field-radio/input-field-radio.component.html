@@ -1,15 +1,25 @@
-<label class="text-dark-900 dark:text-white text-base block mb-2" for="">{{ props.label }}</label>
-<div class="flex flex-col gap-2">
-  @for(option of props.options | formlySelectOptions : field | async; track option.value) {
-    <label class="flex items-center gap-3" for="{{ field.id }}">
-      <p-radioButton
-        name="{{ field.id }}"
-        [value]="option.value"
-        [formControl]="formControl"
-        [formlyAttributes]="field"
-        inputId="{{ field.id }}"
-      />
-      <span class="text-dark-900 dark:text-white text-sm"> {{ option.label }}</span>
-    </label>
-  }
-</div>
+<fieldset class="flex flex-col gap-2">
+  <app-label-tooltip
+    [id]="field.id"
+    [label]="props.label"
+    [tooltip]="props['tooltip']"
+    [required]="props.required"
+    *ngIf="props.label"
+  ></app-label-tooltip>
+  <div class="flex flex-col gap-2">
+    @for(option of props.options | formlySelectOptions : field | async; track option.value) {
+      <label class="flex items-center gap-3" for="{{ option.value }}">
+        <p-radioButton
+          name="{{ field.id }}"
+          [value]="option.value"
+          [formControl]="formControl"
+          [formlyAttributes]="field"
+          inputId="{{ option.value }}"
+        />
+        <span class="text-dark-900 dark:text-white text-sm"> {{ option.label }}</span>
+      </label>
+    }
+  </div>
+  
+</fieldset>
+<app-field-description [description]="props.description" *ngIf="props.description"></app-field-description>

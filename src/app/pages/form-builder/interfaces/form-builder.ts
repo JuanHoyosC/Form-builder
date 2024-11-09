@@ -40,7 +40,11 @@ export interface CustomFormlyFieldProps {
   tooltip?: string,
   headingType?: 'h1' | 'h2' | 'h3',
   align?: 'left' | 'center' | 'right' | 'justify'
+  exactLength?: number
 }
+
+export type TextStyleKeys = keyof Pick<CustomFormlyFieldProps, 'underline' | 'italic' | 'bold' | 'strikethrough'>;
+
 
 export enum FormType {
   calendar = 'calendar',

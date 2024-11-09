@@ -105,7 +105,7 @@ export class FormBuilderTypesService {
         readonly: false,
         minLength: 0,
         maxLength: 255,
-      },
+      }
     },
     INPUT_TITLE: {
       key: '',
@@ -114,7 +114,7 @@ export class FormBuilderTypesService {
         label: '',
         headingType: 'h1',
         align: 'left',
-        bold: false,
+        bold: true,
         italic: false,
         strikethrough: false,
         underline: false,
@@ -140,7 +140,7 @@ export class FormBuilderTypesService {
     },
   };
 
-  formPanelList: FormFieldList[] = [
+  formFieldList: FormFieldList[] = [
     {
       title: 'Layout',
       items: [
@@ -309,5 +309,24 @@ export class FormBuilderTypesService {
    */
   deactivateFieldMenu(): void {
     this.selectedField.set(undefined);
+  }
+  minLengthValidationMessage(error: any, field: FormlyFieldConfig) {
+    if(!field?.props) return '';
+    return `Should have atleast ${field.props.minLength} characters`;
+  }
+  
+  maxLengthValidationMessage(error: any, field: FormlyFieldConfig) {
+    if(!field?.props) return '';
+    return `This value should be less than ${field.props.maxLength} characters`;
+  }
+  
+  minValidationMessage(error: any, field: FormlyFieldConfig) {
+    if(!field?.props) return '';
+    return `This value should be more than ${field.props.min}`;
+  }
+  
+  maxValidationMessage(error: any, field: FormlyFieldConfig) {
+    if(!field?.props) return '';
+    return `This value should be less than ${field.props.max}`;
   }
 }

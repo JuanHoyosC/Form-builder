@@ -10,7 +10,7 @@
     </article>
     <app-history-buttons></app-history-buttons>
   </section>
-  <aside class="settings bg-white dark:bg-dark-900 h-full transition-all duration-300 " 
+  <aside class="settings bg-white dark:bg-dark-900 h-full transition-all duration-300 overflow-y-auto" 
     [ngClass]="{'w-[320px]':formBuilderTypesService.selectedField(), 'w-0': !formBuilderTypesService.selectedField()}">
     <app-form-field-settings [field]="formBuilderTypesService.selectedField()" *ngIf="formBuilderTypesService.selectedField()"></app-form-field-settings>
   </aside>

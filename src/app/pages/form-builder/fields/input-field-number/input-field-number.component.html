@@ -1,8 +1,15 @@
-<label class="flex flex-col gap-2" for="{{ field.id }}">
-  <span>{{ props.label }}</span>
+<fieldset class="flex flex-col gap-2">
+  <app-label-tooltip
+    [id]="field.id"
+    [label]="props.label"
+    [tooltip]="props['tooltip']"
+    [required]="props.required"
+    *ngIf="props.label"
+  ></app-label-tooltip>
   <p-inputNumber
-  [formControl]="formControl"
-  [formlyAttributes]="field"
-  inputId="{{ field.id }}"
-/>
-</label>
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    inputId="{{ field.id }}"
+  />
+</fieldset>
+<app-field-description [description]="props.description" *ngIf="props.description"></app-field-description>
