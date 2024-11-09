@@ -1,0 +1,29 @@
+<p-panel [toggleable]="true">
+  <ng-template pTemplate="header">
+    <p class="text-dark-900 dark:text-white text-sm">Data</p>
+  </ng-template>
+
+  <section class="flex flex-col gap-2 px-4">
+    <app-input-options
+      [(ngModel)]="props.options"
+    ></app-input-options>
+
+    <!-- <p-multiSelect
+      *ngIf="field"
+      [options]="(props.options | formlySelectOptions : field | async) || []"
+      [(ngModel)]="field.defaultValue"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Select Cities"
+    />
+
+    <p-dropdown
+      *ngIf="field"
+      [options]="(props.options | formlySelectOptions : field | async) || []"
+      [(ngModel)]="field.defaultValue"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Select a City"
+    /> -->
+  </section>
+</p-panel>
