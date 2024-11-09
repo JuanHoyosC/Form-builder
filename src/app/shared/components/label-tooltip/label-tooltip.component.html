@@ -1,0 +1,16 @@
+<label
+  class="text-sm break-all"
+  [class.required]="required"
+  [class]="customClass"
+  for="{{ id }}"
+>
+  {{ label }}
+</label>
+@if(tooltip) {
+<ng-icon
+  pTooltip="{{ tooltip }}"
+  tooltipPosition="right"
+  name="ionInformationCircleOutline"
+  class="text-indigo-500 text-base"
+></ng-icon>
+}
