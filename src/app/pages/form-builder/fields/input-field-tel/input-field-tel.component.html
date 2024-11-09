@@ -1,11 +1,4 @@
-<fieldset class="flex flex-col gap-2">
-  <app-label-tooltip
-    [id]="field.id"
-    [label]="props.label"
-    [tooltip]="props['tooltip']"
-    [required]="props.required"
-    *ngIf="props.label"
-  ></app-label-tooltip>
+
 <p-intl-tel-input
   [favoriteCountries]="favoriteCountries"
   [enableAutoCountrySelect]="true"
@@ -20,12 +13,3 @@
   lang="pt"
 >
 </p-intl-tel-input>
-<div>
-  <strong>Control validation errors:</strong>
-  <pre>{{ phone.errors | json }}</pre>
-</div>
-</fieldset>
-<app-field-description
-  [description]="props.description"
-  *ngIf="props.description"
-></app-field-description>

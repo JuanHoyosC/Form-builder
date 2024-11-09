@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-2">
+  @if(props.label) {
+  <app-label-tooltip
+    [id]="field.id"
+    [label]="props.label"
+    [tooltip]="props['tooltip']"
+    [required]="props.required"
+  ></app-label-tooltip>
+  }
+  
+  <ng-container #fieldComponent></ng-container>
+  @if(props.description) {
+  <app-field-description
+    [description]="props.description"
+  ></app-field-description>
+  }
+</div>

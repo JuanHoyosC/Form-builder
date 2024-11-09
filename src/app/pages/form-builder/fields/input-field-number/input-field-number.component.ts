@@ -1,14 +1,12 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { LabelTooltipComponent } from '../../../../shared/components/label-tooltip/label-tooltip.component';
-import { FieldDescriptionComponent } from '../../../../shared/components/field-description/field-description.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-input-field-number',
   standalone: true,
-  imports: [CommonModule, FieldDescriptionComponent, InputNumberModule, LabelTooltipComponent],
+  imports: [CommonModule, InputNumberModule],
   schemas: [NO_ERRORS_SCHEMA],
   templateUrl: './input-field-number.component.html',
   styleUrl: './input-field-number.component.css'

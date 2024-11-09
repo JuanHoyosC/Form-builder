@@ -26,7 +26,7 @@ import { InputFieldGroupComponent } from './pages/form-builder/fields/input-fiel
 import { SortablejsModule } from 'nxt-sortablejs';
 import { InputFieldParagraphComponent } from './pages/form-builder/fields/input-field-paragraph/input-field-paragraph.component';
 import { DividerComponent } from './pages/form-builder/wrappers/divider/divider.component';
-
+import { FieldWrapperComponent } from './pages/form-builder/wrappers/fieldWrapper/fieldWrapper.component';
 
 export const defaultLabelExtension: FormlyExtension = {
   prePopulate(field: FormlyFieldConfig): void {
@@ -85,7 +85,10 @@ export const appConfig: ApplicationConfig = {
           { name: 'text', component: InputFieldTextComponent },
           { name: 'title', component: InputFieldTitleComponent },
         ],
-        wrappers: [{ name: 'divider', component: DividerComponent }]
+        wrappers: [
+          { name: 'divider', component: DividerComponent },
+          { name: 'fieldWrapper', component: FieldWrapperComponent },
+        ],
       }),
       BrowserModule,
       BrowserAnimationsModule,

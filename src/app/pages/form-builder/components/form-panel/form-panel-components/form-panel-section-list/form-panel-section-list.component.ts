@@ -5,31 +5,11 @@ import { FormFieldList } from '../../../../interfaces/form-builder';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { PanelModule } from 'primeng/panel';
-import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { Options } from 'sortablejs';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  ionCallOutline,
-  ionRadioButtonOnOutline,
-  ionCheckboxOutline,
-  ionMailOutline,
-  ionCalendarNumberOutline,
-  ionTextOutline,
-  ionSquareOutline,
-  ionAddOutline,
-  ionRemoveOutline,
-} from '@ng-icons/ionicons';
-import {
-  heroHashtag,
-  heroH1,
-  heroEllipsisHorizontal,
-  heroViewColumns,
-  heroDocumentText,
-  heroMinus,
-} from '@ng-icons/heroicons/outline';
 import { SearchComponentPipe } from '../../../../pipes/search-component.pipe';
 import { FormPanelSearchComponent } from '../form-panel-search/form-panel-search.component';
 import { FlattenFieldsPipe } from '../../../../pipes/flatten-fields.pipe';
+import { FORM_FIELD_LIST } from '../../../../services/form-fields.config';
 
 @Component({
   selector: 'app-form-panel-section-list',
@@ -38,41 +18,20 @@ import { FlattenFieldsPipe } from '../../../../pipes/flatten-fields.pipe';
     CommonModule,
     FormPanelItemComponent,
     FormPanelSearchComponent,
-    NgIconComponent,
     PanelModule,
     SortablejsModule,
     SearchComponentPipe,
     FlattenFieldsPipe
   ],
-  providers: [
-    provideIcons({
-      ionCallOutline,
-      ionRadioButtonOnOutline,
-      ionCheckboxOutline,
-      ionMailOutline,
-      ionCalendarNumberOutline,
-      ionTextOutline,
-      ionSquareOutline,
-      ionAddOutline,
-      ionRemoveOutline,
-      heroDocumentText,
-      heroEllipsisHorizontal,
-      heroHashtag,
-      heroH1,
-      heroMinus,
-      heroViewColumns,
-    }),
-  ],
   templateUrl: './form-panel-section-list.component.html',
   styleUrl: './form-panel-section-list.component.scss',
 })
 export class FormPanelSectionListComponent implements OnInit {
-  private readonly formBuilderTypesService = inject(FormBuilderTypesService);
   formFieldList: FormFieldList[] = [];
   searchComponent: string = '';
 
   ngOnInit(): void {
-    this.formFieldList = this.formBuilderTypesService.formFieldList;
+    this.formFieldList = FORM_FIELD_LIST;
   }
   
   sortableConfig: Options = {

@@ -33,7 +33,6 @@ export class FormFieldSettingsComponent implements OnChanges {
   visible: boolean = true;
 
   ngOnChanges(): void {
-    this.field = structuredClone(this.field);
     if (this.field?.props) {
       this.props = this.field?.props;
     }

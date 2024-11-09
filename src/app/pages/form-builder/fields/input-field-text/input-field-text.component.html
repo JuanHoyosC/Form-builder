@@ -1,11 +1,4 @@
-<fieldset class="flex flex-col gap-2">
-  <app-label-tooltip
-    [id]="field.id"
-    [label]="props.label"
-    [tooltip]="props['tooltip']"
-    [required]="props.required"
-    *ngIf="props.label"
-  ></app-label-tooltip>
+
   <input
     id="{{ field.id }}"
     type="text"
@@ -18,7 +11,3 @@
     [maxlength]="props.maxLength!"
     [pattern]="props.pattern!"
   />
-</fieldset>
-<app-field-description
-  [description]="props.description" *ngIf="props.description"
-></app-field-description>

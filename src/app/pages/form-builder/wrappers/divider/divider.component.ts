@@ -5,7 +5,7 @@ import { FieldWrapper } from '@ngx-formly/core';
   selector: 'app-divider',
   standalone: true,
   imports: [],
-  templateUrl: './divider.component.html',
+  template: `<hr>`,
 })
 export class DividerComponent extends FieldWrapper {
 
