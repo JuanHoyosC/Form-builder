@@ -1,0 +1,14 @@
+<p-messages
+  [value]="[{ severity: props['severity'], detail: props.description }]"
+  [closable]="false"
+  [enableService]="false"
+  [showTransitionOptions]="'0ms'" 
+  [hideTransitionOptions]="'0ms'"
+  [class]="props['align']"
+  [ngClass]="{
+    'bold': props['bold'],
+    'italic': props['italic'],
+    'underline': props['underline'],
+    'strikethrough': props['strikethrough']
+  }"
+/>

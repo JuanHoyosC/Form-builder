@@ -1,0 +1,33 @@
+:host ::ng-deep {
+    .left .p-message .p-message-detail {
+        text-align: left;
+    }
+
+    .right .p-message .p-message-detail {
+        text-align: right;
+    }
+
+    .center .p-message .p-message-detail {
+        text-align: center;
+    }
+
+    .justify .p-message .p-message-detail {
+        text-align: justify;
+    }
+
+    .bold .p-message .p-message-detail { 
+        font-weight: 700;
+    }
+
+    .underline .p-message .p-message-detail { 
+        text-decoration: underline;
+    }
+
+    .strikethrough .p-message .p-message-detail { 
+        text-decoration: line-through;
+    }
+
+    .italic .p-message .p-message-detail { 
+        font-style: italic;
+    }
+}
