@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroArrowUturnLeft, heroArrowUturnRight } from '@ng-icons/heroicons/outline';
 import { HistoryService } from '../../../../services/history.service';
+import { HERO_ICONS } from '../../../../../../shared/components/icons';
 
 @Component({
   selector: 'app-history-buttons',
   standalone: true,
   imports: [NgIconComponent],
-  providers: [provideIcons({heroArrowUturnLeft, heroArrowUturnRight})],
+  providers: [provideIcons(HERO_ICONS)],
   templateUrl: './history-buttons.component.html',
   styleUrl: './history-buttons.component.css'
 })

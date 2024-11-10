@@ -7,18 +7,17 @@ import {
 } from '@angular/core';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroTrash } from '@ng-icons/heroicons/outline';
-import { ionCopyOutline, ionSettingsOutline } from '@ng-icons/ionicons';
 import { CommonModule } from '@angular/common';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { ClickOutsideDirective } from '../../../../directives/click-outside.directive';
 import { FieldGroup } from '../../../../interfaces/form-builder';
+import { HERO_ICONS } from '../../../../../../shared/components/icons';
 
 @Component({
   selector: 'app-form-field-group-item',
   standalone: true,
   imports: [CommonModule, ClickOutsideDirective, FormlyModule, NgIconComponent],
-  providers: [provideIcons({ heroTrash, ionCopyOutline, ionSettingsOutline })],
+  providers: [provideIcons(HERO_ICONS)],
   schemas: [NO_ERRORS_SCHEMA],
   templateUrl: './form-field-group-item.component.html',
   styleUrl: './form-field-group-item.component.css',

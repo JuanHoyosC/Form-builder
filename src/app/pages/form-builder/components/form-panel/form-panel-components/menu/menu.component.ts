@@ -1,23 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  heroChevronLeft,
-  heroChevronRight,
-  heroQueueList,
-  heroRectangleGroup,
-} from '@ng-icons/heroicons/outline';
+import { HERO_ICONS } from '../../../../../../shared/components/icons';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
   imports: [CommonModule, NgIconComponent],
-  providers: provideIcons({
-    heroChevronLeft,
-    heroChevronRight,
-    heroRectangleGroup,
-    heroQueueList,
-  }),
+  providers: provideIcons(HERO_ICONS),
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css',
 })
