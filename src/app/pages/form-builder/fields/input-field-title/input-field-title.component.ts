@@ -16,7 +16,8 @@ export class InputFieldTitleComponent extends FieldType<FieldTypeConfig>  {
       'line-through': this.props['strikethrough'],
        underline: this.props['underline'],
        italic: this.props['italic'],
-       'font-bold': this.props['bold']
+       'font-bold': this.props['bold'],
+       'font-normal': !this.props['bold']
      }
    }
 }

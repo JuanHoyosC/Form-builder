@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormlyFieldConfig, FormlyFieldProps } from '@ngx-formly/core';
+import { FormlyFieldProps } from '@ngx-formly/core';
 import { PanelModule } from 'primeng/panel';
 import { CustomFormlyFieldProps } from '../../../../../interfaces/form-builder';
 import { FormsModule } from '@angular/forms';
@@ -17,5 +17,4 @@ import { LabelTooltipComponent } from '../../../../../../../shared/components/la
 })
 export class PropertiesComponent {
   @Input() props!: FormlyFieldProps & CustomFormlyFieldProps;
-  @Input() field: FormlyFieldConfig | undefined = undefined;
 }

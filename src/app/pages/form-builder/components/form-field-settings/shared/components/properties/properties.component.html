@@ -55,7 +55,7 @@
       <app-label-tooltip
         id="description"
         label="Descripción"
-        tooltip="Añade una descripción o mensaje de ayuda que se mostrará debajo del campo"
+        tooltip="Añade una descripción o mensaje de ayuda que se mostrará debajo del campo (maximo 450 carácteres)"
       ></app-label-tooltip>
       <textarea
         id="description"
@@ -64,9 +64,8 @@
         [(ngModel)]="props.description"
         pInputTextarea
         [autoResize]="true"
-        [rows]="1"
-        class="max-h-48 overflow-y-auto"
-        style="overflow-y: auto !important"
+        [maxlength]="450"
+        rows="1"
       ></textarea>
     </div>
   </section>

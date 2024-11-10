@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroArrowLongRight, heroTrash } from '@ng-icons/heroicons/outline';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LabelTooltipComponent } from '../label-tooltip/label-tooltip.component';
+import { HERO_ICONS } from '../icons';
 
 @Component({
   selector: 'app-input-options',
@@ -19,7 +19,7 @@ import { LabelTooltipComponent } from '../label-tooltip/label-tooltip.component'
     LabelTooltipComponent,
   ],
   providers: [
-    provideIcons({ heroArrowLongRight, heroTrash }),
+    provideIcons(HERO_ICONS),
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => InputOptionsComponent),

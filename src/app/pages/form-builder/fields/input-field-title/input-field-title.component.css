@@ -1,5 +1,5 @@
 .title {
-    @apply font-normal break-words leading-tight text-dark-900 outline-none; /* Propiedades de Tailwind */
+    @apply break-words leading-tight text-dark-900 outline-none; /* Propiedades de Tailwind */
   }
   
   /* Estilo para el modo oscuro */

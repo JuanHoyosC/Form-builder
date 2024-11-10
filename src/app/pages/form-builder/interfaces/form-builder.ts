@@ -12,6 +12,7 @@ export interface FormFieldItem {
 }
 
 export interface FormFieldType {
+  ALERT_WRAPPER: CustomFormlyFieldConfig,
   DIVIDER_WRAPPER: CustomFormlyFieldConfig;
   INPUT_CALENDAR: CustomFormlyFieldConfig;
   INPUT_CHECKBOX: CustomFormlyFieldConfig;
@@ -38,15 +39,30 @@ export interface CustomFormlyFieldProps {
   bold?: boolean
   strikethrough?: boolean
   tooltip?: string,
-  headingType?: 'h1' | 'h2' | 'h3',
-  align?: 'left' | 'center' | 'right' | 'justify'
-  exactLength?: number
+  headingType?: HeadingType,
+  align?: Align
+  exactLength?: number,
+  severity?: Severity
 }
 
+export type Align = 'left' | 'center' | 'right' | 'justify';
+export type HeadingType = 'h1' | 'h2' | 'h3';
+export type Severity = 'info' | 'warn' | 'error' | 'success';
 export type TextStyleKeys = keyof Pick<CustomFormlyFieldProps, 'underline' | 'italic' | 'bold' | 'strikethrough'>;
+export type Color = `#${string}` | `rgb(${number},${number},${number})` | `rgba(${number},${number},${number},${number})`;
+
+export type LayoutOption = {
+  icon: string;
+  value: HeadingType | Align | Severity | TextStyleKeys;
+  disabled?: boolean;
+  color?: Color
+}
+
+
 
 
 export enum FormType {
+  alert = 'alert',
   calendar = 'calendar',
   checkbox = 'checkbox',
   divider = 'divider',

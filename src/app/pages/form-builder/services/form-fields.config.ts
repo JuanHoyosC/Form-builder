@@ -1,4 +1,3 @@
-
 import {
   FormFieldList,
   FormFieldType,
@@ -6,6 +5,19 @@ import {
 } from '../interfaces/form-builder';
 
 export const FORM_FIELD_TYPES: FormFieldType = {
+  ALERT_WRAPPER: {
+    type: FormType.alert,
+    props: {
+      description: 'Escribe aqui un mensaje de ayuda',
+        severity: 'info',
+        align: 'left',
+        bold: false,
+        strikethrough: false,
+        underline: false,
+        italic: false,
+    },
+    wrappers: [FormType.alert],
+  },
   INPUT_CALENDAR: {
     key: '',
     type: FormType.calendar,
@@ -147,14 +159,19 @@ export const FORM_FIELD_LIST: FormFieldList[] = [
         field: FORM_FIELD_TYPES.INPUT_GROUP,
       },
       {
+        label: 'Divider',
+        icon: 'heroMinus',
+        field: FORM_FIELD_TYPES.DIVIDER_WRAPPER,
+      },
+      {
         label: 'Grid',
         icon: 'heroViewColumns',
         field: FORM_FIELD_TYPES.INPUT_GROUP_GRID,
       },
       {
-        label: 'Title',
-        icon: 'heroH1',
-        field: FORM_FIELD_TYPES.INPUT_TITLE,
+        label: 'Message',
+        icon: 'ionInformationCircleOutline',
+        field: FORM_FIELD_TYPES.ALERT_WRAPPER,
       },
       {
         label: 'Paragraph',
@@ -162,9 +179,9 @@ export const FORM_FIELD_LIST: FormFieldList[] = [
         field: FORM_FIELD_TYPES.INPUT_PARAGRAPH,
       },
       {
-        label: 'Divider',
-        icon: 'heroMinus',
-        field: FORM_FIELD_TYPES.DIVIDER_WRAPPER,
+        label: 'Title',
+        icon: 'heroH1',
+        field: FORM_FIELD_TYPES.INPUT_TITLE,
       },
     ],
   },

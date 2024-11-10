@@ -10,20 +10,12 @@
         label="heading Type"
         tooltip="heading Type"
       ></app-label-tooltip>
-      <p-selectButton
+      <app-select-button
         id="headingType"
-        class="no-disabled"
         name="headingType"
-        optionLabel="icon"
-        optionValue="value"
-        optionDisabled="disabled"
         [options]="headingLevelOptions"
         [(ngModel)]="props.headingType"
-        (onChange)="applyDefaultToggleState($event, headingLevelOptions)"
-      >
-        <ng-template let-item pTemplate>
-          <ng-icon [name]="item.icon"></ng-icon> </ng-template
-      ></p-selectButton>
+      ></app-select-button>
     </div>
 
     <div class="flex justify-between items-center">
@@ -33,20 +25,26 @@
         tooltip="Alineación del texto"
       ></app-label-tooltip>
 
-      <p-selectButton
+      <app-select-button
         id="alignText"
-        name="align"
-        optionValue="value"
+        name="alignText"
         [options]="textAlignmentOptions"
         [(ngModel)]="props.align"
-        optionLabel="icon"
-        class="no-disabled"
-        (onChange)="applyDefaultToggleState($event, textAlignmentOptions)"
-      >
-        <ng-template let-item pTemplate>
-          <ng-icon [name]="item.icon"></ng-icon>
-        </ng-template>
-      </p-selectButton>
+      ></app-select-button>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <app-label-tooltip
+        id="severity"
+        label="Severity types"
+        tooltip="Tipo de alerta"
+      ></app-label-tooltip>
+      <app-select-button
+        id="severity"
+        name="severity"
+        [options]="severityOptions"
+        [(ngModel)]="props.severity"
+      ></app-select-button>
     </div>
 
     <div class="flex justify-between items-center">
@@ -55,19 +53,15 @@
         label="Font styles"
         tooltip="Agrega cisas"
       ></app-label-tooltip>
-      <p-selectButton
+      <app-select-button
+        id="textStyles"
+        name="textStyles"
         [options]="textFormattingOptions"
-        optionValue="value"
+        [disabledOptions]="disabledOptions"
         [multiple]="true"
-        optionLabel="icon"
-        optionDisabled="disabled"
         [(ngModel)]="appliedTextStyles"
-        (onChange)="updateTextFormattingState($event)"
-      >
-        <ng-template let-item pTemplate>
-          <ng-icon [name]="item.icon"></ng-icon>
-        </ng-template>
-      </p-selectButton>
+        (ngModelChange)="enabledTextStyles()"
+      ></app-select-button>
     </div>
   </section>
 </p-panel>

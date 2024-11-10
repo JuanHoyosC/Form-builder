@@ -3,4 +3,9 @@
         background-color: #fafbfc;
         padding: 1rem;
     }
+
+    .p-inputtext {
+        overflow-y: auto !important;
+        max-height: 12rem;
+    }
 }
