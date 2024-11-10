@@ -1,0 +1,16 @@
+<p-selectButton
+  id="{{ id }}"
+  name="{{ name }}"
+  optionValue="value"
+  [options]="options"
+  [(ngModel)]="value"
+  [multiple]="multiple"
+  optionDisabled="disabled"
+  optionLabel="icon"
+  [class.no-disabled]="!multiple"
+  (onChange)="onSelectButtonChange($event, options)"
+>
+  <ng-template let-item pTemplate>
+    <ng-icon [name]="item.icon" [style.color]="item.color"></ng-icon>
+  </ng-template>
+</p-selectButton>
