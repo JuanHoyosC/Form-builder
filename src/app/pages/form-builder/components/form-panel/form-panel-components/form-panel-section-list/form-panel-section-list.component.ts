@@ -9,7 +9,7 @@ import { Options } from 'sortablejs';
 import { SearchComponentPipe } from '../../../../pipes/search-component.pipe';
 import { FormPanelSearchComponent } from '../form-panel-search/form-panel-search.component';
 import { FlattenFieldsPipe } from '../../../../pipes/flatten-fields.pipe';
-import { FORM_FIELD_LIST } from '../../../../services/form-fields.config';
+import { FORM_FIELD_LIST } from '../../../../../../shared/form-fields.config';
 
 @Component({
   selector: 'app-form-panel-section-list',

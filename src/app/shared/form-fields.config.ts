@@ -1,20 +1,35 @@
+import { FormlyExtension, FormlyFieldConfig } from '@ngx-formly/core';
 import {
   FormFieldList,
   FormFieldType,
   FormType,
-} from '../interfaces/form-builder';
+} from '../pages/form-builder/interfaces/form-builder';
+import { InputFieldCalendarComponent } from '../pages/form-builder/fields/input-field-calendar/input-field-calendar.component';
+import { InputFieldCheckboxComponent } from '../pages/form-builder/fields/input-field-checkbox/input-field-checkbox.component';
+import { InputFieldEmailComponent } from '../pages/form-builder/fields/input-field-email/input-field-email.component';
+import { InputFieldGroupComponent } from '../pages/form-builder/fields/input-field-group/input-field-group.component';
+import { InputFieldNumberComponent } from '../pages/form-builder/fields/input-field-number/input-field-number.component';
+import { InputFieldParagraphComponent } from '../pages/form-builder/fields/input-field-paragraph/input-field-paragraph.component';
+import { InputFieldPasswordComponent } from '../pages/form-builder/fields/input-field-password/input-field-password.component';
+import { InputFieldRadioComponent } from '../pages/form-builder/fields/input-field-radio/input-field-radio.component';
+import { InputFieldTelComponent } from '../pages/form-builder/fields/input-field-tel/input-field-tel.component';
+import { InputFieldTextComponent } from '../pages/form-builder/fields/input-field-text/input-field-text.component';
+import { InputFieldTitleComponent } from '../pages/form-builder/fields/input-field-title/input-field-title.component';
+import { AlertComponent } from '../pages/form-builder/wrappers/alert/alert.component';
+import { DividerComponent } from '../pages/form-builder/wrappers/divider/divider.component';
+import { FieldWrapperComponent } from '../pages/form-builder/wrappers/fieldWrapper/fieldWrapper.component';
 
 export const FORM_FIELD_TYPES: FormFieldType = {
   ALERT_WRAPPER: {
     type: FormType.alert,
     props: {
       description: 'Escribe aqui un mensaje de ayuda',
-        severity: 'info',
-        align: 'left',
-        bold: false,
-        strikethrough: false,
-        underline: false,
-        italic: false,
+      severity: 'info',
+      align: 'left',
+      bold: false,
+      strikethrough: false,
+      underline: false,
+      italic: false,
     },
     wrappers: [FormType.alert],
   },
@@ -234,4 +249,66 @@ export const FORM_FIELD_LIST: FormFieldList[] = [
     title: 'Advanced fields',
     items: [],
   },
+];
+
+export const defaultLabelExtension: FormlyExtension = {
+  prePopulate(field: FormlyFieldConfig): void {
+    if (!field.props?.label) {
+      field.props = { ...field.props, label: 'Default Label' };
+    }
+  },
+};
+
+export const defaultOptionsExtension: FormlyExtension = {
+  prePopulate(field: FormlyFieldConfig): void {
+    const fieldTypes = [FormType.radio];
+    const currentFielType = field.type as FormType;
+    if (!fieldTypes.includes(currentFielType)) return;
+    if (field.props?.options) return;
+
+    field.props = {
+      ...field.props,
+      options: [
+        {
+          label: 'option 1',
+          value: 'option 1',
+        },
+        {
+          label: 'option 2',
+          value: 'option 2',
+        },
+      ],
+    };
+  },
+};
+
+export const FORMLY_EXTENSIONS = [
+  {
+    name: 'default-label',
+    extension: defaultLabelExtension,
+  },
+  {
+    name: 'default-options',
+    extension: defaultOptionsExtension,
+  },
+];
+
+export const FORMLY_TYPES = [
+  { name: 'calendar', component: InputFieldCalendarComponent },
+  { name: 'checkbox', component: InputFieldCheckboxComponent },
+  { name: 'email', component: InputFieldEmailComponent },
+  { name: 'group', component: InputFieldGroupComponent },
+  { name: 'number', component: InputFieldNumberComponent },
+  { name: 'paragraph', component: InputFieldParagraphComponent },
+  { name: 'password', component: InputFieldPasswordComponent },
+  { name: 'radio', component: InputFieldRadioComponent },
+  { name: 'tel', component: InputFieldTelComponent },
+  { name: 'text', component: InputFieldTextComponent },
+  { name: 'title', component: InputFieldTitleComponent },
+];
+
+export const FORMLY_WRAPPERS = [
+  { name: 'alert', component: AlertComponent },
+  { name: 'divider', component: DividerComponent },
+  { name: 'fieldWrapper', component: FieldWrapperComponent },
 ];
