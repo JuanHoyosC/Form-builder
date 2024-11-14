@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { TooltipModule } from 'primeng/tooltip';
-import { HERO_ICONS } from '../icons';
+import { HERO_ICONS } from '../../icons';
 
 
 @Component({

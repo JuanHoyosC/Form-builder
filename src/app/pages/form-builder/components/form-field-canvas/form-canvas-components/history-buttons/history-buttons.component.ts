@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { HistoryService } from '../../../../services/history.service';
-import { HERO_ICONS } from '../../../../../../shared/components/icons';
+import { HERO_ICONS } from '../../../../../../shared/icons';
 
 @Component({
   selector: 'app-history-buttons',

@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { ClickOutsideDirective } from '../../../../directives/click-outside.directive';
 import { FieldGroup } from '../../../../interfaces/form-builder';
-import { HERO_ICONS } from '../../../../../../shared/components/icons';
+import { HERO_ICONS } from '../../../../../../shared/icons';
 
 @Component({
   selector: 'app-form-field-group-item',

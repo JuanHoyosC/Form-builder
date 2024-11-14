@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { HERO_ICONS } from '../../../../../../shared/components/icons';
+import { HERO_ICONS } from '../../../../../../shared/icons';
 
 @Component({
   selector: 'app-form-panel-search',

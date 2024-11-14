@@ -5,7 +5,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LabelTooltipComponent } from '../label-tooltip/label-tooltip.component';
-import { HERO_ICONS } from '../icons';
+import { HERO_ICONS } from '../../icons';
 
 @Component({
   selector: 'app-input-options',
