@@ -9,7 +9,9 @@
   [numberFormat]="PhoneNumberFormat.INTERNATIONAL"
   [searchCountryField]="[SearchCountryField.NAME, SearchCountryField.DIALCODE]"
   cssClass="custom"
-  [formControl]="phone"
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  [required]="true"
   lang="pt"
 >
 </p-intl-tel-input>

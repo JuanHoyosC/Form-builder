@@ -5,17 +5,17 @@ import {
 } from '@angular/core';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import {
+  CustomFormlyFieldConfig,
   FieldGroup,
-  FormFieldList,
-  FormFieldType,
-  FormType,
 } from '../interfaces/form-builder';
-import { FORM_FIELD_TYPES } from './form-fields.config';
+import { FORM_FIELD_TYPES } from '../../../shared/form-fields.config';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormBuilderTypesService {
+  $selectedField: BehaviorSubject<FormlyFieldConfig> = new BehaviorSubject({});
   fields: WritableSignal<FormlyFieldConfig> = signal(
     structuredClone(FORM_FIELD_TYPES.INPUT_GROUP)
   );
@@ -29,6 +29,29 @@ export class FormBuilderTypesService {
     fieldGroup.splice(newIndex, 1, newField);
     this.fields.set({ ...this.fields() });
   }
+
+  updateField(
+    node: FormlyFieldConfig,
+    updatedData: FormlyFieldConfig
+  ): FormlyFieldConfig | null {
+    // Si encontramos el nodo, actualizamos sus propiedades
+    if (node.id === updatedData.id) {
+      Object.assign(node, updatedData);
+      return node; // Retornar el nodo raíz con el nodo actualizado
+    }
+  
+    // Si tiene hijos, buscamos recursivamente en ellos
+    if (node.fieldGroup) {
+      for (const child of node.fieldGroup) {
+        const updatedNode = this.updateField(child, updatedData);
+        if (updatedNode) return node; // Retornar el objeto raíz completo
+      }
+    }
+  
+    // Si no se encuentra el nodo en este nivel, devolver null
+    return null;
+  }
+
 
   /**
    * Removes a field from the specified field group.
@@ -96,6 +119,7 @@ export class FormBuilderTypesService {
    */
   activateFieldMenu(selectedField: FormlyFieldConfig): void {
     this.selectedField.set(selectedField);
+    this.$selectedField.next(selectedField);
   }
 
   /**

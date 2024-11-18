@@ -30,30 +30,31 @@ export interface FormFieldType {
 
 export interface CustomFormlyFieldConfig extends FormlyFieldConfig {
   type: FormType | string; // Reemplaza el tipo existente
-  props: FormlyFieldProps & CustomFormlyFieldProps
+  props: CustomFormlyFieldProps
 }
 
-export interface CustomFormlyFieldProps {
-  underline?: boolean,
-  italic?: boolean
-  bold?: boolean
-  strikethrough?: boolean
+export interface CustomFormlyFieldProps extends FormlyFieldProps{
+  textFormattingOptions?: TextFormattingOptions
   tooltip?: string,
   headingType?: HeadingType,
   align?: Align
   exactLength?: number,
-  severity?: Severity
+  severity?: Severity,
+  minDate?: Date,
+  maxDate?: Date 
 }
+
+export type TextFormattingOption = 'bold' | 'underline' | 'italic' | 'strikethrough';
+export type TextFormattingOptions = Array<TextFormattingOption>;
 
 export type Align = 'left' | 'center' | 'right' | 'justify';
 export type HeadingType = 'h1' | 'h2' | 'h3';
 export type Severity = 'info' | 'warn' | 'error' | 'success';
-export type TextStyleKeys = keyof Pick<CustomFormlyFieldProps, 'underline' | 'italic' | 'bold' | 'strikethrough'>;
 export type Color = `#${string}` | `rgb(${number},${number},${number})` | `rgba(${number},${number},${number},${number})`;
 
 export type LayoutOption = {
   icon: string;
-  value: HeadingType | Align | Severity | TextStyleKeys;
+  value: HeadingType | Align | Severity | TextFormattingOption;
   disabled?: boolean;
   color?: Color
 }

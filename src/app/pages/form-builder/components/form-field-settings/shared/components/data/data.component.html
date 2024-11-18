@@ -3,27 +3,36 @@
     <p class="text-dark-900 dark:text-white text-sm">Data</p>
   </ng-template>
 
-  <section class="flex flex-col gap-2 px-4">
-    <app-input-options
-      [(ngModel)]="props.options"
-    ></app-input-options>
-
-    <!-- <p-multiSelect
-      *ngIf="field"
-      [options]="(props.options | formlySelectOptions : field | async) || []"
-      [(ngModel)]="field.defaultValue"
-      optionLabel="label"
-      optionValue="value"
-      placeholder="Select Cities"
-    />
-
-    <p-dropdown
-      *ngIf="field"
-      [options]="(props.options | formlySelectOptions : field | async) || []"
-      [(ngModel)]="field.defaultValue"
-      optionLabel="label"
-      optionValue="value"
-      placeholder="Select a City"
-    /> -->
+  <section class="flex flex-col gap-4 px-4">
+    @if(settingService.formFieldSettings().data.showDefaultValue) {
+    <div class="grid grid-cols-2 gap-2 items-center">
+      <app-label-tooltip
+        id="readonly"
+        label="Default data"
+        tooltip="Habilita el modo de solo lectura si el campo no es obligatorio y no está deshabilitado"
+        class="font-bold"
+      ></app-label-tooltip>
+      @if(!settingService.form.get('props.options')?.value) {
+      <app-default-field
+        [field]="settingService.defaultSelectedField()"
+        formControlName="defaultValue"
+      ></app-default-field>
+      }@else {
+      <p-dropdown
+        [options]="
+          settingService.form.get('props.options')?.value | formlyOptions
+        "
+        formControlName="defaultValue"
+        appendTo="body"
+        class="block w-full"
+        placeholder="Select an option"
+      ></p-dropdown
+      >}
+    </div>
+    } @if(settingService.formFieldSettings().data.showOptions) {
+    <div formGroupName="props">
+      <app-input-options formControlName="options"></app-input-options>
+    </div>
+    }
   </section>
 </p-panel>

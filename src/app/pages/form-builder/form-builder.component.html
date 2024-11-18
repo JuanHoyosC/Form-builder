@@ -9,9 +9,10 @@
       <app-form-field-canvas class="block h-auto w-full bg-white dark:bg-dark-900 rounded-lg shadow-md p-4 overflow-visible"></app-form-field-canvas>
     </article>
     <app-history-buttons></app-history-buttons>
+    <button (click)="open()">xcvxcvzxvxvzc</button>
   </section>
-  <aside class="settings bg-white dark:bg-dark-900 h-full transition-all duration-300 overflow-y-auto" 
+  <aside class="settings bg-white pb-8 dark:bg-dark-900 h-full transition-all duration-300 overflow-y-auto" 
     [ngClass]="{'w-[344px]':formBuilderTypesService.selectedField(), 'w-0': !formBuilderTypesService.selectedField()}">
-    <app-form-field-settings [field]="formBuilderTypesService.selectedField()" *ngIf="formBuilderTypesService.selectedField()"></app-form-field-settings>
+    <app-form-field-settings *ngIf="formBuilderTypesService.selectedField()"></app-form-field-settings>
   </aside>
 </main>

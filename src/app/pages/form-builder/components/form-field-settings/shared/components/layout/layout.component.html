@@ -3,7 +3,8 @@
     <p class="text-dark-900 dark:text-white text-sm">Layout</p>
   </ng-template>
 
-  <section class="flex flex-col gap-2 px-4">
+  <section class="flex flex-col gap-2 px-4" formGroupName="props">
+     @if(settingService.formFieldSettings().layout.showHeadingType) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
         id="headingType"
@@ -14,10 +15,10 @@
         id="headingType"
         name="headingType"
         [options]="headingLevelOptions"
-        [(ngModel)]="props.headingType"
+        formControlName="headingType"
       ></app-select-button>
-    </div>
-
+    </div> }
+ @if(settingService.formFieldSettings().layout.showAlign) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
         id="alignText"
@@ -29,10 +30,10 @@
         id="alignText"
         name="alignText"
         [options]="textAlignmentOptions"
-        [(ngModel)]="props.align"
+        formControlName="align"
       ></app-select-button>
-    </div>
-
+    </div> }
+ @if(settingService.formFieldSettings().layout.showSeverity) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
         id="severity"
@@ -43,10 +44,10 @@
         id="severity"
         name="severity"
         [options]="severityOptions"
-        [(ngModel)]="props.severity"
+        formControlName="severity"
       ></app-select-button>
-    </div>
-
+    </div> }
+ @if(settingService.formFieldSettings().layout.showTextFormattingOptions) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
         id="headingType"
@@ -59,9 +60,8 @@
         [options]="textFormattingOptions"
         [disabledOptions]="disabledOptions"
         [multiple]="true"
-        [(ngModel)]="appliedTextStyles"
-        (ngModelChange)="enabledTextStyles()"
+        formControlName="textFormattingOptions"
       ></app-select-button>
-    </div>
+    </div> }
   </section>
 </p-panel>

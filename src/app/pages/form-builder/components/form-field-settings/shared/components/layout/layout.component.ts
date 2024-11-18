@@ -1,39 +1,39 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { FormlyFieldProps } from '@ngx-formly/core';
+import { Component, inject } from '@angular/core';
 import {
-  CustomFormlyFieldProps,
-  TextStyleKeys,
   LayoutOption,
+  TextFormattingOption,
 } from '../../../../../interfaces/form-builder';
 import { CommonModule } from '@angular/common';
 import { provideIcons } from '@ng-icons/core';
-import { FormsModule } from '@angular/forms';
+import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { PanelModule } from 'primeng/panel';
 import { LabelTooltipComponent } from '../../../../../../../shared/components/label-tooltip/label-tooltip.component';
 import {
   DisabledOptions,
   SelectButtonComponent,
 } from '../../../../../../../shared/components/select-button/select-button.component';
-import { HERO_ICONS } from '../../../../../../../shared/components/icons';
+import { HERO_ICONS } from '../../../../../../../shared/icons';
+import { SettingService } from '../../../setting.service';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     PanelModule,
     SelectButtonComponent,
     LabelTooltipComponent,
+    ReactiveFormsModule
   ],
   providers: [
     provideIcons(HERO_ICONS),
   ],
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective}],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
-export class LayoutComponent implements OnChanges {
-  @Input() props!: FormlyFieldProps & CustomFormlyFieldProps;
+export class LayoutComponent {
+  public settingService = inject(SettingService);
   // Text alignment options with icons and alignment values
   textAlignmentOptions: LayoutOption[] = [
     { icon: 'heroBars3BottomLeft', value: 'left', disabled: false },
@@ -79,46 +79,8 @@ export class LayoutComponent implements OnChanges {
     { icon: 'heroStrikethrough', value: 'strikethrough', disabled: false },
   ];
 
-  // Keys of text style properties represented as strings
-  textStyleKeys: TextStyleKeys[] = [
-    'bold',
-    'italic',
-    'strikethrough',
-    'underline',
-  ];
-
-  // List of currently applied text styles
-  appliedTextStyles: TextStyleKeys[] = [];
-
   disabledOptions: DisabledOptions[] = [
     { disabled: 'underline', enabled: 'strikethrough' },
     { disabled: 'strikethrough', enabled: 'underline' },
   ];
-
-  /**
-   * Initializes options when input properties change.
-   * This method is triggered when `props` or other input properties update.
-   */
-  ngOnChanges(): void {
-    this.initializeAppliedTextStyles();
-  }
-
-  /**
-   * Updates the list of applied text styles (`appliedTextStyles`) based on the current `props`.
-   * Each style (bold, italic, etc.) is added if it is active in `props`.
-   */
-  initializeAppliedTextStyles(): void {
-    this.appliedTextStyles = [];
-    for (const key of this.textStyleKeys) {
-      if (this.props[key]) {
-        this.appliedTextStyles.push(key);
-      }
-    }
-  }
-
-  enabledTextStyles(): void { 
-    for (const key of this.textStyleKeys) {
-     this.props[key] = this.appliedTextStyles.includes(key);
-    }
-  }
 }

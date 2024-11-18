@@ -1,13 +1,13 @@
 <div class="flex flex-col gap-2">
   @for(option of props.options | formlySelectOptions : field | async; track
   option.value) {
-  <label class="flex items-center gap-3" for="{{ option.value }}">
+  <label class="flex items-center gap-3" for="{{ option.value }} {{ field.id }}">
     <p-radioButton
       name="{{ field.id }}"
       [value]="option.value"
       [formControl]="formControl"
       [formlyAttributes]="field"
-      inputId="{{ option.value }}"
+      inputId="{{ option.value }} {{ field.id }}"
     />
     <span class="text-dark-900 dark:text-white text-sm">
       {{ option.label }}</span

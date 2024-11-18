@@ -1,6 +1,11 @@
 <p-calendar
+  id="{{ field.id }}"
+  inputId="{{ field.id }}"
   [formControl]="formControl"
   [formlyAttributes]="field"
-  inputId="{{ field.id }}"
-  id="{{ field.id }}"
+  appendTo="body"
+  [showTime]="true"
+  [hourFormat]="'12'"
+  [minDate]="props['minDate']"
+  [maxDate]="props['maxDate']"
 />

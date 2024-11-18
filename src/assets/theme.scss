@@ -50,78 +50,29 @@
   background-color: transparent;
 }
 
-.p-tree {
-  border: none;
-  background: transparent;
+.p-overlaypanel .p-overlaypanel-content {
   padding: 0;
+}
+
+.p-overlaypanel.p-overlaypanel-flipped:after,
+.p-overlaypanel.p-overlaypanel-flipped:before,
+.p-overlaypanel:before {
+  display: none;
+}
+
+.p-overlaypanel {
+  background: #ffffff;
+  color: #4b5563;
+  border: 0 none;
   border-radius: 0;
-}
-
-.p-tree .p-treenode-children {
-  padding: 0 0 0 8px;
-  border-left: 1px dotted #00000030;
-  margin-left: 8px;
-}
-
-.p-tree .p-tree-container .p-treenode {
-  padding: 0.3rem;
-}
-
-.p-tree .p-tree-container .p-treenode .p-treenode-content {
-  border-radius: 0;
-  padding: 0;
-  gap: 8px;
-}
-
-.p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight,
-.p-tree
-  .p-tree-container
-  .p-treenode
-  .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
-  background: transparent;
-  color: theme("colors.indigo.600");
-  outline: none;
-}
-
-.p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
   box-shadow: none;
-}
-
-.p-tree
-  .p-tree-container
-  .p-treenode
-  .p-treenode-content
-  .p-tree-toggler:enabled:hover {
-  color: theme("colors.indigo.600");
-  background: transparent;
-}
-
-.p-tree
-  .p-tree-container
-  .p-treenode
-  .p-treenode-content.p-highlight
-  .p-tree-toggler {
-  color: theme("colors.indigo.600");
-}
-
-.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
-  &,
-  &:hover {
-    margin-right: 0;
-    width: 1rem;
-    height: 1rem;
-    background: transparent;
-    border-radius: 0;
-    border: 1px solid #00000030;
-  }
-}
-
-.p-treenode-label {
-  font-size: 14px;
-}
-
-.p-tree-toggler-icon {
-  display: flex;
+  border: none;
+  margin: 0;
+  min-width: 11rem;
+  max-height: 40vh;
+  overflow: auto;
+  overflow-x: auto;
+  max-width: 40vw;
 }
 
 .p-panel.p-panel-toggleable .p-panel-header {
@@ -151,12 +102,14 @@
 
 .p-selectbutton {
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .p-selectbutton .p-button {
   padding: 0.5rem 0.75rem;
   font-size: 14px;
-  border-color:  #efefef;
+  border-color: #efefef;
+  border-radius: 0;
 
   &:focus {
     box-shadow: none;
@@ -169,6 +122,27 @@
   color: #fff;
 }
 
+.p-dropdown {
+  width: 100%;
+}
+
+.p-dropdown .p-inputtext {
+  border: none;
+}
+
+.p-dropdown .p-focus > .p-inputtext,
+.p-dropdown.p-inputtext:enabled:focus {
+  box-shadow: none;
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: none;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  font-size: 14px;
+}
+
 p-inputnumber,
 .p-inputnumber,
 .p-inputtext,
@@ -178,18 +152,26 @@ p-inputnumber,
 }
 
 .p-inputtext {
-  font-size: theme('fontSize.sm');
+  font-size: theme("fontSize.sm");
   background: transparent;
   padding: 0.5rem;
   border: 1px solid #d1d5db;
   border-radius: 4px;
 }
 
-*.p-focus > .p-inputtext, .p-inputtext:enabled:focus {
-  box-shadow: 0 0 0 0.1rem #e1bffe;
+.p-dropdown:not(.p-disabled):hover,
+.p-dropdown:not(.p-disabled):focus,
+.p-inputtext:enabled:focus,
+.p-inputtext:enabled:hover {
+  border-color: theme("colors.indigo.500");
 }
 
-.p-inputtext.ng-dirty.ng-invalid { 
+*.p-focus > .p-inputtext,
+.p-inputtext:enabled:focus {
+  box-shadow: none;
+}
+
+.p-inputtext.ng-dirty.ng-invalid {
   border-color: red;
 }
 
@@ -218,8 +200,12 @@ p-inputnumber,
 
 .p-button {
   width: max-content;
+  border-radius: 4px;
 }
 
+.p-button-label {
+  font-weight: 500;
+}
 .p-button.p-button-sm {
   font-size: theme("fontSize.sm");
   padding: 0.3rem 0.5rem;
@@ -231,37 +217,60 @@ p-inputnumber,
 }
 
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
-  transform: translate(calc(var(--inputswitch-width) - 1.05rem), -50%) !important;
+  transform: translate(
+    calc(var(--inputswitch-width) - 1.05rem),
+    -50%
+  ) !important;
 }
 
 .p-inputswitch.p-focus .p-inputswitch-slider {
   box-shadow: none;
 }
 
-body.light  {
+.p-datepicker {
+  padding: 0;
+  border-radius: 4px;
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month, .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year {
+  font-size: theme("fontSize.sm");
+  padding: 0;
+}
+
+.p-datepicker table td {
+  padding: 0.25rem;
+}
+
+.p-datepicker table th {
+  padding: 0.25rem;
+  font-size: theme("fontSize.sm");
+}
+
+.p-datepicker table td > span {
+  width: 2rem;
+  height: 2rem;
+  font-size: theme("fontSize.sm");
+}
+
+body.light {
   .p-panel .p-panel-header .p-panel-header-icon {
-  color: theme("colors.dark.900");
+    color: theme("colors.dark.900");
   }
 
   .p-inputswitch .p-inputswitch-slider {
     background-color: theme("colors.gray.200");
   }
 
-  
-.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-  background-color: theme("colors.indigo.500");
-}
-
-
+  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background-color: theme("colors.indigo.500");
+  }
 }
 
 body.dark {
   .p-panel .p-panel-header .p-panel-header-icon {
     color: theme("colors.white");
   }
-
 }
-
 
 .dropZone::before {
   content: "Drag a element here";
@@ -289,6 +298,6 @@ body.dark {
 }
 
 .required::after {
-  content: '*';
+  content: "*";
   color: red;
 }

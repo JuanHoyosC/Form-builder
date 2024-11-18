@@ -5,10 +5,11 @@
   [showTransitionOptions]="'0ms'" 
   [hideTransitionOptions]="'0ms'"
   [class]="props['align']"
+  
   [ngClass]="{
-    'bold': props['bold'],
-    'italic': props['italic'],
-    'underline': props['underline'],
-    'strikethrough': props['strikethrough']
+    'bold': props['textFormattingOptions'].includes('bold'),
+    'strikethrough': props['textFormattingOptions'].includes('strikethrough'),
+    italic: props['textFormattingOptions'].includes('italic'),
+    underline: props['textFormattingOptions'].includes('underline'),
   }"
 />

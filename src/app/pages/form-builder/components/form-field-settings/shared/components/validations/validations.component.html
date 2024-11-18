@@ -2,7 +2,8 @@
   <ng-template pTemplate="header">
     <p class="text-dark-900 dark:text-white text-sm">Validaciones</p>
   </ng-template>
-  <section class="flex flex-col gap-2 px-4">
+  <section class="flex flex-col gap-2 px-4" formGroupName="props">
+    @if(settingService.formFieldSettings().validations.showRequired) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
         id="required"
@@ -12,11 +13,10 @@
       <p-inputSwitch
         id="required"
         name="required"
-        [(ngModel)]="props.required"
-        [disabled]="props.disabled || props.readonly || false"
+        formControlName="required"
       />
     </div>
-
+    } @if(settingService.formFieldSettings().validations.showReadonly) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
         id="readonly"
@@ -26,11 +26,10 @@
       <p-inputSwitch
         id="readonly"
         name="readonly"
-        [(ngModel)]="props.readonly"
-        [disabled]="props.required || props.disabled || false"
+        formControlName="readonly"
       />
     </div>
-
+    } @if(settingService.formFieldSettings().validations.showDisabled) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
         id="disabled"
@@ -40,12 +39,41 @@
       <p-inputSwitch
         id="disabled"
         name="disabled"
-        [(ngModel)]="props.disabled"
-        [disabled]="props.required || props.readonly || false"
+        formControlName="disabled"
+      />
+    </div>
+    }
+
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="min"
+        label="Mínimo"
+        tooltip="Especifica el valor mínimo permitido para este campo"
+      ></app-label-tooltip>
+      <p-calendar
+        name="minDate"
+        [maxDate]="settingService.form.get('maxDate')?.value"
+        appendTo="body"
+        formControlName="minDate"
       />
     </div>
 
-    <hr />
+
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        id="min"
+        label="Max"
+        tooltip="Especifica el valor mínimo permitido para este campo"
+      ></app-label-tooltip>
+      <p-calendar
+        name="maxDate"
+        [minDate]="settingService.form.get('minDate')?.value"
+        appendTo="body"
+        formControlName="maxDate"
+      />
+    </div>
+
+    @if(settingService.formFieldSettings().validations.showMin) {
 
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
@@ -56,12 +84,11 @@
       <input
         id="min"
         type="number"
-        [max]="props.max ?? 255"
-        [(ngModel)]="props.min"
+        formControlName="min"
         pInputText
       />
     </div>
-
+    } @if(settingService.formFieldSettings().validations.showMax) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
         id="max"
@@ -71,14 +98,11 @@
       <input
         id="max"
         type="number"
-        [min]="props.min ?? 0"
-        [(ngModel)]="props.max"
+        formControlName="max"
         pInputText
       />
     </div>
-
-    <hr />
-
+    } @if(settingService.formFieldSettings().validations.showMinLength) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
         id="minLength"
@@ -89,12 +113,11 @@
         id="minLength"
         type="number"
         [min]="0"
-        [max]="props.maxLength ?? 255"
-        [(ngModel)]="props.minLength"
+        formControlName="minLength"
         pInputText
       />
     </div>
-
+    } @if(settingService.formFieldSettings().validations.showMaxLength) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
         id="maxLength"
@@ -104,12 +127,11 @@
       <input
         id="maxLength"
         type="number"
-        [min]="props.min ?? 0"
-        [(ngModel)]="props.maxLength"
+        formControlName="maxLength"
         pInputText
       />
     </div>
-
+    } @if(settingService.formFieldSettings().validations.showExactLength) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
         id="exactLength"
@@ -120,20 +142,25 @@
         id="exactLength"
         type="number"
         min="0"
-        [(ngModel)]="props.exactLength"
+        formControlName="exactLength"
         pInputText
       />
     </div>
-
-    <hr />
-
+    } @if(settingService.formFieldSettings().validations.showPattern) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
         id="pattern"
         label="Expresión regular"
         tooltip="Introduce una expresión regular para definir un patrón específico de entrada para este campo"
       ></app-label-tooltip>
-      <input id="pattern" type="text" name="pattern" [(ngModel)]="props.pattern!" pInputText />
+      <input
+        id="pattern"
+        type="text"
+        name="pattern"
+        formControlName="pattern"
+        pInputText
+      />
     </div>
+    }
   </section>
 </p-panel>

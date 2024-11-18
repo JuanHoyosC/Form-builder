@@ -26,10 +26,7 @@ export const FORM_FIELD_TYPES: FormFieldType = {
       description: 'Escribe aqui un mensaje de ayuda',
       severity: 'info',
       align: 'left',
-      bold: false,
-      strikethrough: false,
-      underline: false,
-      italic: false,
+      textFormattingOptions: []
     },
     wrappers: [FormType.alert],
   },
@@ -78,13 +75,9 @@ export const FORM_FIELD_TYPES: FormFieldType = {
     key: '',
     type: FormType.paragraph,
     props: {
-      label: '',
-      placeholder: '',
+      description: 'Contenido de ayuda',
       align: 'left',
-      bold: false,
-      italic: false,
-      strikethrough: false,
-      underline: false,
+      textFormattingOptions: []
     },
   },
   INPUT_PASSWORD: {
@@ -138,10 +131,7 @@ export const FORM_FIELD_TYPES: FormFieldType = {
       label: '',
       headingType: 'h1',
       align: 'left',
-      bold: true,
-      italic: false,
-      strikethrough: false,
-      underline: false,
+      textFormattingOptions: ['bold']
     },
   },
   INPUT_GROUP: {

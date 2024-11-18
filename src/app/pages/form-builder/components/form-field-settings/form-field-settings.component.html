@@ -1,14 +1,11 @@
-<form>
-    <section class="flex flex-col gap-2">
-      <app-properties [props]="props"></app-properties>
-      <app-layout [props]="props"></app-layout>
-      <app-data [props]="props" [field]="field"></app-data>
-      <app-validations [props]="props"></app-validations>
-    </section>
+<form class="flex flex-col gap-2" [formGroup]="settingService.form">
+  @if(settingService.isSectionVisible('properties')) {
+  <app-properties></app-properties>
+  } @if(settingService.isSectionVisible('layout')) {
+  <app-layout></app-layout>
+  } @if(settingService.isSectionVisible('data')) {
+  <app-data></app-data>
+  } @if(settingService.isSectionVisible('validations')) {
+  <app-validations></app-validations>
+  }
 </form>
-
-<!-- <p-dialog  [(visible)]="visible" [showHeader]="false" [draggable]="false">
- <div class="bg-white w-100% p-4 min-w-[50%] rounded">
-  <formly-form [fields]="[field]"></formly-form>
- </div>
-</p-dialog> -->

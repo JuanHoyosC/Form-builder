@@ -1,7 +1,6 @@
 <div
   class="relative px-4 pl-6 py-2 group border border-transparent hover:border-indigo-500/50 animate__animated"
   (click)="openMenuForSelectedField($event)"
-  (outside)="closeMenuForSelectedField()"
   [ngClass]="{
     active: formBuilderTypesService.selectedField()?.id === field.id,
     animate__bounce: removeElement

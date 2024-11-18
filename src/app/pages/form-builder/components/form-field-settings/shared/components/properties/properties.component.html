@@ -3,7 +3,8 @@
     <p class="text-dark-900 dark:text-white text-sm">Propiedades</p>
   </ng-template>
 
-  <section class="flex flex-col gap-2 px-4">
+  <section class="flex flex-col gap-2 px-4" formGroupName="props">
+    @if(settingService.formFieldSettings().properties.showLabel) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
         id="label"
@@ -14,11 +15,11 @@
         id="label"
         type="text"
         name="label"
-        [(ngModel)]="props.label"
+        formControlName="label"
         pInputText
       />
     </div>
-
+    } @if(settingService.formFieldSettings().properties.showTooltip) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
         id="tooltip"
@@ -29,13 +30,11 @@
         id="tooltip"
         type="text"
         name="tooltip"
-        [(ngModel)]="props.tooltip"
+        formControlName="tooltip"
         pInputText
       />
     </div>
-
-    <hr />
-
+    } @if(settingService.formFieldSettings().properties.showPlaceholder) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
         id="placeholder"
@@ -46,11 +45,11 @@
         id="placeholder"
         type="text"
         name="placeholder"
-        [(ngModel)]="props.placeholder"
+        formControlName="placeholder"
         pInputText
       />
     </div>
-
+    } @if(settingService.formFieldSettings().properties.showDescription) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
         id="description"
@@ -61,12 +60,15 @@
         id="description"
         type="text"
         name="description"
-        [(ngModel)]="props.description"
+        formControlName="description"
         pInputTextarea
         [autoResize]="true"
-        [maxlength]="450"
-        rows="1"
+        [maxlength]="750"
+        [rows]="1"
+        (input)="adjustTextareaHeight()"
+        #description
       ></textarea>
     </div>
+    }
   </section>
 </p-panel>

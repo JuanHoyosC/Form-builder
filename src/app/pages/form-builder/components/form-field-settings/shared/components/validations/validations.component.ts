@@ -1,20 +1,35 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FormlyFieldProps } from '@ngx-formly/core';
+import { Component, inject } from '@angular/core';
+import {
+  ControlContainer,
+  FormGroupDirective,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { CustomFormlyFieldProps } from '../../../../../interfaces/form-builder';
 import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
 import { LabelTooltipComponent } from '../../../../../../../shared/components/label-tooltip/label-tooltip.component';
+import { SettingService } from '../../../setting.service';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-validations',
   standalone: true,
-  imports: [CommonModule, FormsModule, InputSwitchModule, InputTextModule, LabelTooltipComponent, PanelModule],
+  imports: [
+    CalendarModule,
+    CommonModule,
+    InputSwitchModule,
+    InputTextModule,
+    LabelTooltipComponent,
+    ReactiveFormsModule,
+    PanelModule,
+  ],
+  viewProviders: [
+    { provide: ControlContainer, useExisting: FormGroupDirective },
+  ],
   templateUrl: './validations.component.html',
-  styleUrl: './validations.component.scss'
+  styleUrl: './validations.component.scss',
 })
 export class ValidationsComponent {
-  @Input() props!: FormlyFieldProps & CustomFormlyFieldProps;
+  public settingService = inject(SettingService);
 }

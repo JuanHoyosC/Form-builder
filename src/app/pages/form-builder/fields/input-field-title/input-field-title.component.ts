@@ -11,13 +11,12 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 })
 export class InputFieldTitleComponent extends FieldType<FieldTypeConfig>  {
 
-   customClass() {
+   get customClass() {
     return {
-      'line-through': this.props['strikethrough'],
-       underline: this.props['underline'],
-       italic: this.props['italic'],
-       'font-bold': this.props['bold'],
-       'font-normal': !this.props['bold']
+      'font-bold': this.props['textFormattingOptions'].includes('bold'),
+      'line-through': this.props['textFormattingOptions'].includes('strikethrough'),
+      italic: this.props['textFormattingOptions'].includes('italic'),
+      underline: this.props['textFormattingOptions'].includes('underline'),
      }
    }
 }
