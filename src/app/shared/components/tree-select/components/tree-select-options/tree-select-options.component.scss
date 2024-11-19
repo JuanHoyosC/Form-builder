@@ -1,0 +1,11 @@
+.active {
+    @apply bg-indigo-500 text-white
+}
+
+.active ng-icon {
+    @apply text-white
+}
+
+.flex-items {
+    @apply flex w-full items-center gap-2;
+}

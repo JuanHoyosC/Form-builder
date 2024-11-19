@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   forwardRef,
+  input,
   Input,
   OnInit,
   Output,
@@ -12,7 +13,6 @@ import {
   SelectButtonChangeEvent,
   SelectButtonModule,
 } from 'primeng/selectbutton';
-import { LayoutOption } from '../../../pages/form-builder/interfaces/form-builder';
 
 @Component({
   selector: 'app-select-button',
@@ -28,47 +28,49 @@ import { LayoutOption } from '../../../pages/form-builder/interfaces/form-builde
   templateUrl: './select-button.component.html',
   styleUrl: './select-button.component.scss',
 })
-export class SelectButtonComponent implements OnInit {
-  @Input() value: OptionValue | undefined = undefined;
-  @Input() options: LayoutOption[] = [];
+export class SelectButtonComponent<T> implements OnInit {
+  @Input() value: T | undefined = undefined;
+  @Input() options: SelectableOption<T>[] = [];
   @Input() multiple: boolean = false;
-  @Input() disabledOptions: DisabledOptions[] = [];
+  @Input() disabledOptions: DisabledOption<T>[] = [];
   @Input() name: string = 'select-button';
   @Input() id: string = 'select-button';
-  @Output() valueChange: EventEmitter<OptionValue> = new EventEmitter();
-  private onChangeFn: (value: any) => void = () => {};
+  @Output() valueChange: EventEmitter<T> = new EventEmitter();
+  private onChangeFn: (value: T | undefined) => void = () => {};
   private onTouched: () => void = () => {};
 
   ngOnInit(): void {
     this.setDefaultOption();
   }
 
-  private writeValue(value: OptionValue): void {
+  private writeValue(value: T): void {
     if (value) {
       this.value = value;
     }
   }
 
-  private registerOnChange(fn: (value: any) => void): void {
+  private registerOnChange(fn: (value: unknown) => void): void {
     this.onChangeFn = fn;
   }
   private registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  private onChange() {
+  private onChange(): void {
     this.onChangeFn(this.value);
     this.valueChange.emit(this.value);
   }
 
   private setDefaultOption(): void {
-    this.applyDefaultToggleState({ value: this.value }, this.options);
+    if (this.value !== undefined) {
+      this.applyDefaultToggleState({ value: this.value }, this.options);
+    }
   }
 
   onSelectButtonChange(
     event: SelectButtonChangeEvent,
-    options: LayoutOption[]
-  ) {
+    options: SelectableOption<T>[]
+  ): void {
     if (this.multiple) {
       this.updateTextFormattingState(event);
     } else {
@@ -78,7 +80,7 @@ export class SelectButtonComponent implements OnInit {
 
   private applyDefaultToggleState(
     event: SelectButtonChangeEvent,
-    options: LayoutOption[]
+    options: SelectableOption<T>[]
   ): void {
     if (!event.value) return;
     for (const option of options) {
@@ -127,9 +129,9 @@ export class SelectButtonComponent implements OnInit {
    */
   private isEnabledStyleSelected(
     event: SelectButtonChangeEvent,
-    enabledStyle: string
+    enabledStyle: T
   ): boolean {
-    return event.value.includes(enabledStyle);
+    return event.value === enabledStyle;
   }
 
   /**
@@ -138,7 +140,7 @@ export class SelectButtonComponent implements OnInit {
    * @param disabledStyle The style that needs to be disabled.
    * @returns The option object that should be disabled, or undefined if not found.
    */
-  private getOptionToDisable(disabledStyle: string): LayoutOption | undefined {
+  private getOptionToDisable(disabledStyle: T): SelectableOption<T> | undefined {
     return this.options.find((option) => option.value === disabledStyle);
   }
 
@@ -147,13 +149,22 @@ export class SelectButtonComponent implements OnInit {
    *
    * @param option The option object to be disabled.
    */
-  private disableOption(option: LayoutOption): void {
+  private disableOption(option: SelectableOption<T>): void {
     option.disabled = true;
   }
 }
 
-type OptionValue = Pick<LayoutOption, 'value'>['value'];
-export type DisabledOptions = {
-  disabled: OptionValue;
-  enabled: OptionValue;
+export type SelectableOption<T> = {
+  icon: string;
+  value: T;
+  disabled?: boolean;
+  color?: Color;
 };
+
+export type Color = `#${string}` | `rgb(${number},${number},${number})` | `rgba(${number},${number},${number},${number})`;
+
+export type DisabledOption<T> = {
+  enabled: T;
+  disabled: T;
+};
+

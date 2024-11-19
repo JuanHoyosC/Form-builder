@@ -1,0 +1,40 @@
+<ul>
+  @for(option of treeOptions; track $index) {
+  <li
+    class="flex-items py-2 pr-4 hover:bg-black/5 cursor-pointer select-none min-w-fit"
+    [class.active]="optionSelected?.key === option.key"
+    [class.pointer-events-none]="!option.selectable"
+    [style.paddingLeft]="children + 1 + 'rem'"
+    (click)="selectOption(option)"
+  >
+    @if(option.children) {
+    <button
+      (click)="toggleDropdown($event, $index)"
+      class="pointer-events-auto h-4"
+    >
+      <ng-icon
+        [name]="
+          dropdownStates[$index].active ? 'heroChevronUp' : 'heroChevronDown'
+        "
+      ></ng-icon>
+    </button>
+    }
+    <div
+      class="flex-items"
+      [class.pointer-events-none]="option.children?.length"
+      pTooltip="{{ option.label }}"
+      tooltipPosition="right"
+    >
+      <ng-icon name="{{ option.icon }}" class="text-indigo-500 min-w-fit"></ng-icon>
+     <span class="text-nowrap">{{ option.label.length > 48 ? (option.label | slice:0:48) + '...' : option.label }}</span>
+    </div>
+  </li>
+  @if(option.children && dropdownStates[$index].active) {
+  <app-tree-select-options
+    [treeOptions]="option.children"
+    [children]="children + 1"
+    [(optionSelected)]="optionSelected"
+    (optionSelectedChange)="selectOption($event)"
+  ></app-tree-select-options>
+  } }
+</ul>

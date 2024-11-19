@@ -1,0 +1,41 @@
+<div class="tree-select-container">
+  <button
+    (click)="options.toggle($event)"
+    class="tree-select border px-4 py-2 w-full rounded overflow-hidden flex items-center justify-between gap-2 hover:border-indigo-500 cursor-pointer transition-all focus:border-indigo-500"
+  >
+    <div
+      class="grid grid-cols-[auto,1fr] gap-2"
+      pTooltip="{{ optionSelected?.label }}"
+      tooltipPosition="top"
+    >
+      @if(optionSelected?.icon) {
+      <ng-icon [name]="optionSelected?.icon" class="text-indigo-500"></ng-icon>
+      }
+      <span
+        class="text-sm"
+        style="
+          text-wrap-mode: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        "
+      >
+        {{ optionSelected?.label ?? "Select node" }}</span
+      >
+    </div>
+    <ng-icon
+      [name]="showOptions ? 'heroChevronUp' : 'heroChevronDown'"
+      class="min-w-fit"
+    ></ng-icon>
+  </button>
+  <p-overlayPanel
+    #options
+    (onHide)="showOptions = false"
+    (onShow)="showOptions = true"
+  >
+    <app-tree-select-options
+      [treeOptions]="treeOptions"
+      [(optionSelected)]="optionSelected"
+    (optionSelectedChange)="options.toggle($event); optionSelectedChanged.emit(optionSelected?.key)"
+    ></app-tree-select-options>
+  </p-overlayPanel>
+</div>
