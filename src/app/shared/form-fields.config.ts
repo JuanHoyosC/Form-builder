@@ -18,6 +18,7 @@ import { InputFieldTitleComponent } from '../pages/form-builder/fields/input-fie
 import { AlertComponent } from '../pages/form-builder/wrappers/alert/alert.component';
 import { DividerComponent } from '../pages/form-builder/wrappers/divider/divider.component';
 import { FieldWrapperComponent } from '../pages/form-builder/wrappers/fieldWrapper/fieldWrapper.component';
+import { InputFieldMultiCheckboxComponent } from '../pages/form-builder/fields/input-field-multicheckbox/input-field-multicheckbox.component';
 
 export const FORM_FIELD_TYPES: FormFieldType = {
   ALERT_WRAPPER: {
@@ -26,7 +27,7 @@ export const FORM_FIELD_TYPES: FormFieldType = {
       description: 'Escribe aqui un mensaje de ayuda',
       severity: 'info',
       align: 'left',
-      textFormattingOptions: []
+      textFormattingOptions: [],
     },
     wrappers: [FormType.alert],
   },
@@ -71,13 +72,23 @@ export const FORM_FIELD_TYPES: FormFieldType = {
       placeholder: '',
     },
   },
+  INPUT_MULTICHECKBOX: {
+    key: '',
+    type: FormType.multicheckbox,
+    wrappers: ['fieldWrapper'],
+    props: {
+      label: '',
+      description: '',
+      options: undefined,
+    },
+  },
   INPUT_PARAGRAPH: {
     key: '',
     type: FormType.paragraph,
     props: {
       description: 'Contenido de ayuda',
       align: 'left',
-      textFormattingOptions: []
+      textFormattingOptions: [],
     },
   },
   INPUT_PASSWORD: {
@@ -95,7 +106,7 @@ export const FORM_FIELD_TYPES: FormFieldType = {
     wrappers: ['fieldWrapper'],
     props: {
       label: '',
-      placeholder: '',
+      description: '',
       options: undefined,
     },
   },
@@ -131,7 +142,7 @@ export const FORM_FIELD_TYPES: FormFieldType = {
       label: '',
       headingType: 'h1',
       align: 'left',
-      textFormattingOptions: ['bold']
+      textFormattingOptions: ['bold'],
     },
   },
   INPUT_GROUP: {
@@ -219,6 +230,11 @@ export const FORM_FIELD_LIST: FormFieldList[] = [
         field: FORM_FIELD_TYPES.INPUT_CHECKBOX,
       },
       {
+        label: 'Checkbox group',
+        icon: 'ionCheckboxOutline',
+        field: FORM_FIELD_TYPES.INPUT_MULTICHECKBOX,
+      },
+      {
         label: 'Radio',
         icon: 'ionRadioButtonOnOutline',
         field: FORM_FIELD_TYPES.INPUT_RADIO,
@@ -251,7 +267,7 @@ export const defaultLabelExtension: FormlyExtension = {
 
 export const defaultOptionsExtension: FormlyExtension = {
   prePopulate(field: FormlyFieldConfig): void {
-    const fieldTypes = [FormType.radio];
+    const fieldTypes = [FormType.radio, FormType.multicheckbox];
     const currentFielType = field.type as FormType;
     if (!fieldTypes.includes(currentFielType)) return;
     if (field.props?.options) return;
@@ -289,6 +305,7 @@ export const FORMLY_TYPES = [
   { name: 'email', component: InputFieldEmailComponent },
   { name: 'group', component: InputFieldGroupComponent },
   { name: 'number', component: InputFieldNumberComponent },
+  { name: 'multicheckbox', component: InputFieldMultiCheckboxComponent },
   { name: 'paragraph', component: InputFieldParagraphComponent },
   { name: 'password', component: InputFieldPasswordComponent },
   { name: 'radio', component: InputFieldRadioComponent },

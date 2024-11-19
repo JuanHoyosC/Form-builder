@@ -18,6 +18,7 @@ export interface FormFieldType {
   INPUT_CHECKBOX: CustomFormlyFieldConfig;
   INPUT_EMAIL: CustomFormlyFieldConfig;
   INPUT_NUMBER: CustomFormlyFieldConfig;
+  INPUT_MULTICHECKBOX: CustomFormlyFieldConfig;
   INPUT_PASSWORD: CustomFormlyFieldConfig;
   INPUT_RADIO: CustomFormlyFieldConfig;
   INPUT_TEL: CustomFormlyFieldConfig;
@@ -71,6 +72,7 @@ export enum FormType {
   grid = 'grid',
   group = 'group',
   number = 'number',
+  multicheckbox = 'multicheckbox',
   paragraph = 'paragraph',
   password = 'password',
   radio = 'radio',
