@@ -1,0 +1,7 @@
+.active-field {
+    border-color: theme('colors.indigo.500/50');
+}
+
+.drag-icon {
+    @apply absolute left-1 top-[50%] translate-y-[-50%] w-3 items-center h-full cursor-grab hidden group-hover:flex group-[.active-field]:flex 
+}

@@ -63,5 +63,20 @@
         formControlName="textFormattingOptions"
       ></app-select-button>
     </div> }
+
+    @if(settingService.formFieldSettings().layout.showCols) {
+      <div class="flex justify-between items-center">
+        <app-label-tooltip
+          id="cols"
+          label="Columnas"
+          tooltip="Cantidad de columnas del grupo"
+        ></app-label-tooltip>
+        <app-select-button
+          id="cols"
+          name="cols"
+          [options]="colsOptions"
+          formControlName="cols"
+        ></app-select-button>
+      </div> }
   </section>
 </p-panel>

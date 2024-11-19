@@ -5,17 +5,19 @@
   appDropZone
   [childrenCount]="formBuilderTypesService.fields().fieldGroup?.length ?? 0"
 >
-  <section
-    *ngFor="let field of formBuilderTypesService.fields().fieldGroup as fieldGroup"
-    class="w-full mb-2"
-  >
-    @if(!field.fieldGroup) {
+  @for(field of formBuilderTypesService.fields().fieldGroup; track field.id) {
+  <section class="w-full mb-2">
+    @if(field.fieldGroup) {
+    <app-form-field-group
+      [field]="field"
+      [fieldGroup]="formBuilderTypesService.fields().fieldGroup"
+    ></app-form-field-group>
+    } @else {
     <app-form-field-group-item
       [field]="field"
-      [fieldGroup]="fieldGroup"
+      [fieldGroup]="formBuilderTypesService.fields().fieldGroup"
     ></app-form-field-group-item>
-    } @else {
-    <app-form-field-group [field]="field"></app-form-field-group>
     }
   </section>
+  }
 </main>

@@ -44,7 +44,7 @@
     </div>
     }
 
-    <div class="grid grid-cols-2 justify-between items-center">
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
         id="min"
         label="Mínimo"
@@ -59,7 +59,7 @@
     </div>
 
 
-    <div class="grid grid-cols-2 justify-between items-center">
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
         id="min"
         label="Max"
@@ -75,7 +75,7 @@
 
     @if(settingService.formFieldSettings().validations.showMin) {
 
-    <div class="grid grid-cols-2 justify-between items-center">
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
         id="min"
         label="Mínimo"
@@ -89,7 +89,7 @@
       />
     </div>
     } @if(settingService.formFieldSettings().validations.showMax) {
-    <div class="grid grid-cols-2 justify-between items-center">
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
         id="max"
         label="Máximo"
@@ -103,7 +103,7 @@
       />
     </div>
     } @if(settingService.formFieldSettings().validations.showMinLength) {
-    <div class="grid grid-cols-2 justify-between items-center">
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
         id="minLength"
         label="Longitud mínima"
@@ -118,7 +118,7 @@
       />
     </div>
     } @if(settingService.formFieldSettings().validations.showMaxLength) {
-    <div class="grid grid-cols-2 justify-between items-center">
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
         id="maxLength"
         label="Longitud máxima"
@@ -132,7 +132,7 @@
       />
     </div>
     } @if(settingService.formFieldSettings().validations.showExactLength) {
-    <div class="grid grid-cols-2 justify-between items-center">
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
         id="exactLength"
         label="Longitud exacta"
@@ -147,7 +147,7 @@
       />
     </div>
     } @if(settingService.formFieldSettings().validations.showPattern) {
-    <div class="grid grid-cols-2 justify-between items-center">
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
         id="pattern"
         label="Expresión regular"

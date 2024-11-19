@@ -8,24 +8,18 @@ import {
   FormlyFieldConfig,
 } from '@ngx-formly/core';
 import { InputOptionsComponent } from '../../../../../../../shared/components/input-options/input-options.component';
-import { DropdownModule } from 'primeng/dropdown';
 import { SettingService } from '../../../setting.service';
-import { FormlyOptionsPipe } from '../../../../../pipes/formly-options.pipe';
 import { DefaulltFieldComponent } from '../default-field/default-field.component';
-import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-data',
   standalone: true,
   imports: [
     CommonModule,
-    DropdownModule,
     DefaulltFieldComponent,
-    FormlyOptionsPipe,
     InputOptionsComponent,
     InputTextModule,
     LabelTooltipComponent,
-    MultiSelectModule,
     PanelModule,
     ReactiveFormsModule,
   ],

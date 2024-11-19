@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, inject, ViewChild } from '@angula
 import { PanelModule } from 'primeng/panel';
 import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextarea, InputTextareaModule } from 'primeng/inputtextarea';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { LabelTooltipComponent } from '../../../../../../../shared/components/label-tooltip/label-tooltip.component';
 import { SettingService } from '../../../setting.service';
 
@@ -26,8 +26,7 @@ export class PropertiesComponent implements AfterViewInit{
   }
 
   adjustTextareaHeight(): void {
-    const textarea = this.textAreaElement.nativeElement;
-
+    const textarea = this.textAreaElement?.nativeElement;
     if (textarea) {
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight + 'px';

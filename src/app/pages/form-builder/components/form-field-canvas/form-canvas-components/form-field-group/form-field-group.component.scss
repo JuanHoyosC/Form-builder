@@ -1,0 +1,7 @@
+.active {
+    border-color: theme('colors.indigo.500/50');
+}
+
+.drag-icon {
+    @apply flex w-3 items-center h-full cursor-grab
+}

@@ -153,16 +153,7 @@ export const FORM_FIELD_TYPES: FormFieldType = {
       label: 'Group',
       cols: 1,
     },
-  },
-  INPUT_GROUP_GRID: {
-    key: '',
-    type: FormType.grid,
-    fieldGroup: [],
-    props: {
-      label: 'Grids columns',
-      cols: 3,
-    },
-  },
+  }
 };
 
 export const FORM_FIELD_LIST: FormFieldList[] = [
@@ -178,11 +169,6 @@ export const FORM_FIELD_LIST: FormFieldList[] = [
         label: 'Divider',
         icon: 'heroMinus',
         field: FORM_FIELD_TYPES.DIVIDER_WRAPPER,
-      },
-      {
-        label: 'Grid',
-        icon: 'heroViewColumns',
-        field: FORM_FIELD_TYPES.INPUT_GROUP_GRID,
       },
       {
         label: 'Message',

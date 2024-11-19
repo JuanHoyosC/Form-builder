@@ -26,7 +26,6 @@ export interface FormFieldType {
   INPUT_TITLE: CustomFormlyFieldConfig;
   INPUT_PARAGRAPH: CustomFormlyFieldConfig;
   INPUT_GROUP: CustomFormlyFieldConfig;
-  INPUT_GROUP_GRID: CustomFormlyFieldConfig;
 }
 
 export interface CustomFormlyFieldConfig extends FormlyFieldConfig {
@@ -53,15 +52,7 @@ export type HeadingType = 'h1' | 'h2' | 'h3';
 export type Severity = 'info' | 'warn' | 'error' | 'success';
 export type Color = `#${string}` | `rgb(${number},${number},${number})` | `rgba(${number},${number},${number},${number})`;
 
-export type LayoutOption = {
-  icon: string;
-  value: HeadingType | Align | Severity | TextFormattingOption;
-  disabled?: boolean;
-  color?: Color
-}
-
-
-
+export type SelectOption = Align | HeadingType | Severity | number | string
 
 export enum FormType {
   alert = 'alert',

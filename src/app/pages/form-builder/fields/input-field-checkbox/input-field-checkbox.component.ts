@@ -11,6 +11,5 @@ import { CommonModule } from '@angular/common';
   imports: [CheckboxModule, CommonModule, FieldDescriptionComponent, LabelTooltipComponent, ReactiveFormsModule],
   schemas: [NO_ERRORS_SCHEMA],
   templateUrl: './input-field-checkbox.component.html',
-  styleUrl: './input-field-checkbox.component.scss'
 })
 export class InputFieldCheckboxComponent extends FieldType<FieldTypeConfig> {}

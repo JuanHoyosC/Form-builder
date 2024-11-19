@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import {
-  LayoutOption,
+  Align,
+  HeadingType,
+  Severity,
   TextFormattingOption,
 } from '../../../../../interfaces/form-builder';
 import { CommonModule } from '@angular/common';
@@ -9,7 +11,8 @@ import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angu
 import { PanelModule } from 'primeng/panel';
 import { LabelTooltipComponent } from '../../../../../../../shared/components/label-tooltip/label-tooltip.component';
 import {
-  DisabledOptions,
+  DisabledOption,
+  SelectableOption,
   SelectButtonComponent,
 } from '../../../../../../../shared/components/select-button/select-button.component';
 import { HERO_ICONS } from '../../../../../../../shared/icons';
@@ -35,21 +38,27 @@ import { SettingService } from '../../../setting.service';
 export class LayoutComponent {
   public settingService = inject(SettingService);
   // Text alignment options with icons and alignment values
-  textAlignmentOptions: LayoutOption[] = [
+  textAlignmentOptions: SelectableOption<Align>[] = [
     { icon: 'heroBars3BottomLeft', value: 'left', disabled: false },
     { icon: 'heroBars3', value: 'center', disabled: false },
     { icon: 'heroBars4', value: 'justify', disabled: false },
     { icon: 'heroBars3BottomRight', value: 'right', disabled: false },
   ];
 
+  colsOptions: SelectableOption<number>[] = [
+    { icon: 'ionSquareOutline', value: 1, disabled: false },
+    { icon: 'heroSquares2x2', value: 2, disabled: false },
+    { icon: 'heroViewColumns', value: 3, disabled: false },
+  ];
+
   // Header level options (h1, h2, h3)
-  headingLevelOptions: LayoutOption[] = [
+  headingLevelOptions: SelectableOption<HeadingType>[] = [
     { icon: 'heroH1', value: 'h1', disabled: false },
     { icon: 'heroH2', value: 'h2', disabled: false },
     { icon: 'heroH3', value: 'h3', disabled: false },
   ];
 
-  severityOptions: LayoutOption[] = [
+  severityOptions: SelectableOption<Severity>[] = [
     {
       icon: 'ionInformationCircleOutline',
       value: 'info',
@@ -72,14 +81,14 @@ export class LayoutComponent {
   ];
 
   // Text formatting options (bold, underline, italic, strikethrough)
-  textFormattingOptions: LayoutOption[] = [
+  textFormattingOptions: SelectableOption<TextFormattingOption>[] = [
     { icon: 'heroBold', value: 'bold', disabled: false },
     { icon: 'heroUnderline', value: 'underline', disabled: false },
     { icon: 'heroItalic', value: 'italic', disabled: false },
     { icon: 'heroStrikethrough', value: 'strikethrough', disabled: false },
   ];
 
-  disabledOptions: DisabledOptions[] = [
+  disabledOptions: DisabledOption<TextFormattingOption>[] = [
     { disabled: 'underline', enabled: 'strikethrough' },
     { disabled: 'strikethrough', enabled: 'underline' },
   ];

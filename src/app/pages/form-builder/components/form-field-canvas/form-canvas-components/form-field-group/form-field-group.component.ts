@@ -1,22 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, input, Input } from '@angular/core';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { FormFieldGroupItemComponent } from '../form-field-group-item/form-field-group-item.component';
 import { Options, SortableEvent } from 'sortablejs';
 import { DropZoneDirective } from '../../../../directives/drag-and-drop.directive';
+import { MenuComponent } from '../menu/menu.component';
+import { FieldGroup } from '../../../../interfaces/form-builder';
+import { DragIconComponent } from '../drag-icon/drag-icon.component';
 
 
 @Component({
   selector: 'app-form-field-group',
   standalone: true,
-  imports: [CommonModule, DropZoneDirective,  FormlyModule, FormFieldGroupItemComponent, SortablejsModule],
+  imports: [CommonModule, DragIconComponent, DropZoneDirective,  FormlyModule, FormFieldGroupItemComponent, MenuComponent, SortablejsModule],
   templateUrl: './form-field-group.component.html',
-  styleUrl: './form-field-group.component.css',
+  styleUrl: './form-field-group.component.scss',
 })
 export class FormFieldGroupComponent {
-  @Input() field!: FormlyFieldConfig;
+  field = input.required<FormlyFieldConfig>();
+  fieldGroup = input.required<FieldGroup>();
   public readonly formBuilderTypesService = inject(FormBuilderTypesService);
   private cdr = inject(ChangeDetectorRef);
   sortableConfig: Options = {
@@ -32,10 +36,11 @@ export class FormFieldGroupComponent {
     swap: true,
     handle: '.handle',
     onAdd: (event: SortableEvent) => {
-      const fieldGroup = this.field.fieldGroup;
+      const fieldGroup = this.field().fieldGroup;
       this.formBuilderTypesService.saveNewField(fieldGroup, event.newIndex);
       this.cdr.detectChanges();
     },
+
     onEnd: () => {
       this.cdr.detectChanges();
     }
@@ -43,7 +48,7 @@ export class FormFieldGroupComponent {
 
    openMenuForSelectedField(event: MouseEvent) {
     event.stopPropagation();
-    this.formBuilderTypesService.activateFieldMenu(this.field);
+    this.formBuilderTypesService.activateFieldMenu(this.field());
   }
 
   closeMenuForSelectedField() {

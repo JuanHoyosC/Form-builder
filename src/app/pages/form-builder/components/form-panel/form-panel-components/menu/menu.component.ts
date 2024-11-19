@@ -23,7 +23,7 @@ export class MenuComponent {
       handle: () => this.toggleFormPanel(),
     },
     {
-      icon: 'heroRectangleGroup',
+      icon: 'ionHammerOutline',
       activeTabIndex: 0,
       handle: () => this.handleMenuClick(0),
     },

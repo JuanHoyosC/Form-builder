@@ -1,30 +1,57 @@
-import { computed, Injectable, input, Signal, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import {
   CustomFormlyFieldConfig,
-  CustomFormlyFieldProps,
   FormType,
 } from '../../interfaces/form-builder';
 import { FormBuilderTypesService } from '../../services/form-builder.service';
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { FormFieldSettings, PropertyConfigMap, SectionKeys, SectionPropertyKeys } from './interfaces/settings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SettingService {
-  form: FormGroup;
-  defaultSelectedField = signal<CustomFormlyFieldConfig>(
+  public form: FormGroup;
+  public defaultSelectedField = signal<CustomFormlyFieldConfig>(
     {} as CustomFormlyFieldConfig
   );
+  public formFieldSettings = signal<FormFieldSettings>({
+    data: {
+      showDefaultValue: false,
+      showOptions: false,
+    },
+    layout: {
+      showHeadingType: false,
+      showAlign: false,
+      showSeverity: false,
+      showTextFormattingOptions: false,
+      showCols: false,
+    },
+    properties: {
+      showLabel: false,
+      showTooltip: false,
+      showPlaceholder: false,
+      showDescription: false,
+    },
+    validations: {
+      showRequired: false,
+      showDisabled: false,
+      showReadonly: false,
+      showMin: false,
+      showMax: false,
+      showMinLength: false,
+      showMaxLength: false,
+      showExactLength: false,
+      showPattern: false,
+    },
+  });
 
-  subscriptions: Subscription[] = [];
-
+  private subscriptions: Subscription[] = [];
   private propertyConfigMap: PropertyConfigMap = {
     properties: {
       showLabel: [
@@ -97,6 +124,7 @@ export class SettingService {
         FormType.title,
       ],
       showHeadingType: [FormType.title],
+      showCols: [FormType.group],
     },
     validations: {
       showMin: [FormType.number],
@@ -140,36 +168,6 @@ export class SettingService {
       ],
     },
   };
-
-  public readonly formFieldSettings = signal<FormFieldSettings>({
-    data: {
-      showDefaultValue: false,
-      showOptions: false,
-    },
-    layout: {
-      showHeadingType: false,
-      showAlign: false,
-      showSeverity: false,
-      showTextFormattingOptions: false,
-    },
-    properties: {
-      showLabel: false,
-      showTooltip: false,
-      showPlaceholder: false,
-      showDescription: false,
-    },
-    validations: {
-      showRequired: false,
-      showDisabled: false,
-      showReadonly: false,
-      showMin: false,
-      showMax: false,
-      showMinLength: false,
-      showMaxLength: false,
-      showExactLength: false,
-      showPattern: false,
-    },
-  });
 
   constructor(
     private formBuilderTypesService: FormBuilderTypesService,
@@ -444,7 +442,7 @@ export class SettingService {
    * @param section - The section to evaluate (e.g., 'data', 'layout', 'properties', 'validations').
    * @returns `true` if any property in the section is active, otherwise `false`.
    */
-  isSectionVisible(section: keyof FormFieldSettings): boolean {
+  isSectionVisible(section: SectionKeys): boolean {
     const sectionConfig = this.formFieldSettings()[section];
     return Object.values(sectionConfig).includes(true);
   }
@@ -463,42 +461,3 @@ export class SettingService {
     }
   }
 }
-
-type FormFieldSettings = {
-  data: {
-    showDefaultValue: boolean;
-    showOptions: boolean;
-  };
-  layout: {
-    showHeadingType: boolean;
-    showAlign: boolean;
-    showSeverity: boolean;
-    showTextFormattingOptions: boolean;
-  };
-  properties: {
-    showLabel: boolean;
-    showTooltip: boolean;
-    showPlaceholder: boolean;
-    showDescription: boolean;
-  };
-  validations: {
-    showRequired: boolean;
-    showDisabled: boolean;
-    showReadonly: boolean;
-    showMin: boolean;
-    showMax: boolean;
-    showMinLength: boolean;
-    showMaxLength: boolean;
-    showExactLength: boolean;
-    showPattern: boolean;
-  };
-};
-
-type SectionKeys = keyof FormFieldSettings;
-type SectionPropertyKeys<T extends SectionKeys> = keyof FormFieldSettings[T];
-
-type PropertyConfigMap = {
-  [K in keyof FormFieldSettings]: {
-    [P in keyof FormFieldSettings[K]]: FormType[];
-  };
-};

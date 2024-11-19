@@ -1,5 +1,11 @@
-import { Directive, ElementRef, HostListener, Input, OnChanges, Renderer2 } from '@angular/core';
-
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  OnChanges,
+  Renderer2,
+} from '@angular/core';
 
 @Directive({
   selector: '[appDropZone]',
@@ -10,30 +16,14 @@ export class DropZoneDirective implements OnChanges {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnChanges() {
-    console.log(this.childrenCount)
     this.updateDropZoneState();
   }
 
-  @HostListener('dragenter', ['$event'])
-  onDragEnter() {
-    this.updateActiveDropZoneState(true);
-  }
-
-  @HostListener('dragover', ['$event'])
-  onDragOver() {
-    this.updateActiveDropZoneState(true);
-  }
-
-  @HostListener('dragleave', ['$event'])
-  onDragLeave() {
-    this.updateActiveDropZoneState(false);
-  }
-
   @HostListener('drop', ['$event'])
-  onDrop() {
-   this.childrenCount = 1;
-   this.updateDropZoneState();
-   this.updateActiveDropZoneState(false);
+  onDrop(event: DragEvent) {
+    if (this.isSameElementRef(event)) return;
+    this.childrenCount = 1;
+    this.updateDropZoneState();
   }
 
   private updateDropZoneState(): void {
@@ -48,11 +38,8 @@ export class DropZoneDirective implements OnChanges {
     }
   }
 
-  private updateActiveDropZoneState(isActive: boolean): void {
-    if (isActive) {
-      this.renderer.addClass(this.el.nativeElement, 'active');
-    } else {
-      this.renderer.removeClass(this.el.nativeElement, 'active');
-    }
+  private isSameElementRef(event: Event): boolean {
+    if(this.childrenCount > 0) return true;
+    return event.target === this.el.nativeElement;
   }
 }

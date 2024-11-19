@@ -1,54 +1,36 @@
 import {
-  ChangeDetectorRef,
   Component,
   inject,
-  Input,
+  input,
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { ClickOutsideDirective } from '../../../../directives/click-outside.directive';
 import { FieldGroup } from '../../../../interfaces/form-builder';
-import { HERO_ICONS } from '../../../../../../shared/icons';
+import { MenuComponent } from '../menu/menu.component';
+import { DragIconComponent } from '../drag-icon/drag-icon.component';
 
 @Component({
   selector: 'app-form-field-group-item',
   standalone: true,
-  imports: [CommonModule, ClickOutsideDirective, FormlyModule, NgIconComponent],
-  providers: [provideIcons(HERO_ICONS)],
+  imports: [CommonModule, ClickOutsideDirective, DragIconComponent, FormlyModule, MenuComponent],
   schemas: [NO_ERRORS_SCHEMA],
   templateUrl: './form-field-group-item.component.html',
-  styleUrl: './form-field-group-item.component.css',
+  styleUrl: './form-field-group-item.component.scss',
 })
 export class FormFieldGroupItemComponent {
-  @Input() field!: FormlyFieldConfig;
-  @Input() fieldGroup: FieldGroup;
+  field = input.required<FormlyFieldConfig>();
+  fieldGroup = input.required<FieldGroup>();
   formBuilderTypesService = inject(FormBuilderTypesService);
-  private cdr = inject(ChangeDetectorRef);
   removeElement = false;
-
-  openMenuForSelectedField(event: MouseEvent) {
-    event.stopPropagation();
-    this.formBuilderTypesService.activateFieldMenu(this.field);
-  }
-
   closeMenuForSelectedField() {
     this.formBuilderTypesService.deactivateFieldMenu();
   }
 
-  removeField(event: MouseEvent) {
+  openMenuForSelectedField(event: MouseEvent) {
     event.stopPropagation();
-    this.removeElement = true;
-    this.closeMenuForSelectedField();
-    setTimeout(() => {
-      this.formBuilderTypesService.removeField(this.field, this.fieldGroup);
-      this.cdr.detectChanges();
-    }, 500);
-  }
-
-  cloneField() {
-    this.formBuilderTypesService.cloneField(this.field, this.fieldGroup);
+    this.formBuilderTypesService.activateFieldMenu(this.field());
   }
 }
