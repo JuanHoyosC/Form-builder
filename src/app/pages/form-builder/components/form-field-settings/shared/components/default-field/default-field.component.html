@@ -1,0 +1,30 @@
+@if(visibilityConfig.showMultiOptions) {
+  <p-multiSelect
+  [options]="field.props.options | formlyOptions"
+  optionLabel="label"
+  optionValue="value"
+  appendTo="body"
+  placeholder="Select an options"
+  [filter]="true" 
+  [(ngModel)]="model.defaultValue"
+  (ngModelChange)="changeDefaultValue()"
+/>
+} @else if(visibilityConfig.showOptions) {
+  <p-dropdown
+  [options]="field.props.options | formlyOptions"
+  [(ngModel)]="model.defaultValue"
+  appendTo="body"
+  class="block w-full"
+  optionLabel="label"
+  optionValue="value"
+  placeholder="Select an option"
+  (ngModelChange)="changeDefaultValue()"
+></p-dropdown>
+
+} @else {
+  <formly-form
+  [fields]="[field]"
+  [model]="model"
+  (modelChange)="changeDefaultValue()"
+></formly-form>
+}

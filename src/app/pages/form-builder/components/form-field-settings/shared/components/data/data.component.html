@@ -12,22 +12,10 @@
         tooltip="Habilita el modo de solo lectura si el campo no es obligatorio y no está deshabilitado"
         class="font-bold"
       ></app-label-tooltip>
-      @if(!settingService.form.get('props.options')?.value) {
       <app-default-field
         [field]="settingService.defaultSelectedField()"
         formControlName="defaultValue"
       ></app-default-field>
-      }@else {
-      <p-dropdown
-        [options]="
-          settingService.form.get('props.options')?.value | formlyOptions
-        "
-        formControlName="defaultValue"
-        appendTo="body"
-        class="block w-full"
-        placeholder="Select an option"
-      ></p-dropdown
-      >}
     </div>
     } @if(settingService.formFieldSettings().data.showOptions) {
     <div formGroupName="props">

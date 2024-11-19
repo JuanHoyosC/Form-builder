@@ -1,4 +1,4 @@
-import { computed, Injectable, Signal, signal } from '@angular/core';
+import { computed, Injectable, input, Signal, signal } from '@angular/core';
 import {
   CustomFormlyFieldConfig,
   CustomFormlyFieldProps,
@@ -34,6 +34,7 @@ export class SettingService {
         FormType.grid,
         FormType.group,
         FormType.number,
+        FormType.multicheckbox,
         FormType.password,
         FormType.radio,
         FormType.tel,
@@ -64,6 +65,7 @@ export class SettingService {
         FormType.checkbox,
         FormType.email,
         FormType.number,
+        FormType.multicheckbox,
         FormType.paragraph,
         FormType.password,
         FormType.radio,
@@ -78,12 +80,13 @@ export class SettingService {
         FormType.checkbox,
         FormType.email,
         FormType.number,
+        FormType.multicheckbox,
         FormType.password,
         FormType.radio,
         FormType.tel,
         FormType.text,
       ],
-      showOptions: [FormType.radio],
+      showOptions: [FormType.radio, FormType.multicheckbox],
     },
     layout: {
       showSeverity: [FormType.alert],
@@ -109,6 +112,7 @@ export class SettingService {
         FormType.number,
         FormType.password,
         FormType.radio,
+        FormType.multicheckbox,
         FormType.tel,
         FormType.text,
       ],
@@ -117,6 +121,7 @@ export class SettingService {
         FormType.checkbox,
         FormType.email,
         FormType.number,
+        FormType.multicheckbox,
         FormType.password,
         FormType.radio,
         FormType.tel,
@@ -127,6 +132,7 @@ export class SettingService {
         FormType.checkbox,
         FormType.email,
         FormType.number,
+        FormType.multicheckbox,
         FormType.password,
         FormType.radio,
         FormType.tel,
@@ -169,35 +175,7 @@ export class SettingService {
     private formBuilderTypesService: FormBuilderTypesService,
     private fb: FormBuilder
   ) {
-    this.form = this.fb.group<CustomFormlyFieldConfig>({
-      id: '',
-      defaultValue: '',
-      type: '',
-      key: '',
-      props: this.fb.group<CustomFormlyFieldProps>({
-        align: undefined,
-        cols: 1,
-        description: '',
-        disabled: false,
-        exactLength: undefined,
-        headingType: undefined,
-        label: '',
-        max: undefined,
-        maxDate: undefined,
-        maxLength: undefined,
-        min: undefined,
-        minDate: undefined,
-        minLength: undefined,
-        options: [],
-        pattern: '',
-        placeholder: '',
-        readonly: false,
-        required: false,
-        severity: undefined,
-        textFormattingOptions: undefined,
-        tooltip: '',
-      }),
-    });
+    this.form = this.fb.group({});
   }
 
   /**
@@ -207,38 +185,86 @@ export class SettingService {
    */
   initializeFormFieldSettings(selectedField: CustomFormlyFieldConfig): void {
     this.clearAllSubscriptions();
-    this.form.reset();
     this.initializeConfig(selectedField);
     this.setDefaultField(selectedField);
-    this.form.patchValue(selectedField);
-    
+    this.buildDynamicFormGroup(selectedField);
+
     const formChangeSubscription = this.subscribeToFormChanges();
     const propsChangeSubscription = this.subscribeToPropsChanges();
     const minMaxValidatorSubscriptions = this.addMinMaxValidatorsForFields();
-    const controlStateChangeSubscriptions = this.setupControlStateSubscriptions();
+    const controlStateChangeSubscriptions =
+      this.setupControlStateSubscriptions();
 
     // Collect all subscriptions for easy cleanup
     this.subscriptions = [
       formChangeSubscription,
       propsChangeSubscription,
       ...minMaxValidatorSubscriptions,
-      ...controlStateChangeSubscriptions
+      ...controlStateChangeSubscriptions,
     ];
   }
-  
+
+  buildDynamicFormGroup(selectedField: CustomFormlyFieldConfig): void {
+    const { id, defaultValue, type, key } = selectedField;
+    const props = selectedField.props;
+    this.form = this.fb.group({
+      id,
+      defaultValue,
+      type,
+      key,
+      props: this.fb.group({
+        align: [props.align],
+        cols: [props.cols],
+        description: [props.description],
+        disabled: [
+          { value: props.disabled, disabled: props.required || props.readonly },
+        ],
+        exactLength: [props.exactLength],
+        headingType: [props.headingType],
+        label: [props.label],
+        max: [props.max, Validators.min(props.min ?? 0)],
+        maxDate: [props.maxDate],
+        maxLength: [
+          props.maxLength,
+          Validators.minLength(props.minLength ?? 0),
+        ],
+        min: [props.min, Validators.max(props.max ?? Infinity)],
+        minDate: [props.minDate],
+        minLength: [
+          props.minLength,
+          Validators.max(props.maxLength ?? Infinity),
+        ],
+        options: [props.options ?? []],
+        pattern: [props.pattern],
+        placeholder: [props.placeholder],
+        readonly: [
+          { value: props.readonly, disabled: props.required || props.disabled },
+        ],
+        required: [
+          { value: props.required, disabled: props.readonly || props.disabled },
+        ],
+        severity: [props.severity],
+        textFormattingOptions: [props.textFormattingOptions],
+        tooltip: [props.tooltip],
+      }),
+    });
+  }
+
   /**
    * Adds dynamic min and max validators for multiple field pairs.
    * @param fieldPairs - Array of objects containing minControl and maxControl field names.
    * @returns Array of Subscription objects for the min/max validations.
    */
   private addMinMaxValidatorsForFields(): Subscription[] {
-    const fieldPairs =[
+    const fieldPairs = [
       { minControlName: 'props.min', maxControlName: 'props.max' },
-      { minControlName: 'props.minLength', maxControlName: 'props.maxLength' }
+      { minControlName: 'props.minLength', maxControlName: 'props.maxLength' },
     ];
-    return fieldPairs.map(({ minControlName: minControl, maxControlName: maxControlName }) => 
-      this.addMinMaxValidators(minControl, maxControlName)
-    ).flat();
+    return fieldPairs
+      .map(({ minControlName: minControl, maxControlName: maxControlName }) =>
+        this.addMinMaxValidators(minControl, maxControlName)
+      )
+      .flat();
   }
 
   /**
@@ -262,10 +288,7 @@ export class SettingService {
     ];
 
     return controls.map(({ control, affectedControlsNames }) =>
-      this.toggleControlsEnableState(
-        control,
-        affectedControlsNames
-      )
+      this.toggleControlsEnableState(control, affectedControlsNames)
     );
   }
 
@@ -386,6 +409,7 @@ export class SettingService {
       defaultValue: selectedField.defaultValue,
       props: {
         ...selectedField.props,
+        label: ' ',
       },
     });
   }
