@@ -1,14 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CustomFormlyFieldConfig } from '../../interfaces/form-builder';
-import { PropertiesComponent } from './shared/components/properties/properties.component';
-import { ValidationsComponent } from './shared/components/validations/validations.component';
-import { LayoutComponent } from './shared/components/layout/layout.component';
-import { DataComponent } from './shared/components/data/data.component';
+import { CustomFormlyFieldConfig } from '../../types/form-builder.types';
 import { DialogModule } from 'primeng/dialog';
-import { SettingService } from './setting.service';
+import { SettingService } from './services/setting.service';
 import { FormBuilderTypesService } from '../../services/form-builder.service';
+import {
+  DataComponent,
+  LayoutComponent,
+  PropertiesComponent,
+  ValidationsComponent,
+} from './components/index';
 @Component({
   selector: 'app-form-field-settings',
   standalone: true,
@@ -34,11 +36,13 @@ export class FormFieldSettingsComponent {
   constructor() {
     this.formBuilderTypesService.$selectedField.subscribe((field) => {
       const selectedField = field as CustomFormlyFieldConfig;
-      if(this.isSameFieldSelected(selectedField)) return;
+      if (this.isSameFieldSelected(selectedField)) return;
       console.log('entro aqui');
-      
+
       if (selectedField) {
-        this.settingService.initializeFormFieldSettings(structuredClone(selectedField));
+        this.settingService.initializeFormFieldSettings(
+          structuredClone(selectedField)
+        );
       }
     });
   }
@@ -46,5 +50,4 @@ export class FormFieldSettingsComponent {
   isSameFieldSelected(field: CustomFormlyFieldConfig) {
     return this.settingService.form.get('id')?.value === field.id;
   }
-  
 }

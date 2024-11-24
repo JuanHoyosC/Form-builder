@@ -3,13 +3,12 @@ import { ChangeDetectorRef, Component, inject, input, Input } from '@angular/cor
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { SortablejsModule } from 'nxt-sortablejs';
-import { FormFieldGroupItemComponent } from '../form-field-group-item/form-field-group-item.component';
 import { Options, SortableEvent } from 'sortablejs';
 import { DropZoneDirective } from '../../../../directives/drag-and-drop.directive';
 import { MenuComponent } from '../menu/menu.component';
-import { FieldGroup } from '../../../../interfaces/form-builder';
+import { FieldGroup } from '../../../../types/form-builder.types';
 import { DragIconComponent } from '../drag-icon/drag-icon.component';
-
+import { FormFieldGroupItemComponent } from '../index'
 
 @Component({
   selector: 'app-form-field-group',

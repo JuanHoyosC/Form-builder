@@ -2,8 +2,8 @@ import { Injectable, signal } from '@angular/core';
 import {
   CustomFormlyFieldConfig,
   FormType,
-} from '../../interfaces/form-builder';
-import { FormBuilderTypesService } from '../../services/form-builder.service';
+} from '../../../types/form-builder.types';
+import { FormBuilderTypesService } from '../../../services/form-builder.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
@@ -11,7 +11,7 @@ import {
   PropertyConfigMap,
   SectionKeys,
   SectionPropertyKeys,
-} from './interfaces/settings';
+} from './settings.types';
 
 @Injectable({
   providedIn: 'root',
@@ -486,7 +486,6 @@ export class SettingService {
     );
 
     if (!updated) return;
-    console.log('entro aqui 1');
     this.formBuilderTypesService.fields.set(updated);
   }
 }

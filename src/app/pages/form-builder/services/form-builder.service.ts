@@ -6,7 +6,7 @@ import {
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import {
   FieldGroup,
-} from '../interfaces/form-builder';
+} from '../types/form-builder.types';
 import { FORM_FIELD_TYPES } from '../../../shared/form-fields.config';
 import { BehaviorSubject } from 'rxjs';
 

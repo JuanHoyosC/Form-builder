@@ -13,7 +13,7 @@ import { FORM_FIELD_LIST } from '../../form-fields.config';
 import {
   FormFieldList,
   FormType,
-} from '../../../pages/form-builder/interfaces/form-builder';
+} from '../../../pages/form-builder/types/form-builder.types';
 import {
   TreeOptions,
   TreeSelectComponent,

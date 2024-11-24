@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormPanelItemComponent } from '../form-panel-item/form-panel-item.component';
 import { CommonModule } from '@angular/common';
-import { FormFieldList } from '../../../../interfaces/form-builder';
+import { FormFieldList } from '../../../../types/form-builder.types';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { PanelModule } from 'primeng/panel';
 import { Options } from 'sortablejs';

@@ -4,7 +4,7 @@ import {
   FormFieldType,
   FormType,
   Wrapper,
-} from '../pages/form-builder/interfaces/form-builder';
+} from '../pages/form-builder/types/form-builder.types';
 import { InputFieldCalendarComponent } from '../pages/form-builder/fields/input-field-calendar/input-field-calendar.component';
 import { InputFieldCheckboxComponent } from '../pages/form-builder/fields/input-field-checkbox/input-field-checkbox.component';
 import { InputFieldEmailComponent } from '../pages/form-builder/fields/input-field-email/input-field-email.component';

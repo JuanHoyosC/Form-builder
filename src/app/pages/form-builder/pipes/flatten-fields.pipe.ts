@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FormFieldList } from '../interfaces/form-builder';
+import { FormFieldList } from '../types/form-builder.types';
 
 @Pipe({
   name: 'flattenFields',

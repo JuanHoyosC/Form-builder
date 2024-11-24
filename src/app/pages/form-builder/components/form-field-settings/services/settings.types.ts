@@ -1,6 +1,6 @@
-import { FormType } from "../../../interfaces/form-builder";
+import { FormType } from "../../../types/form-builder.types";
 
-export interface FormFieldSettings {
+export type FormFieldSettings = {
     data: {
       showDefaultValue: boolean;
       showOptions: boolean;

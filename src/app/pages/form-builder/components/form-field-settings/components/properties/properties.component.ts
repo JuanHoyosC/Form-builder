@@ -4,8 +4,9 @@ import { PanelModule } from 'primeng/panel';
 import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { LabelTooltipComponent } from '../../../../../../../shared/components/label-tooltip/label-tooltip.component';
-import { SettingService } from '../../../setting.service';
+import { SettingService } from '../../services/setting.service';
+import { LabelTooltipComponent } from '../../../../../../shared/components/label-tooltip/label-tooltip.component';
+
 
 @Component({
   selector: 'app-properties',

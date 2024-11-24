@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { FormPanelSectionListComponent } from './form-panel-components/form-panel-section-list/form-panel-section-list.component';
+import { FormPanelSectionListComponent } from './components/form-panel-section-list/form-panel-section-list.component';
 
 @Component({
   selector: 'app-form-panel',

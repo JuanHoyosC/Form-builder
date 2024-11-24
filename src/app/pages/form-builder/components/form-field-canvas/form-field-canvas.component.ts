@@ -1,15 +1,14 @@
 import { Component, inject, effect } from '@angular/core';
 import { FormBuilderTypesService } from '../../services/form-builder.service';
-import { FormFieldGroupComponent } from './form-canvas-components/form-field-group/form-field-group.component';
 import { CommonModule } from '@angular/common';
 import { SortablejsModule } from 'nxt-sortablejs';
-import { FormFieldGroupItemComponent } from './form-canvas-components/form-field-group-item/form-field-group-item.component';
 import { FormlyModule } from '@ngx-formly/core';
 import { Options, SortableEvent } from 'sortablejs';
 import { ChangeDetectorRef } from '@angular/core';
 import { DropZoneDirective } from '../../directives/drag-and-drop.directive';
 import { FormsModule } from '@angular/forms';
 import { HistoryService } from '../../services/history.service';
+import { FormFieldGroupComponent, FormFieldGroupItemComponent } from './components/index'
 @Component({
   selector: 'app-form-field-canvas',
   standalone: true,

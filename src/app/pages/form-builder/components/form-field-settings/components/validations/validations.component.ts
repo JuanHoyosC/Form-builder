@@ -8,9 +8,9 @@ import {
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
-import { LabelTooltipComponent } from '../../../../../../../shared/components/label-tooltip/label-tooltip.component';
-import { SettingService } from '../../../setting.service';
 import { CalendarModule } from 'primeng/calendar';
+import { LabelTooltipComponent } from '../../../../../../shared/components/label-tooltip/label-tooltip.component';
+import { SettingService } from '../../services/setting.service';
 
 @Component({
   selector: 'app-validations',

@@ -1,22 +1,16 @@
 import { Component, inject } from '@angular/core';
-import {
-  Align,
-  HeadingType,
-  Severity,
-  TextFormattingOption,
-} from '../../../../../interfaces/form-builder';
+
 import { CommonModule } from '@angular/common';
 import { provideIcons } from '@ng-icons/core';
 import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { PanelModule } from 'primeng/panel';
-import { LabelTooltipComponent } from '../../../../../../../shared/components/label-tooltip/label-tooltip.component';
-import {
-  DisabledOption,
-  SelectableOption,
-  SelectButtonComponent,
-} from '../../../../../../../shared/components/select-button/select-button.component';
-import { HERO_ICONS } from '../../../../../../../shared/icons';
-import { SettingService } from '../../../setting.service';
+
+
+import { DisabledOption, SelectableOption, SelectButtonComponent } from '../../../../../../shared/components/select-button/select-button.component';
+import { LabelTooltipComponent } from '../../../../../../shared/components/label-tooltip/label-tooltip.component';
+import { HERO_ICONS } from '../../../../../../shared/icons';
+import { SettingService } from '../../services/setting.service';
+import { Align, HeadingType, Severity, TextFormattingOption } from '../../../../types/form-builder.types';
 
 @Component({
   selector: 'app-layout',

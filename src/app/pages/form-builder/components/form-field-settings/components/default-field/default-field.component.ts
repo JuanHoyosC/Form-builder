@@ -12,14 +12,12 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
-import {
-  CustomFormlyFieldConfig,
-  FormType,
-} from '../../../../../interfaces/form-builder';
+
 import { CommonModule } from '@angular/common';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormlyOptionsPipe } from '../../../../../pipes/formly-options.pipe';
+import { FormlyOptionsPipe } from '../../../../pipes/formly-options.pipe';
+import { CustomFormlyFieldConfig, FormType } from '../../../../types/form-builder.types';
 
 @Component({
   selector: 'app-default-field',

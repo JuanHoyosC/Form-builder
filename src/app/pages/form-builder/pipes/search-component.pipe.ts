@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FormFieldItem, FormFieldList } from '../interfaces/form-builder';
+import { FormFieldItem, FormFieldList } from '../types/form-builder.types';
 
 @Pipe({
   name: 'searchComponent',

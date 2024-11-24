@@ -1,15 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { PanelModule } from 'primeng/panel';
-import { LabelTooltipComponent } from '../../../../../../../shared/components/label-tooltip/label-tooltip.component';
 import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import {
   FormlyFieldConfig,
 } from '@ngx-formly/core';
-import { InputOptionsComponent } from '../../../../../../../shared/components/input-options/input-options.component';
-import { SettingService } from '../../../setting.service';
-import { DefaulltFieldComponent } from '../default-field/default-field.component';
+
+import { DefaulltFieldComponent } from '../index';
+import { LabelTooltipComponent } from '../../../../../../shared/components/label-tooltip/label-tooltip.component';
+import { InputOptionsComponent } from '../../../../../../shared/components/input-options/input-options.component';
+import { SettingService } from '../../services/setting.service';
 
 @Component({
   selector: 'app-data',

@@ -8,9 +8,8 @@ import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { ClickOutsideDirective } from '../../../../directives/click-outside.directive';
-import { FieldGroup } from '../../../../interfaces/form-builder';
-import { MenuComponent } from '../menu/menu.component';
-import { DragIconComponent } from '../drag-icon/drag-icon.component';
+import { FieldGroup } from '../../../../types/form-builder.types';
+import { MenuComponent, DragIconComponent } from '../index'
 
 @Component({
   selector: 'app-form-field-group-item',

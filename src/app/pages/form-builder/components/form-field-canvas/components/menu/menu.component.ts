@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject, input, signal } from '@angular/core';
-import { CustomFormlyFieldConfig, FieldGroup } from '../../../../interfaces/form-builder';
+import { FieldGroup } from '../../../../types/form-builder.types';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { CommonModule } from '@angular/common';
