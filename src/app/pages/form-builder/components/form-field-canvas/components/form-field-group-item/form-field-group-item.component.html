@@ -1,18 +1,23 @@
 <div
   class="relative px-4 pl-6 py-2 group border border-transparent hover:border-indigo-500/50 animate__animated"
   (click)="openMenuForSelectedField($event)"
-  (mouseenter)="$event.stopPropagation();"
+  (mouseenter)="$event.stopPropagation()"
   [ngClass]="{
     'active-field': formBuilderTypesService.selectedField()?.id === field().id,
-    animate__bounce: removeElement
+    animate__bounce: removeElement()
   }"
   appClickOutside
+  (outside)="closeMenuForSelectedField()"
   [ignoreElement]="['.settings']"
   role="button"
   tabindex="0"
 >
   @if(formBuilderTypesService.selectedField()?.id === field().id) {
-  <app-form-field-menu [field]="field()" [fieldGroup]="fieldGroup()"></app-form-field-menu>
+  <app-form-field-menu
+    [field]="field()"
+    [fieldGroup]="fieldGroup()"
+    [(removeElement)]="removeElement"
+  ></app-form-field-menu>
   }
 
   <app-drag-icon class="handle drag-icon"></app-drag-icon>

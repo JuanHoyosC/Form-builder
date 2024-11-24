@@ -4,6 +4,7 @@ import {
   Component,
   inject,
   input,
+  model,
 } from '@angular/core';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
@@ -38,6 +39,7 @@ export class FormFieldGroupComponent {
   fieldGroup = input.required<FieldGroup>();
   public readonly formBuilderTypesService = inject(FormBuilderTypesService);
   private cdr = inject(ChangeDetectorRef);
+  removeElement = model<boolean>(false);
   sortableConfig: Options = {
     group: {
       name: 'shared',

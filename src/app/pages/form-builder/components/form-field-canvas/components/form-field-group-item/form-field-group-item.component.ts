@@ -2,6 +2,7 @@ import {
   Component,
   inject,
   input,
+  model,
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
 import { FormlyModule } from '@ngx-formly/core';
@@ -25,7 +26,7 @@ export class FormFieldGroupItemComponent {
   field = input.required<CustomFormlyFieldConfig>();
   fieldGroup = input.required<FieldGroup>();
   formBuilderTypesService = inject(FormBuilderTypesService);
-  removeElement = false;
+  removeElement = model<boolean>(false);
   closeMenuForSelectedField() {
     this.formBuilderTypesService.deactivateFieldMenu();
   }

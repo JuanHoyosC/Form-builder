@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, input, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, input, model, signal } from '@angular/core';
 import { CustomFormlyFieldConfig, FieldGroup } from '../../../../types/form-builder.types';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,7 @@ import { HERO_ICONS } from '../../../../../../shared/icons';
 export class  FormFieldMenuComponent {
   field = input.required<CustomFormlyFieldConfig>();
   fieldGroup = input.required<FieldGroup>();
-  removeElement = signal<boolean>(false)
+  removeElement = model<boolean>(false)
   public readonly formBuilderTypesService = inject(FormBuilderTypesService);
   private cdr = inject(ChangeDetectorRef);
   
