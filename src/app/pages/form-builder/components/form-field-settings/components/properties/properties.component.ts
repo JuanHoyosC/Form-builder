@@ -17,7 +17,7 @@ import { LabelTooltipComponent } from '../../../../../../shared/components/label
   styleUrl: './properties.component.scss'
 })
 export class PropertiesComponent implements AfterViewInit{
-  @ViewChild('description') textAreaElement!: ElementRef<any>;
+  @ViewChild('description') textAreaElement!: ElementRef<HTMLTextAreaElement>;
   public readonly settingService = inject(SettingService);
 
   ngAfterViewInit(): void {

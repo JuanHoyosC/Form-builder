@@ -8,7 +8,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { DropZoneDirective } from '../../directives/drag-and-drop.directive';
 import { FormsModule } from '@angular/forms';
 import { HistoryService } from '../../services/history.service';
-import { FormFieldGroupComponent, FormFieldGroupItemComponent } from './components/index'
+import { FormFieldGroupComponent } from './components/form-field-group/form-field-group.component';
+import { FormFieldGroupItemComponent } from './components/form-field-group-item/form-field-group-item.component';
 @Component({
   selector: 'app-form-field-canvas',
   standalone: true,
@@ -46,6 +47,7 @@ export class FormFieldCanvasComponent {
     },
     onAdd: (event: SortableEvent) => {
       const fieldGroup = this.formBuilderTypesService.fields().fieldGroup;
+      if(!fieldGroup) return;
       this.formBuilderTypesService.saveNewField(fieldGroup, event.newIndex);
       this.cdr.detectChanges();
     },

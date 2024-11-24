@@ -1,12 +1,12 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormBuilderTypesService } from './form-builder.service';
+import { CustomFormlyFieldConfig } from '../types/form-builder.types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HistoryService {
-  private history: WritableSignal<FormlyFieldConfig[]> = signal([]);
+  private history: WritableSignal<CustomFormlyFieldConfig[]> = signal([]);
   private currentIndex = -1;
   lockHistory = false;
   constructor(private formBuilderService: FormBuilderTypesService) {}
@@ -17,9 +17,9 @@ export class HistoryService {
    * If a new state is added from an intermediate position in the history,
    * it removes subsequent states to avoid inconsistencies.
    *
-   * @param field - The `FormlyFieldConfig` form field whose state is to be saved.
+   * @param field - The `CustomFormlyFieldConfig` form field whose state is to be saved.
    */
-  public addState(field: FormlyFieldConfig) {
+  public addState(field: CustomFormlyFieldConfig) {
     if (this.lockHistory) return;
 
     if (this.currentIndex === -1) {
@@ -84,14 +84,14 @@ export class HistoryService {
   }
 
   /**
-   * Creates a deep copy of a `FormlyFieldConfig` form field.
+   * Creates a deep copy of a `CustomFormlyFieldConfig` form field.
    * Uses JSON serialization and deserialization to ensure the copy
    * has no references to the original object.
    *
-   * @param field - The `FormlyFieldConfig` field to be cloned.
+   * @param field - The `CustomFormlyFieldConfig` field to be cloned.
    * @returns A deep copy of the provided field.
    */
-  private deepClone(field: FormlyFieldConfig): FormlyFieldConfig {
+  private deepClone(field: CustomFormlyFieldConfig): CustomFormlyFieldConfig {
     return JSON.parse(JSON.stringify(field));
   }
 }

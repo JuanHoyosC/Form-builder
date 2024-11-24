@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FormlyOptionsPipe implements PipeTransform {
 
-  transform(options: any[] | Observable<any[]> | undefined): { label: string; value: string}[] {
+  transform(options: { label: string; value: string}[] | Observable<{ label: string; value: string}[]> | undefined): { label: string; value: string}[] {
     if (Array.isArray(options)) { 
       return options
     }

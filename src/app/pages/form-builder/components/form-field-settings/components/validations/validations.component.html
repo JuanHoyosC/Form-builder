@@ -6,106 +6,85 @@
     @if(settingService.formFieldSettings().validations.showRequired) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-      appId="required"
+        appId="required"
         label="Obligatorio"
         tooltip="Define si este campo debe completarse obligatoriamente"
       ></app-label-tooltip>
-      <p-inputSwitch
-        id="required"
-        name="required"
-        formControlName="required"
-      />
+      <p-inputSwitch id="required" name="required" formControlName="required" />
     </div>
     } @if(settingService.formFieldSettings().validations.showReadonly) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-      appId="readonly"
+        appId="readonly"
         label="Solo lectura"
         tooltip="Habilita el modo de solo lectura si el campo no es obligatorio y no está deshabilitado"
       ></app-label-tooltip>
-      <p-inputSwitch
-        id="readonly"
-        name="readonly"
-        formControlName="readonly"
-      />
+      <p-inputSwitch id="readonly" name="readonly" formControlName="readonly" />
     </div>
     } @if(settingService.formFieldSettings().validations.showDisabled) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-      appId="disabled"
+        appId="disabled"
         label="Deshabilitado"
         tooltip="Desactiva el campo si no es obligatorio o está en modo de solo lectura"
       ></app-label-tooltip>
-      <p-inputSwitch
-        id="disabled"
-        name="disabled"
-        formControlName="disabled"
-      />
+      <p-inputSwitch id="disabled" name="disabled" formControlName="disabled" />
     </div>
-    }
+    } @if(settingService.formFieldSettings().validations.showMin) {
 
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-      appId="min"
+        appId="min"
         label="Mínimo"
         tooltip="Especifica el valor mínimo permitido para este campo"
       ></app-label-tooltip>
-      <p-calendar
-        name="minDate"
-        [maxDate]="settingService.form.get('maxDate')?.value"
-        appendTo="body"
-        formControlName="minDate"
-      />
-    </div>
-
-
-    <div class="grid grid-cols-2 gap-2 justify-between items-center">
-      <app-label-tooltip
-      appId="min"
-        label="Max"
-        tooltip="Especifica el valor mínimo permitido para este campo"
-      ></app-label-tooltip>
-      <p-calendar
-        name="maxDate"
-        [minDate]="settingService.form.get('minDate')?.value"
-        appendTo="body"
-        formControlName="maxDate"
-      />
-    </div>
-
-    @if(settingService.formFieldSettings().validations.showMin) {
-
-    <div class="grid grid-cols-2 gap-2 justify-between items-center">
-      <app-label-tooltip
-      appId="min"
-        label="Mínimo"
-        tooltip="Especifica el valor mínimo permitido para este campo"
-      ></app-label-tooltip>
-      <input
-        id="min"
-        type="number"
-        formControlName="min"
-        pInputText
-      />
+      <input id="min" type="number" formControlName="min" pInputText />
     </div>
     } @if(settingService.formFieldSettings().validations.showMax) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-      appId="max"
+        appId="max"
         label="Máximo"
         tooltip="Establece el valor máximo permitido para este campo"
       ></app-label-tooltip>
-      <input
-        id="max"
-        type="number"
-        formControlName="max"
-        pInputText
+      <input id="max" type="number" formControlName="max" pInputText />
+    </div>
+    } @if(settingService.formFieldSettings().validations.showMinDate) {
+
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
+      <app-label-tooltip
+        appId="minDate"
+        label="Start Date"
+        tooltip="Especifica el valor mínimo permitido para este campo"
+      ></app-label-tooltip>
+      <p-calendar
+        inputId="minDate"
+        name="minDate"
+        [maxDate]="settingService.dateValidation().maxDate"
+        appendTo="body"
+        formControlName="minDate"
+      />
+    </div>
+    } @if(settingService.formFieldSettings().validations.showMaxDate) {
+
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
+      <app-label-tooltip
+        appId="maxDate"
+        label="End Date"
+        tooltip="Especifica el valor mínimo permitido para este campo"
+      ></app-label-tooltip>
+      <p-calendar
+        inputId="maxDate"
+        name="maxDate"
+        [minDate]="settingService.dateValidation().minDate"
+        appendTo="body"
+        formControlName="maxDate"
       />
     </div>
     } @if(settingService.formFieldSettings().validations.showMinLength) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-      appId="minLength"
+        appId="minLength"
         label="Longitud mínima"
         tooltip="Define la cantidad mínima de caracteres permitidos en este campo"
       ></app-label-tooltip>
@@ -120,7 +99,7 @@
     } @if(settingService.formFieldSettings().validations.showMaxLength) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-      appId="maxLength"
+        appId="maxLength"
         label="Longitud máxima"
         tooltip="Define la cantidad máxima de caracteres permitidos en este campo"
       ></app-label-tooltip>
@@ -134,7 +113,7 @@
     } @if(settingService.formFieldSettings().validations.showExactLength) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-      appId="exactLength"
+        appId="exactLength"
         label="Longitud exacta"
         tooltip="Especifica la cantidad exacta de caracteres requerida para este campo"
       ></app-label-tooltip>
@@ -149,7 +128,7 @@
     } @if(settingService.formFieldSettings().validations.showPattern) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-      appId="pattern"
+        appId="pattern"
         label="Expresión regular"
         tooltip="Introduce una expresión regular para definir un patrón específico de entrada para este campo"
       ></app-label-tooltip>

@@ -31,5 +31,5 @@ import { SettingService } from '../../services/setting.service';
   styleUrl: './validations.component.scss',
 })
 export class ValidationsComponent {
-  public settingService = inject(SettingService);
+  public readonly settingService = inject(SettingService);
 }

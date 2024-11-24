@@ -1,16 +1,11 @@
-import {
- Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormBuilderTypesService } from '../../../pages/form-builder/services/form-builder.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-import { TreeNode } from 'primeng/api';
-import { FORM_FIELD_LIST } from '../../form-fields.config';
+import { FORM_FIELD_LIST } from '../../../pages/form-builder/config/form-fields.config';
 import {
+  CustomFormlyFieldConfig,
   FormFieldList,
   FormType,
 } from '../../../pages/form-builder/types/form-builder.types';
@@ -18,7 +13,6 @@ import {
   TreeOptions,
   TreeSelectComponent,
 } from '../tree-select/tree-select.component';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -118,10 +112,7 @@ export class ConditionalComponent implements OnInit {
 
     // Insertar el nuevo grupo en la posición deseada
     conditions.push(newGroup);
-    console.log(
-      this.buildJsCondition(this.conditionTree),
-      this.conditionTree
-    );
+    console.log(this.buildJsCondition(this.conditionTree), this.conditionTree);
     localStorage.setItem('conditions', JSON.stringify(this.conditionTree));
   }
 
@@ -131,7 +122,11 @@ export class ConditionalComponent implements OnInit {
         // Si el nodo tiene subcondiciones, procesarlas
         const subExpressions = node.conditions
           .map((subNode) => {
-            if (subNode.property && subNode.operator && subNode.value !== undefined) {
+            if (
+              subNode.property &&
+              subNode.operator &&
+              subNode.value !== undefined
+            ) {
               // Si la subcondición tiene propiedad, operador y valor
               return this.getJsCondition(subNode);
             } else if (subNode.conditions && subNode.conditions.length > 0) {
@@ -257,7 +252,7 @@ export class ConditionalComponent implements OnInit {
   initializesTreeOptions(): void {
     const formFields = this.fieldService.fields();
     this.treeOptions = this.convertToTreeOptions(
-      { fieldGroup: [formFields] },
+      { fieldGroup: [formFields], type: undefined, props: {} },
       ''
     );
   }
@@ -268,7 +263,7 @@ export class ConditionalComponent implements OnInit {
    * @returns An array of `TreeOptions` nodes.
    */
   convertToTreeOptions(
-    item: FormlyFieldConfig,
+    item: CustomFormlyFieldConfig,
     parentKey: string
   ): TreeOptions[] {
     const nodes: TreeOptions[] = [];
@@ -289,7 +284,7 @@ export class ConditionalComponent implements OnInit {
    * @param item - Formly field configuration object.
    * @returns True if the field contains a field group, false otherwise.
    */
-  private hasFieldGroup(item: FormlyFieldConfig): boolean | undefined {
+  private hasFieldGroup(item: CustomFormlyFieldConfig): boolean | undefined {
     return item.fieldGroup && Array.isArray(item.fieldGroup);
   }
 
@@ -299,7 +294,7 @@ export class ConditionalComponent implements OnInit {
    * @returns A `TreeOptions` node or null if the field type should be ignored.
    */
   private createTreeOption(
-    child: FormlyFieldConfig,
+    child: CustomFormlyFieldConfig,
     parentKey: string
   ): TreeOptions | null {
     const childType = child.type as FormType;

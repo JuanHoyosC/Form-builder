@@ -10,6 +10,5 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [CommonModule, InputNumberModule, ReactiveFormsModule],
   schemas: [NO_ERRORS_SCHEMA],
   templateUrl: './input-field-number.component.html',
-  styleUrl: './input-field-number.component.css'
 })
 export class InputFieldNumberComponent extends FieldType<FieldTypeConfig> {}

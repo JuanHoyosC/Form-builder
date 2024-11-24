@@ -5,7 +5,7 @@ import { FieldDescriptionComponent } from '../../../../shared/components/field-d
 import { LabelTooltipComponent } from '../../../../shared/components/label-tooltip/label-tooltip.component';
 
 @Component({
-  selector: 'app-fieldWrapper',
+  selector: 'app-field-wrapper',
   standalone: true,
   imports: [CommonModule, FieldDescriptionComponent, LabelTooltipComponent],
   schemas: [NO_ERRORS_SCHEMA],

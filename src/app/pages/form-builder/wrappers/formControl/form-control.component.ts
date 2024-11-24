@@ -4,7 +4,7 @@ import { Validators } from '@angular/forms';
 import { FieldWrapper } from '@ngx-formly/core';
 
 @Component({
-  selector: 'app-fieldWrapper',
+  selector: 'app-form-control-wrapper',
   standalone: true,
   imports: [CommonModule],
   template: `<ng-container #fieldComponent></ng-container>`,

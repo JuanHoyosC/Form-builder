@@ -12,7 +12,7 @@
   tabindex="0"
 >
   @if(formBuilderTypesService.selectedField()?.id === field().id) {
-  <app-menu [field]="field()" [fieldGroup]="fieldGroup()"></app-menu>
+  <app-form-field-menu [field]="field()" [fieldGroup]="fieldGroup()"></app-form-field-menu>
   }
 
   <app-drag-icon class="handle drag-icon"></app-drag-icon>

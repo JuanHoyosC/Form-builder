@@ -12,7 +12,7 @@ import {
 
 import { routes } from './app.routes';
 import { SortablejsModule } from 'nxt-sortablejs';
-import { FORMLY_TYPES, FORMLY_EXTENSIONS, FORMLY_WRAPPERS } from './shared/form-fields.config';
+import { FORMLY_TYPES, FORMLY_EXTENSIONS, FORMLY_WRAPPERS } from './pages/form-builder/config/form-fields.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -3,23 +3,23 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import {
+  CustomFormlyFieldConfig,
   FieldGroup,
 } from '../types/form-builder.types';
-import { FORM_FIELD_TYPES } from '../../../shared/form-fields.config';
+import { FORM_FIELD_TYPES } from '../config/form-fields.config';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormBuilderTypesService {
-  $selectedField = new BehaviorSubject<FormlyFieldConfig>({});
-  fields: WritableSignal<FormlyFieldConfig> = signal(
+  $selectedField = new BehaviorSubject<CustomFormlyFieldConfig | undefined>(undefined);
+  fields: WritableSignal<CustomFormlyFieldConfig> = signal(
     structuredClone(FORM_FIELD_TYPES.INPUT_GROUP)
   );
 
-  selectedField: WritableSignal<FormlyFieldConfig | undefined> =
+  selectedField: WritableSignal<CustomFormlyFieldConfig | undefined> =
     signal(undefined);
 
   saveNewField(fieldGroup: FieldGroup, newIndex: number | undefined): void {
@@ -30,9 +30,9 @@ export class FormBuilderTypesService {
   }
 
   updateField(
-    node: FormlyFieldConfig,
-    updatedData: FormlyFieldConfig
-  ): FormlyFieldConfig {
+    node: CustomFormlyFieldConfig,
+    updatedData: CustomFormlyFieldConfig
+  ): CustomFormlyFieldConfig {
     // Si encontramos el nodo, retornamos una nueva copia con los datos actualizados
     if (node.id === updatedData.id) {
       return {
@@ -61,7 +61,7 @@ export class FormBuilderTypesService {
    * @param field - The field to remove.
    * @param fieldGroup - The group of fields from which to remove the field.
    */
-  removeField(field: FormlyFieldConfig, fieldGroup: FieldGroup): void {
+  removeField(field: CustomFormlyFieldConfig, fieldGroup: FieldGroup): void {
     const index = this.findFieldIndexById(field, fieldGroup);
     if (index !== undefined) {
       fieldGroup?.splice(index, 1);
@@ -74,7 +74,7 @@ export class FormBuilderTypesService {
    * @param field - The field to clone.
    * @param fieldGroup - The group of fields to which the cloned field will be added.
    */
-  cloneField(field: FormlyFieldConfig, fieldGroup: FieldGroup): void {
+  cloneField(field: CustomFormlyFieldConfig, fieldGroup: FieldGroup): void {
     const index = this.findFieldIndexById(field, fieldGroup);
     if (index !== undefined) {
       const fieldCopy = this.generateUniqueField(field);
@@ -89,9 +89,9 @@ export class FormBuilderTypesService {
    * and constructs a key that combines the field type and the new ID.
    *
    * @param field - The field configuration object to clone and modify.
-   * @returns A new FormlyFieldConfig object with a unique ID and key.
+   * @returns A new CustomFormlyFieldConfig object with a unique ID and key.
    */
-  generateUniqueField(field: FormlyFieldConfig): FormlyFieldConfig {
+  generateUniqueField(field: CustomFormlyFieldConfig): CustomFormlyFieldConfig {
     const newId = crypto.randomUUID();
     const newField = JSON.parse(
       JSON.stringify({ ...field, id: newId, key: `${field.type}_${newId}` })
@@ -107,7 +107,7 @@ export class FormBuilderTypesService {
    * @returns The index of the field in the field group, or -1 if not found.
    */
   findFieldIndexById(
-    field: FormlyFieldConfig,
+    field: CustomFormlyFieldConfig,
     fieldGroup: FieldGroup
   ): number | undefined {
     return fieldGroup?.findIndex(
@@ -118,9 +118,9 @@ export class FormBuilderTypesService {
   /**
    * Opens a menu for the currently selected field, setting the field as the active selection.
    *
-   * @param selectedField - The field (FormlyFieldConfig) that will be set as the current selection.
+   * @param selectedField - The field (CustomFormlyFieldConfig) that will be set as the current selection.
    */
-  activateFieldMenu(selectedField: FormlyFieldConfig): void {
+  activateFieldMenu(selectedField: CustomFormlyFieldConfig): void {
     this.selectedField.set(selectedField);
     this.$selectedField.next(selectedField);
   }
@@ -130,24 +130,5 @@ export class FormBuilderTypesService {
    */
   deactivateFieldMenu(): void {
     this.selectedField.set(undefined);
-  }
-  minLengthValidationMessage(error: any, field: FormlyFieldConfig) {
-    if(!field?.props) return '';
-    return `Should have atleast ${field.props.minLength} characters`;
-  }
-  
-  maxLengthValidationMessage(error: any, field: FormlyFieldConfig) {
-    if(!field?.props) return '';
-    return `This value should be less than ${field.props.maxLength} characters`;
-  }
-  
-  minValidationMessage(error: any, field: FormlyFieldConfig) {
-    if(!field?.props) return '';
-    return `This value should be more than ${field.props.min}`;
-  }
-  
-  maxValidationMessage(error: any, field: FormlyFieldConfig) {
-    if(!field?.props) return '';
-    return `This value should be less than ${field.props.max}`;
   }
 }

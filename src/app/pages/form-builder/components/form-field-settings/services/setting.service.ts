@@ -1,6 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import {
   CustomFormlyFieldConfig,
+  CustomFormlyFieldProps,
   FormType,
 } from '../../../types/form-builder.types';
 import { FormBuilderTypesService } from '../../../services/form-builder.service';
@@ -17,10 +18,15 @@ import {
   providedIn: 'root',
 })
 export class SettingService {
-  public form: FormGroup;
+  private formBuilderTypesService = inject(FormBuilderTypesService);
+  private fb = inject(FormBuilder);
+  public form: FormGroup = new FormGroup({});
   public defaultSelectedField = signal<CustomFormlyFieldConfig>(
     {} as CustomFormlyFieldConfig
   );
+
+  private debounceTimeout = signal<number | undefined>(undefined);
+
   public formFieldSettings = signal<FormFieldSettings>({
     data: {
       showDefaultValue: false,
@@ -45,12 +51,19 @@ export class SettingService {
       showReadonly: false,
       showMin: false,
       showMax: false,
+      showMinDate: false,
+      showMaxDate: false,
       showMinLength: false,
       showMaxLength: false,
       showExactLength: false,
       showPattern: false,
     },
   });
+
+  public dateValidation = signal<{
+    minDate: Date | undefined;
+    maxDate: Date | undefined;
+  }>({ minDate: undefined, maxDate: undefined });
 
   private subscriptions: Subscription[] = [];
   private propertyConfigMap: PropertyConfigMap = {
@@ -129,6 +142,8 @@ export class SettingService {
     validations: {
       showMin: [FormType.number],
       showMax: [FormType.number],
+      showMinDate: [FormType.calendar],
+      showMaxDate: [FormType.calendar],
       showMinLength: [FormType.text, FormType.email, FormType.password],
       showMaxLength: [FormType.text, FormType.email, FormType.password],
       showExactLength: [FormType.text, FormType.email],
@@ -169,19 +184,14 @@ export class SettingService {
     },
   };
 
-  constructor(
-    private formBuilderTypesService: FormBuilderTypesService,
-    private fb: FormBuilder
-  ) {
-    this.form = this.fb.group({});
-  }
-
   /**
    * Initializes the form with the selected field configuration and sets up subscriptions
    * for real-time updates and validation controls.
    * @param selectedField - The field configuration to initialize the form with.
    */
-  initializeFormFieldSettings(selectedField: CustomFormlyFieldConfig): void {
+  public initializeFormFieldSettings(
+    selectedField: CustomFormlyFieldConfig
+  ): void {
     this.clearAllSubscriptions();
     this.initializeConfig(selectedField);
     this.setDefaultField(selectedField);
@@ -202,7 +212,7 @@ export class SettingService {
     ];
   }
 
-  buildDynamicFormGroup(selectedField: CustomFormlyFieldConfig): void {
+  public buildDynamicFormGroup(selectedField: CustomFormlyFieldConfig): void {
     const { id, defaultValue, type, key } = selectedField;
     const props = selectedField.props;
     this.form = this.fb.group({
@@ -293,23 +303,30 @@ export class SettingService {
   /**
    * Clears all active subscriptions to prevent memory leaks.
    */
-  clearAllSubscriptions(): void {
+  private clearAllSubscriptions(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
-
-  timer = 0;
 
   /**
    * Subscribes to changes in the entire form to trigger updates.
    * @returns Subscription object for form changes.
    */
   private subscribeToFormChanges(): Subscription {
-    return this.form.valueChanges.subscribe(() => {
-      clearTimeout(this.timer);
-      this.timer = setTimeout(() => {
+    return this.form.valueChanges.subscribe(() => this.handleFormChange());
+  }
+
+  /**
+   * Handles form value changes with a debounce to update the field after a delay.
+   */
+  private handleFormChange(): void {
+    if (this.debounceTimeout() !== undefined) {
+      clearTimeout(this.debounceTimeout());
+    }
+    this.debounceTimeout.set(
+      setTimeout(() => {
         this.updateField();
-      }, 200) as any;
-    });
+      }, 200) as unknown as number
+    );
   }
 
   /**
@@ -318,22 +335,51 @@ export class SettingService {
    */
   private subscribeToPropsChanges(): Subscription {
     return this.form.get('props')?.valueChanges.subscribe((newPropsValue) => {
-      const { min, max, minLength, maxLength, pattern, exactLength, options } =
-        newPropsValue;
-      this.defaultSelectedField.update((prevValue) => ({
-        ...prevValue,
-        props: {
-          min,
-          max,
-          minLength,
-          maxLength,
-          pattern,
-          exactLength,
-          options,
-          label: ' ',
-        },
-      }));
+      this.updateDefaultSelectedField(newPropsValue);
+      this.updateDateValidation(newPropsValue);
     }) as Subscription;
+  }
+
+  private updateDefaultSelectedField(newPropsValue: any): void {
+    this.defaultSelectedField.update((prevValue) => ({
+      ...prevValue,
+      props: { ...this.getDefaultProps(newPropsValue) },
+    }));
+  }
+
+  private updateDateValidation(newPropsValue: any) {
+    const { showMinDate, showMaxDate } = this.formFieldSettings().validations;
+    if (showMinDate || showMaxDate) {
+      this.dateValidation.set({
+        minDate: newPropsValue.minDate,
+        maxDate: newPropsValue.maxDate,
+      });
+    }
+  }
+
+  private getDefaultProps(props: CustomFormlyFieldProps) {
+    const {
+      min,
+      max,
+      minDate,
+      maxDate,
+      minLength,
+      maxLength,
+      pattern,
+      exactLength,
+      options,
+    } = props;
+    return {
+      min,
+      max,
+      minDate,
+      maxDate,
+      minLength,
+      maxLength,
+      pattern,
+      exactLength,
+      options,
+    };
   }
 
   /**
@@ -384,9 +430,11 @@ export class SettingService {
       ?.valueChanges.subscribe((value: boolean) => {
         affectedControlNames.forEach((controlName: string) => {
           const control = this.form.get(controlName);
-          value
-            ? control?.disable({ emitEvent: false })
-            : control?.enable({ emitEvent: false });
+          if (value) {
+            control?.disable({ emitEvent: false });
+          } else {
+            control?.enable({ emitEvent: false });
+          }
         });
       }) as Subscription;
   }
@@ -419,23 +467,12 @@ export class SettingService {
    * @param selectedField - The field configuration.
    */
   private setDefaultField(selectedField: CustomFormlyFieldConfig): void {
-    const { min, max, minLength, maxLength, pattern, exactLength, options } =
-      selectedField.props;
     this.defaultSelectedField.set(
       structuredClone({
         key: 'defaultValue',
         type: selectedField.type,
         defaultValue: selectedField.defaultValue,
-        props: {
-          min,
-          max,
-          minLength,
-          maxLength,
-          pattern,
-          exactLength,
-          options,
-          label: ' ',
-        },
+        props: { ...this.getDefaultProps(selectedField.props) },
       })
     );
   }
@@ -470,7 +507,7 @@ export class SettingService {
    * @param section - The section to evaluate (e.g., 'data', 'layout', 'properties', 'validations').
    * @returns `true` if any property in the section is active, otherwise `false`.
    */
-  isSectionVisible(section: SectionKeys): boolean {
+  public isSectionVisible(section: SectionKeys): boolean {
     const sectionConfig = this.formFieldSettings()[section];
     return Object.values(sectionConfig).includes(true);
   }

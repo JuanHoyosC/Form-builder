@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  EventEmitter,
   forwardRef,
-  Input,
-  model,
-  Output,
   signal,
 } from '@angular/core';
 import {

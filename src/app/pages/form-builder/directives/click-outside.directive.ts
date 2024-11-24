@@ -1,12 +1,9 @@
 import {
   Directive,
   ElementRef,
-  EventEmitter,
   HostListener,
   input,
-  Input,
   output,
-  Output,
 } from '@angular/core';
 
 @Directive({

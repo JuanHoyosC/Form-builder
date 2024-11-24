@@ -1,16 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CustomFormlyFieldConfig } from '../../types/form-builder.types';
+import { PropertiesComponent } from './components/properties/properties.component';
+import { ValidationsComponent } from './components/validations/validations.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { DataComponent } from './components/data/data.component';
 import { DialogModule } from 'primeng/dialog';
 import { SettingService } from './services/setting.service';
 import { FormBuilderTypesService } from '../../services/form-builder.service';
-import {
-  DataComponent,
-  LayoutComponent,
-  PropertiesComponent,
-  ValidationsComponent,
-} from './components/index';
+import { CustomFormlyFieldConfig } from '../../types/form-builder.types';
 @Component({
   selector: 'app-form-field-settings',
   standalone: true,
@@ -35,15 +33,9 @@ export class FormFieldSettingsComponent {
 
   constructor() {
     this.formBuilderTypesService.$selectedField.subscribe((field) => {
-      const selectedField = field as CustomFormlyFieldConfig;
-      if (this.isSameFieldSelected(selectedField)) return;
-      console.log('entro aqui');
-
-      if (selectedField) {
-        this.settingService.initializeFormFieldSettings(
-          structuredClone(selectedField)
-        );
-      }
+      if (!field) return;
+      if (this.isSameFieldSelected(field)) return;
+      this.settingService.initializeFormFieldSettings(structuredClone(field));
     });
   }
 

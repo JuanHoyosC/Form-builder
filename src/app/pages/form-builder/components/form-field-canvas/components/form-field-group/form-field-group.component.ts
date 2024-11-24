@@ -1,24 +1,40 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, input, Input } from '@angular/core';
-import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
+import { FormlyModule } from '@ngx-formly/core';
 import { FormBuilderTypesService } from '../../../../services/form-builder.service';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { Options, SortableEvent } from 'sortablejs';
 import { DropZoneDirective } from '../../../../directives/drag-and-drop.directive';
-import { MenuComponent } from '../menu/menu.component';
-import { FieldGroup } from '../../../../types/form-builder.types';
+import { FormFieldMenuComponent } from '../form-field-menu/form-field-menu.component';
+import {
+  CustomFormlyFieldConfig,
+  FieldGroup,
+} from '../../../../types/form-builder.types';
 import { DragIconComponent } from '../drag-icon/drag-icon.component';
-import { FormFieldGroupItemComponent } from '../index'
+import { FormFieldGroupItemComponent } from '../form-field-group-item/form-field-group-item.component';
 
 @Component({
   selector: 'app-form-field-group',
   standalone: true,
-  imports: [CommonModule, DragIconComponent, DropZoneDirective,  FormlyModule, FormFieldGroupItemComponent, MenuComponent, SortablejsModule],
+  imports: [
+    CommonModule,
+    DragIconComponent,
+    DropZoneDirective,
+    FormlyModule,
+    FormFieldGroupItemComponent,
+    FormFieldMenuComponent,
+    SortablejsModule,
+  ],
   templateUrl: './form-field-group.component.html',
   styleUrl: './form-field-group.component.scss',
 })
 export class FormFieldGroupComponent {
-  field = input.required<FormlyFieldConfig>();
+  field = input.required<CustomFormlyFieldConfig>();
   fieldGroup = input.required<FieldGroup>();
   public readonly formBuilderTypesService = inject(FormBuilderTypesService);
   private cdr = inject(ChangeDetectorRef);
@@ -27,7 +43,6 @@ export class FormFieldGroupComponent {
       name: 'shared',
       put: true,
     },
-    animation: 150,
     sort: true,
     fallbackOnBody: true,
     invertSwap: true,
@@ -36,16 +51,17 @@ export class FormFieldGroupComponent {
     handle: '.handle',
     onAdd: (event: SortableEvent) => {
       const fieldGroup = this.field().fieldGroup;
+      if (!fieldGroup) return;
       this.formBuilderTypesService.saveNewField(fieldGroup, event.newIndex);
       this.cdr.detectChanges();
     },
 
     onEnd: () => {
       this.cdr.detectChanges();
-    }
+    },
   };
 
-   openMenuForSelectedField(event: MouseEvent) {
+  openMenuForSelectedField(event: MouseEvent) {
     event.stopPropagation();
     this.formBuilderTypesService.activateFieldMenu(this.field());
   }

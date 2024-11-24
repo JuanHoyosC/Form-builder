@@ -10,12 +10,12 @@
     @if(field.fieldGroup) {
     <app-form-field-group
       [field]="field"
-      [fieldGroup]="formBuilderTypesService.fields().fieldGroup"
+      [fieldGroup]="formBuilderTypesService.fields().fieldGroup!"
     ></app-form-field-group>
     } @else {
     <app-form-field-group-item
       [field]="field"
-      [fieldGroup]="formBuilderTypesService.fields().fieldGroup"
+      [fieldGroup]="formBuilderTypesService.fields().fieldGroup!"
     ></app-form-field-group-item>
     }
   </section>

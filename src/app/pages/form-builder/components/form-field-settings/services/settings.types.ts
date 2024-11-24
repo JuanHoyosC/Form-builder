@@ -1,6 +1,6 @@
 import { FormType } from "../../../types/form-builder.types";
 
-export type FormFieldSettings = {
+export interface FormFieldSettings {
     data: {
       showDefaultValue: boolean;
       showOptions: boolean;
@@ -24,6 +24,8 @@ export type FormFieldSettings = {
       showReadonly: boolean;
       showMin: boolean;
       showMax: boolean;
+      showMinDate: boolean;
+      showMaxDate: boolean;
       showMinLength: boolean;
       showMaxLength: boolean;
       showExactLength: boolean;
