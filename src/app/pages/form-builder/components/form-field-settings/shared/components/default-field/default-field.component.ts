@@ -1,10 +1,10 @@
 import {
   Component,
-  EventEmitter,
   forwardRef,
-  Input,
+  input,
+  model,
   OnChanges,
-  Output,
+  signal,
 } from '@angular/core';
 import {
   FormsModule,
@@ -43,27 +43,30 @@ import { FormlyOptionsPipe } from '../../../../../pipes/formly-options.pipe';
   templateUrl: './default-field.component.html',
 })
 export class DefaulltFieldComponent implements OnChanges {
-  @Input() value: DefaultValue = undefined;
-  @Input() field!: CustomFormlyFieldConfig;
-  @Output() valueChange: EventEmitter<DefaultValue> = new EventEmitter();
-  private onChangeFn: (value: DefaultValue) => void = () => {};
-  private onTouched: () => void = () => {};
-  model: { defaultValue: DefaultValue } = { defaultValue: undefined };
-  typeDisplayRules: DisplayRules = {
+  value = model<DefaultValue>(undefined);
+  field = input.required<CustomFormlyFieldConfig>();
+  onChangeFn: (value: DefaultValue) => void = () => {};
+  onTouched: () => void = () => {};
+
+  modelDefaultValue = signal<{ defaultValue: DefaultValue }>({ defaultValue: undefined });
+
+  // Signals for typeDisplayRules
+  typeDisplayRules = signal<DisplayRules>({
     showMultiOptions: [FormType.multicheckbox],
     showOptions: [FormType.radio],
     showFormField: [],
-  };
+  });
 
-  visibilityConfig: DefaultValueBoolean = {
+  // Signals for visibilityConfig
+  visibilityConfig = signal<DefaultValueBoolean>({
     showFormField: false,
     showMultiOptions: false,
     showOptions: false,
-  };
+  });
 
   private writeValue(value: DefaultValue): void {
     if (value) {
-      this.value = value;
+      this.value.set(value);
     }
   }
   ngOnChanges(): void {
@@ -75,7 +78,7 @@ export class DefaulltFieldComponent implements OnChanges {
    * Initializes the model with the default value from the field configuration.
    */
   private initializeModelWithDefaultValue(): void {
-    this.model = { defaultValue: this.field.defaultValue };
+    this.modelDefaultValue.set({ defaultValue: this.field().defaultValue });
   }
   
   /**
@@ -84,13 +87,13 @@ export class DefaulltFieldComponent implements OnChanges {
    * the expected types specified in the visibility configuration.
    */
   private updateVisibilitySettings(): void {
-    const fieldType = this.field.type as FormType;
-    for (const key in this.typeDisplayRules) {
+    const fieldType = this.field().type as FormType;
+    for (const key in this.typeDisplayRules()) {
       const settingKey = key as keyof DisplayRules;
-      this.visibilityConfig = {
-        ...this.visibilityConfig,
-        [key]: this.typeDisplayRules[settingKey]?.includes(fieldType),
-      };
+      this.visibilityConfig.set({
+        ...this.visibilityConfig(),
+        [key]: this.typeDisplayRules()[settingKey].includes(fieldType),
+      });
     }
   }
 
@@ -102,23 +105,23 @@ export class DefaulltFieldComponent implements OnChanges {
   }
 
   private onChange() {
-    this.onChangeFn(this.value);
-    this.valueChange.emit(this.value);
+    this.onChangeFn(this.value());
   }
 
   changeDefaultValue() {
-    this.value = this.model.defaultValue;
+    this.value.set(this.modelDefaultValue().defaultValue);
     this.onChange();
+    this.onTouched();
   }
 }
 
 type DefaultValue = string | boolean | number | undefined;
 
-type DisplayRules = {
+interface DisplayRules {
   showMultiOptions: FormType[];
   showOptions: FormType[];
   showFormField: FormType[];
-};
+}
 
 type DefaultValueBoolean = {
   [T in keyof DisplayRules]: boolean;

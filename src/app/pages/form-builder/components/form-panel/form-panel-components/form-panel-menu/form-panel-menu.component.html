@@ -1,0 +1,23 @@
+<aside
+  class="absolute z-20 top-4 left-4 bg-white shadow py-4 px-1 rounded dark:bg-dark-900 h-min"
+>
+  <ul class="flex flex-col gap-2">
+    @for(item of menu; track item.icon) {
+    <li class="w-6 h-6">
+      <button
+        class="w-full h-full flex justify-center items-center cursor-pointer"
+        [ngClass]="{
+          'bg-indigo-200 rounded text-dark-900 dark:bg-dark-700 dark:text-white':
+            activeTabIndex() === item.activeTabIndex
+        }"
+        (click)="item.handle()"
+      >
+        <ng-icon
+          [name]="item.icon"
+          class="text-lg text-dark-900 dark:text-white"
+        ></ng-icon>
+      </button>
+    </li>
+    }
+  </ul>
+</aside>

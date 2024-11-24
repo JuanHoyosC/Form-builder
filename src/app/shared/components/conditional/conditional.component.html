@@ -1,0 +1,90 @@
+Crea las conditiones con las que el campo se mostraran deshabilitaran o será requerido en el formulario
+<div class="px-4 py-6">
+  <div class="flex flex-col">
+    <ng-container *ngFor="let group of conditionTree.conditions; let i = index">
+      <!-- Renderizar grupo de condiciones -->
+      <div
+        class="border-l border-dotted border-indigo-500 pl-8 pb-4 flex flex-col gap-2"
+      >
+        <ng-container
+          *ngFor="let condition of group?.conditions; let j = index"
+        >
+          <div
+            class="border-l border-dotted border-indigo-500 pl-4 pb-4 flex items-center gap-2"
+          >
+            <!-- Selector de propiedad (property) -->
+            <app-tree-select
+              [treeOptions]="treeOptions"
+              (optionSelectedChanged)="condition.property = $event"
+              class="block min-w-44 w-44"
+            ></app-tree-select>
+
+            <!-- Selector de operador (operator) -->
+  <p-dropdown
+    [options]="comparisonOperators"
+              [(ngModel)]="condition.operator"
+    appendTo="body"
+              class="block min-w-44 w-44"
+              placeholder="Select an option"
+            ></p-dropdown>
+
+            <!-- Input para el valor (value) -->
+            <input
+              type="text"
+              [(ngModel)]="condition.value"
+              class="p-inputtext p-component block min-w-44 w-44"
+              placeholder="Enter value"
+            />
+          </div>
+
+          <!-- Mostrar operador lógico entre condiciones -->
+          <div
+            *ngIf="j < group.conditions.length - 1"
+            class="w-fit text-center -translate-x-1/2"
+          >
+            <span class="text-sm">{{ group.conditional }}</span>
+          </div>
+          <div class="flex gap-2" *ngIf="j === group.conditions.length - 1">
+            <p-button
+              label="+ OR"
+              size="small"
+              (click)="addConditionGroup(group.conditions, 'OR', i)"
+            />
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Renderizar operador lógico entre grupos -->
+      <div
+        *ngIf="i < conditionTree.conditions.length - 1"
+        class="w-fit text-sm text-center -translate-x-1/2"
+      >
+        <span>{{ conditionTree.conditional }}</span>
+      </div>
+      <div
+        class="flex gap-2 mt-2"
+        *ngIf="i === conditionTree.conditions.length - 1"
+      >
+        <p-button
+          label="+ AND"
+          size="small"
+          (click)="addConditionGroup(conditionTree.conditions, 'OR', i)"
+        />
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+
+<input
+type="text"
+pInputText
+/>
+
+
+
+
+<div class="flex justify-between">
+  <p-button size="small" [outlined]="true">Cancelar</p-button>
+  <p-button label="Guardar" size="small" />
+</div>

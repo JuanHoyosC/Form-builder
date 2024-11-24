@@ -4,79 +4,79 @@
   </ng-template>
 
   <section class="flex flex-col gap-2 px-4" formGroupName="props">
-     @if(settingService.formFieldSettings().layout.showHeadingType) {
+    @if(settingService.formFieldSettings().layout.showHeadingType) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-        id="headingType"
+      appId="headingType"
         label="heading Type"
         tooltip="heading Type"
       ></app-label-tooltip>
       <app-select-button
-        id="headingType"
+        appId="headingType"
         name="headingType"
         [options]="headingLevelOptions"
         formControlName="headingType"
       ></app-select-button>
-    </div> }
- @if(settingService.formFieldSettings().layout.showAlign) {
+    </div>
+    } @if(settingService.formFieldSettings().layout.showAlign) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-        id="alignText"
+      appId="alignText"
         label="Align types"
         tooltip="Alineación del texto"
       ></app-label-tooltip>
 
       <app-select-button
-        id="alignText"
+        appId="alignText"
         name="alignText"
         [options]="textAlignmentOptions"
         formControlName="align"
       ></app-select-button>
-    </div> }
- @if(settingService.formFieldSettings().layout.showSeverity) {
+    </div>
+    } @if(settingService.formFieldSettings().layout.showSeverity) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-        id="severity"
+      appId="severity"
         label="Severity types"
         tooltip="Tipo de alerta"
       ></app-label-tooltip>
       <app-select-button
-        id="severity"
+        appId="severity"
         name="severity"
         [options]="severityOptions"
         formControlName="severity"
       ></app-select-button>
-    </div> }
- @if(settingService.formFieldSettings().layout.showTextFormattingOptions) {
+    </div>
+    } @if(settingService.formFieldSettings().layout.showTextFormattingOptions) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-        id="headingType"
+      appId="headingType"
         label="Font styles"
         tooltip="Agrega cisas"
       ></app-label-tooltip>
       <app-select-button
-        id="textStyles"
+        appId="textStyles"
         name="textStyles"
         [options]="textFormattingOptions"
         [disabledOptions]="disabledOptions"
         [multiple]="true"
         formControlName="textFormattingOptions"
       ></app-select-button>
-    </div> }
-
-    @if(settingService.formFieldSettings().layout.showCols) {
-      <div class="flex justify-between items-center">
-        <app-label-tooltip
-          id="cols"
-          label="Columnas"
-          tooltip="Cantidad de columnas del grupo"
-        ></app-label-tooltip>
-        <app-select-button
-          id="cols"
-          name="cols"
-          [options]="colsOptions"
-          formControlName="cols"
-        ></app-select-button>
-      </div> }
+    </div>
+    } @if(settingService.formFieldSettings().layout.showCols) {
+    <div class="flex justify-between items-center">
+      <app-label-tooltip
+      appId="cols"
+        label="Columnas"
+        tooltip="Cantidad de columnas del grupo"
+      ></app-label-tooltip>
+      <app-select-button
+        appId="cols"
+        name="cols"
+        [options]="colsOptions"
+        formControlName="cols"
+      ></app-select-button>
+    </div>
+    }
   </section>
 </p-panel>

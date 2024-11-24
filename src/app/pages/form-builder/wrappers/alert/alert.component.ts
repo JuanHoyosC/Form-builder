@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FieldWrapper } from '@ngx-formly/core';
 import { Message } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
@@ -10,7 +10,7 @@ import { MessagesModule } from 'primeng/messages';
   templateUrl: './alert.component.html',
   styleUrl: './alert.component.scss',
 })
-export class AlertComponent extends FieldWrapper {
+export class AlertComponent extends FieldWrapper implements OnInit  {
   messages: Message[] = [];
 
   ngOnInit(){

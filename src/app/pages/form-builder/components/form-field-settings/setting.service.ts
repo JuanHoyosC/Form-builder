@@ -4,13 +4,14 @@ import {
   FormType,
 } from '../../interfaces/form-builder';
 import { FormBuilderTypesService } from '../../services/form-builder.service';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { FormFieldSettings, PropertyConfigMap, SectionKeys, SectionPropertyKeys } from './interfaces/settings';
+import {
+  FormFieldSettings,
+  PropertyConfigMap,
+  SectionKeys,
+  SectionPropertyKeys,
+} from './interfaces/settings';
 
 @Injectable({
   providedIn: 'root',
@@ -98,7 +99,6 @@ export class SettingService {
         FormType.radio,
         FormType.tel,
         FormType.text,
-        FormType.title,
       ],
     },
     data: {
@@ -297,12 +297,19 @@ export class SettingService {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
+  timer = 0;
+
   /**
    * Subscribes to changes in the entire form to trigger updates.
    * @returns Subscription object for form changes.
    */
   private subscribeToFormChanges(): Subscription {
-    return this.form.valueChanges.subscribe(() => this.updateField());
+    return this.form.valueChanges.subscribe(() => {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.updateField();
+      }, 200) as any;
+    });
   }
 
   /**
@@ -311,9 +318,20 @@ export class SettingService {
    */
   private subscribeToPropsChanges(): Subscription {
     return this.form.get('props')?.valueChanges.subscribe((newPropsValue) => {
+      const { min, max, minLength, maxLength, pattern, exactLength, options } =
+        newPropsValue;
       this.defaultSelectedField.update((prevValue) => ({
         ...prevValue,
-        props: newPropsValue,
+        props: {
+          min,
+          max,
+          minLength,
+          maxLength,
+          pattern,
+          exactLength,
+          options,
+          label: ' ',
+        },
       }));
     }) as Subscription;
   }
@@ -401,15 +419,25 @@ export class SettingService {
    * @param selectedField - The field configuration.
    */
   private setDefaultField(selectedField: CustomFormlyFieldConfig): void {
-    this.defaultSelectedField.set({
-      key: 'defaultValue',
-      type: selectedField.type,
-      defaultValue: selectedField.defaultValue,
-      props: {
-        ...selectedField.props,
-        label: ' ',
-      },
-    });
+    const { min, max, minLength, maxLength, pattern, exactLength, options } =
+      selectedField.props;
+    this.defaultSelectedField.set(
+      structuredClone({
+        key: 'defaultValue',
+        type: selectedField.type,
+        defaultValue: selectedField.defaultValue,
+        props: {
+          min,
+          max,
+          minLength,
+          maxLength,
+          pattern,
+          exactLength,
+          options,
+          label: ' ',
+        },
+      })
+    );
   }
 
   /**
@@ -452,12 +480,13 @@ export class SettingService {
    * If the field was successfully updated, the fields list is updated.
    */
   private updateField(): void {
-    const fieldUpdated = this.formBuilderTypesService.updateField(
+    const updated = this.formBuilderTypesService.updateField(
       this.formBuilderTypesService.fields(),
-      this.form.value
+      structuredClone(this.form.value)
     );
-    if (fieldUpdated) {
-      this.formBuilderTypesService.fields.set(structuredClone(fieldUpdated));
-    }
+
+    if (!updated) return;
+    console.log('entro aqui 1');
+    this.formBuilderTypesService.fields.set(updated);
   }
 }

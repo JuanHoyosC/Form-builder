@@ -7,7 +7,7 @@
     @if(settingService.formFieldSettings().properties.showLabel) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
-        id="label"
+      appId="label"
         label="Label"
         tooltip="Introduce el texto que aparecerá como etiqueta junto a tu campo"
       ></app-label-tooltip>
@@ -22,7 +22,7 @@
     } @if(settingService.formFieldSettings().properties.showTooltip) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
-        id="tooltip"
+      appId="tooltip"
         label="Tooltip"
         tooltip="Escribe un mensaje breve de ayuda que se mostrará al pasar el cursor sobre el campo"
       ></app-label-tooltip>
@@ -37,7 +37,7 @@
     } @if(settingService.formFieldSettings().properties.showPlaceholder) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
-        id="placeholder"
+      appId="placeholder"
         label="Placeholder"
         tooltip="Especifica el texto que aparecerá como sugerencia dentro del campo"
       ></app-label-tooltip>
@@ -52,7 +52,7 @@
     } @if(settingService.formFieldSettings().properties.showDescription) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
-        id="description"
+      appId="description"
         label="Descripción"
         tooltip="Añade una descripción o mensaje de ayuda que se mostrará debajo del campo (maximo 450 carácteres)"
       ></app-label-tooltip>

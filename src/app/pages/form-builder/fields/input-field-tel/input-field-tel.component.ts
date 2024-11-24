@@ -18,7 +18,7 @@ export class InputFieldTelComponent extends FieldType<FieldTypeConfig> {
   public readonly PhoneNumberFormat = PhoneNumberFormat;
   public readonly SearchCountryField = SearchCountryField;
 
-  public separateDialCode: boolean = true;
+  public separateDialCode = true;
   public favoriteCountries: CountryISO[] = [];
   public phone = new FormControl({ value: '', disabled: false }, [ Validators.required ]);
 }

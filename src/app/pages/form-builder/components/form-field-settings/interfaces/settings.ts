@@ -1,6 +1,6 @@
 import { FormType } from "../../../interfaces/form-builder";
 
-export type FormFieldSettings = {
+export interface FormFieldSettings {
     data: {
       showDefaultValue: boolean;
       showOptions: boolean;
@@ -29,7 +29,7 @@ export type FormFieldSettings = {
       showExactLength: boolean;
       showPattern: boolean;
     };
-  };
+  }
   
   export type SectionKeys = keyof FormFieldSettings;
   export type SectionPropertyKeys<T extends SectionKeys> = keyof FormFieldSettings[T];

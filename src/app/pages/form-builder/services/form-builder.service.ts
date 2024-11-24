@@ -5,17 +5,16 @@ import {
 } from '@angular/core';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import {
-  CustomFormlyFieldConfig,
   FieldGroup,
 } from '../interfaces/form-builder';
 import { FORM_FIELD_TYPES } from '../../../shared/form-fields.config';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormBuilderTypesService {
-  $selectedField: BehaviorSubject<FormlyFieldConfig> = new BehaviorSubject({});
+  $selectedField = new BehaviorSubject<FormlyFieldConfig>({});
   fields: WritableSignal<FormlyFieldConfig> = signal(
     structuredClone(FORM_FIELD_TYPES.INPUT_GROUP)
   );
@@ -33,23 +32,27 @@ export class FormBuilderTypesService {
   updateField(
     node: FormlyFieldConfig,
     updatedData: FormlyFieldConfig
-  ): FormlyFieldConfig | null {
-    // Si encontramos el nodo, actualizamos sus propiedades
+  ): FormlyFieldConfig {
+    // Si encontramos el nodo, retornamos una nueva copia con los datos actualizados
     if (node.id === updatedData.id) {
-      Object.assign(node, updatedData);
-      return node; // Retornar el nodo raíz con el nodo actualizado
+      return {
+        ...node,
+        ...updatedData,
+      };
     }
   
-    // Si tiene hijos, buscamos recursivamente en ellos
+    // Si tiene hijos, clonamos y actualizamos recursivamente
     if (node.fieldGroup) {
-      for (const child of node.fieldGroup) {
-        const updatedNode = this.updateField(child, updatedData);
-        if (updatedNode) return node; // Retornar el objeto raíz completo
-      }
+      return {
+        ...node,
+        fieldGroup: node.fieldGroup.map((child) =>
+          this.updateField(child, updatedData)
+        ),
+      };
     }
   
-    // Si no se encuentra el nodo en este nivel, devolver null
-    return null;
+    // Si no se encuentra el nodo en este nivel, retornamos el mismo nodo
+    return node;
   }
 
 

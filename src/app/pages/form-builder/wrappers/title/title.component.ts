@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
+import { FieldWrapper } from '@ngx-formly/core';
 
 @Component({
-  selector: 'app-input-field-title',
+  selector: 'app-title-wrapper',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './input-field-title.component.html',
-  styleUrl: './input-field-title.component.css',
+  templateUrl: './title.component.html',
+  styleUrl: './title.component.css',
 })
-export class InputFieldTitleComponent extends FieldType<FieldTypeConfig>  {
-
+export class TitleWrapperComponent extends FieldWrapper {
    get customClass() {
     return {
       'font-bold': this.props['textFormattingOptions'].includes('bold'),

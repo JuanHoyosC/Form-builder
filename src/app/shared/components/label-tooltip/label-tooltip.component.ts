@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { HERO_ICONS } from '../../icons';
@@ -16,9 +16,9 @@ import { HERO_ICONS } from '../../icons';
   styleUrl: './label-tooltip.component.scss',
 })
 export class LabelTooltipComponent {
-  @Input() label: string | undefined = undefined;
-  @Input() tooltip: string | undefined = undefined;
-  @Input() id: string | undefined = undefined;
-  @Input() required: boolean | undefined = undefined;
-  @Input() customClass: string | undefined = undefined;
+  appId = input.required<string>();
+  customClass = input<string | undefined>();
+  label = input<string | undefined>(undefined);
+  required = input<boolean | undefined>();
+  tooltip = input<string | undefined>(undefined);
 }

@@ -1,12 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-field-description',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './field-description.component.html',
-  styleUrl: './field-description.component.css'
 })
 export class FieldDescriptionComponent {
-  @Input() description: string | undefined = undefined;
+  description = input.required<string>();
 }

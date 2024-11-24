@@ -1,11 +1,8 @@
 <div class="mb-2 font-bold">
-    <app-label-tooltip
-  id="options"
-  label="Options"
-></app-label-tooltip>
+  <app-label-tooltip appId="options" label="Options"></app-label-tooltip>
 </div>
 
-@for(option of options; track $index) {
+@for(option of value(); track $index) {
 <div class="flex items-center gap-2 border-b border-b-[#d1d2db] mb-2">
   <input
     [id]="fieldId + 'label' + $index"
@@ -15,6 +12,7 @@
     class="option"
     [(ngModel)]="option.label"
     (ngModelChange)="onChange()"
+    (blur)="onTouched()"
     pInputText
   />
   <ng-icon name="heroArrowLongRight"></ng-icon>
@@ -26,6 +24,7 @@
     placeholder="Value"
     [(ngModel)]="option.value"
     (ngModelChange)="onChange()"
+    (blur)="onTouched()"
     pInputText
   />
   @if($count !== 1) {

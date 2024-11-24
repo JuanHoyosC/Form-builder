@@ -7,12 +7,13 @@ export interface FormFieldList {
 
 export interface FormFieldItem {
   label: string;
+  description: string;
   icon: string;
   field: FormlyFieldConfig;
 }
 
 export interface FormFieldType {
-  ALERT_WRAPPER: CustomFormlyFieldConfig,
+  ALERT_WRAPPER: CustomFormlyFieldConfig;
   DIVIDER_WRAPPER: CustomFormlyFieldConfig;
   INPUT_CALENDAR: CustomFormlyFieldConfig;
   INPUT_CHECKBOX: CustomFormlyFieldConfig;
@@ -30,29 +31,37 @@ export interface FormFieldType {
 
 export interface CustomFormlyFieldConfig extends FormlyFieldConfig {
   type: FormType | string; // Reemplaza el tipo existente
-  props: CustomFormlyFieldProps
+  wrappers?: Wrapper[],
+  props: CustomFormlyFieldProps;
 }
 
-export interface CustomFormlyFieldProps extends FormlyFieldProps{
-  textFormattingOptions?: TextFormattingOptions
-  tooltip?: string,
-  headingType?: HeadingType,
-  align?: Align
-  exactLength?: number,
-  severity?: Severity,
-  minDate?: Date,
-  maxDate?: Date 
+export interface CustomFormlyFieldProps extends FormlyFieldProps {
+  textFormattingOptions?: TextFormattingOptions;
+  tooltip?: string;
+  headingType?: HeadingType;
+  align?: Align;
+  exactLength?: number;
+  severity?: Severity;
+  minDate?: Date;
+  maxDate?: Date;
 }
 
-export type TextFormattingOption = 'bold' | 'underline' | 'italic' | 'strikethrough';
-export type TextFormattingOptions = Array<TextFormattingOption>;
+export type TextFormattingOption =
+  | 'bold'
+  | 'underline'
+  | 'italic'
+  | 'strikethrough';
+export type TextFormattingOptions = TextFormattingOption[];
 
 export type Align = 'left' | 'center' | 'right' | 'justify';
 export type HeadingType = 'h1' | 'h2' | 'h3';
 export type Severity = 'info' | 'warn' | 'error' | 'success';
-export type Color = `#${string}` | `rgb(${number},${number},${number})` | `rgba(${number},${number},${number},${number})`;
+export type Color =
+  | `#${string}`
+  | `rgb(${number},${number},${number})`
+  | `rgba(${number},${number},${number},${number})`;
 
-export type SelectOption = Align | HeadingType | Severity | number | string
+export type SelectOption = Align | HeadingType | Severity | number | string;
 
 export enum FormType {
   alert = 'alert',
@@ -73,7 +82,13 @@ export enum FormType {
 }
 
 export type FieldGroup =
-  | FormlyFieldConfig<
-      FormlyFieldProps & Record<string, boolean>
-    >[]
+  | FormlyFieldConfig<FormlyFieldProps & Record<string, boolean>>[]
   | undefined;
+
+export type Wrapper =
+  | 'alertWrapper'
+  | 'dividerWrapper'
+  | 'fieldWrapper'
+  | 'formControlWrapper'
+  | 'paragraphWrapper'
+  | 'titleWrapper'

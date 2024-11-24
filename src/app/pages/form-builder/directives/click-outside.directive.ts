@@ -3,7 +3,9 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
+  input,
   Input,
+  output,
   Output,
 } from '@angular/core';
 
@@ -12,13 +14,13 @@ import {
   standalone: true,
 })
 export class ClickOutsideDirective {
-  @Output() outside = new EventEmitter<void>();
-  @Input() ignoreElement: string[] = [];
+  ignoreElement = input<string[]>([]);
+  outside = output<void>();
   constructor(private el: ElementRef) {}
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
-    const clickedInIgnoredElement = this.ignoreElement.some((selector) =>
+    const clickedInIgnoredElement = this.ignoreElement().some((selector) =>
       (event.target as HTMLElement).closest(selector)
     );
     const clickedInside = this.el.nativeElement.contains(event.target);

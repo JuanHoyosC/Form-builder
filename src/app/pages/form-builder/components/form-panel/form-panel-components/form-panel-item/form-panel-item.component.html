@@ -1,18 +1,25 @@
-<div class="relative bg-gray-100 dark:bg-dark-700 px-4 py-3 pl-6 flex gap-2 items-center justify-items-center rounded cursor-pointer hover:scale-x-105 select-none">
-    <div
-    class="w-2 h-full absolute left-2 top-[50%] translate-y-[-50%]"
-  >
+<div
+  class="relative bg-gray-100 dark:bg-dark-700 px-4 py-3 pl-6 flex gap-2 items-center justify-items-center rounded cursor-pointer hover:scale-x-105 select-none"
+>
+  <div class="w-2 h-full absolute left-2 top-[50%] translate-y-[-50%]">
     <img
       src="./assets/icons/drag.svg"
       alt="drag"
       class="object-contain w-full h-full pointer-events-none"
     />
   </div>
-    <div class="w-8 h-8 flex items-center justify-center  rounded bg-indigo-700/20 dark:bg-indigo-400/20">
-        <ng-icon [name]="item.icon" class="text-base text-indigo-700 dark:text-indigo-400 w-4 h-4"></ng-icon>
-    </div>
-   <div class="flex flex-col gap-1">
-    <p class="m-0 text-dark-900 dark:text-white text-sm">{{ item.label }}</p>
-    <small class="text-xs text-dark-300 dark:text-gray-400">Select options from matrix</small>
-   </div>
+  <div
+    class="w-8 h-8 flex items-center justify-center rounded bg-indigo-700/20 dark:bg-indigo-400/20"
+  >
+    <ng-icon
+      [name]="item().icon"
+      class="text-base text-indigo-700 dark:text-indigo-400 w-4 h-4"
+    ></ng-icon>
+  </div>
+  <div class="flex flex-col gap-1">
+    <p class="m-0 text-dark-900 dark:text-white text-sm">{{ item().label }}</p>
+    <small class="text-xs text-dark-300 dark:text-gray-400">{{
+      item().description
+    }}</small>
+  </div>
 </div>

@@ -1,26 +1,12 @@
+<!---- Content panel ---->
 <div
-  class="flex h-full relative transition-[width] duration-500"
-  [ngClass]="{ 'w-[368px]': showFormPanelList, 'w-[48px]': !showFormPanelList }"
+  class="h-full overflow-hidden border-r border-gray-100 dark:border-dark-700"
 >
-  <!---- aside menu ---->
-  <app-menu
-    [(showFormPanelList)]="showFormPanelList"
-    [(activeTabIndex)]="activeTabIndex"
-  ></app-menu>
-
-  <!---- Content panel ---->
-  <div
-    class="absolute top-0 left-[48px] block w-[320px] h-full overflow-hidden z-10 transition-transform duration-500 border-r border-gray-100 dark:border-dark-700"
-    [ngClass]="{
-      '-translate-x-[120%]': !showFormPanelList
-    }"
-  >
-    @switch (activeTabIndex) { @case (0) {
-    <app-form-panel-section-list></app-form-panel-section-list>
-    } @case (1) {
-    <div class="animate__animated animate__fadeInDownBig animate__faster">
-      dsafasdfsadfsaf
-    </div>
-    } }
+  @switch (activeTabIndex()) { @case (0) {
+  <app-form-panel-section-list></app-form-panel-section-list>
+  } @case (1) {
+  <div class="animate__animated animate__fadeInDownBig animate__faster">
+    dsafasdfsadfsaf
   </div>
+  } }
 </div>

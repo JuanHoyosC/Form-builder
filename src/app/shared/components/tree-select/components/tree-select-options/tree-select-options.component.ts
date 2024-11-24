@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { TreeNode } from 'primeng/api';
 import { HERO_ICONS } from '../../../../icons';
@@ -14,11 +14,11 @@ import { TooltipModule } from 'primeng/tooltip';
   templateUrl: './tree-select-options.component.html',
   styleUrl: './tree-select-options.component.scss'
 })
-export class TreeSelectOptionsComponent {
+export class TreeSelectOptionsComponent implements OnChanges {
   @Input() treeOptions: TreeOptions[] = [];
-  @Input() children: number = 0;
+  @Input() children = 0;
   @Input() optionSelected: TreeOptions | undefined = undefined;
-  @Output() optionSelectedChange: EventEmitter<TreeOptions> = new EventEmitter();
+  @Output() optionSelectedChange = new EventEmitter<TreeOptions>();
   dropdownStates: {active: boolean}[] = [];
 
   ngOnChanges(): void {

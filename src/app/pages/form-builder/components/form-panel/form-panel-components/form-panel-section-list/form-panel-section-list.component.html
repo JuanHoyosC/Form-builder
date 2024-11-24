@@ -1,11 +1,9 @@
-<app-form-panel-search
-  [(searchComponent)]="searchComponent"
-></app-form-panel-search>
+<app-form-panel-search [(search)]="search"></app-form-panel-search>
 
 <section
   class="flex flex-col gap-4 px-4 pb-4 overflow-y-auto overflow-x-hidden max-h-[calc(100%-116px)] animate__animated animate__fadeInUpBig animate__faster"
 >
-  @for(sectionList of formFieldList | searchComponent:searchComponent; track
+  @for(sectionList of formFieldList() | searchComponent:search(); track
   sectionList.title) {
   <p-panel [toggleable]="true">
     <ng-template pTemplate="header">

@@ -1,6 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  model,
+  Output,
+  signal,
+} from '@angular/core';
+import {
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  ControlValueAccessor,
+} from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -30,21 +42,20 @@ import { HERO_ICONS } from '../../icons';
   styleUrls: ['./input-options.component.scss'],
 })
 export class InputOptionsComponent implements ControlValueAccessor {
-  @Input() options: Option[] = [{ label: '', value: '' }];
-  @Output() optionsChange = new EventEmitter<Option[]>();
+  value = signal<Option[]>([]);
   fieldId: string = crypto.randomUUID();
 
-  private onTouched: () => void = () => {};
-  private onChangeFn: (value: any) => void = () => {};
+  onTouched: () => void = () => {};
+  onChangeFn: (value: Option[]) => void = () => {};
 
   // Métodos para ControlValueAccessor
   writeValue(value: Option[]): void {
     if (value) {
-      this.options = value;
+      this.value.set(value);
     }
   }
 
-  registerOnChange(fn: (value: any) => void): void {
+  registerOnChange(fn: (value: Option[]) => void): void {
     this.onChangeFn = fn;
   }
 
@@ -54,22 +65,23 @@ export class InputOptionsComponent implements ControlValueAccessor {
 
   // Métodos propios
   addNewOption() {
-    this.options.push({ label: '', value: '' });
+    this.value.update((value) => [...value, { label: '', value: '' }]);
     this.onChange();
   }
 
   removeOption(index: number) {
-    this.options.splice(index, 1);
+    this.value.update((value) =>
+      value.filter((_, currentIndex: number) => currentIndex !== index)
+    );
     this.onChange();
   }
 
   onChange() {
-    this.onChangeFn(this.options);
-    this.optionsChange.emit(this.options);
+    this.onChangeFn(this.value());
   }
 }
 
-export type Option = {
+export interface Option {
   label: string;
   value: string | number;
-};
+}

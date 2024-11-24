@@ -2,7 +2,7 @@ import {
   Directive,
   ElementRef,
   HostListener,
-  Input,
+  model,
   OnChanges,
   Renderer2,
 } from '@angular/core';
@@ -12,7 +12,7 @@ import {
   standalone: true,
 })
 export class DropZoneDirective implements OnChanges {
-  @Input() childrenCount = 0;
+  childrenCount = model<number>(0)
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnChanges() {
@@ -22,12 +22,12 @@ export class DropZoneDirective implements OnChanges {
   @HostListener('drop', ['$event'])
   onDrop(event: DragEvent) {
     if (this.isSameElementRef(event)) return;
-    this.childrenCount = 1;
+    this.childrenCount.set(1)
     this.updateDropZoneState();
   }
 
   private updateDropZoneState(): void {
-    if (this.childrenCount === 0) {
+    if (this.childrenCount() === 0) {
       this.renderer.addClass(this.el.nativeElement, 'dropZone');
       this.renderer.addClass(this.el.nativeElement, 'relative');
       this.renderer.addClass(this.el.nativeElement, 'min-h-40');
@@ -39,7 +39,7 @@ export class DropZoneDirective implements OnChanges {
   }
 
   private isSameElementRef(event: Event): boolean {
-    if(this.childrenCount > 0) return true;
+    if(this.childrenCount() > 0) return true;
     return event.target === this.el.nativeElement;
   }
 }

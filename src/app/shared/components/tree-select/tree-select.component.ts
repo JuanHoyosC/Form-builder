@@ -17,11 +17,11 @@ export class TreeSelectComponent {
   @Input() treeOptions: TreeOptions[] = [];
   @Input() optionSelected: TreeOptions | undefined = undefined;
   @Output() optionSelectedChanged = new EventEmitter();
-  showOptions: boolean = false;
+  showOptions = false;
 }
 
 
-export type TreeOptions = {
+export interface TreeOptions {
   key: string,
   label: string,
   data: any,

@@ -29,15 +29,22 @@ import { FormBuilderTypesService } from '../../services/form-builder.service';
 export class FormFieldSettingsComponent {
   public readonly settingService = inject(SettingService);
   public readonly formBuilderTypesService = inject(FormBuilderTypesService);
-  visible: boolean = true;
+  visible = true;
 
   constructor() {
     this.formBuilderTypesService.$selectedField.subscribe((field) => {
       const selectedField = field as CustomFormlyFieldConfig;
+      if(this.isSameFieldSelected(selectedField)) return;
+      console.log('entro aqui');
+      
       if (selectedField) {
         this.settingService.initializeFormFieldSettings(structuredClone(selectedField));
       }
     });
+  }
+
+  isSameFieldSelected(field: CustomFormlyFieldConfig) {
+    return this.settingService.form.get('id')?.value === field.id;
   }
   
 }

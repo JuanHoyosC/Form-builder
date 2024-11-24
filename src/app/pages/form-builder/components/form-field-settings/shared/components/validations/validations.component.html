@@ -6,7 +6,7 @@
     @if(settingService.formFieldSettings().validations.showRequired) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-        id="required"
+      appId="required"
         label="Obligatorio"
         tooltip="Define si este campo debe completarse obligatoriamente"
       ></app-label-tooltip>
@@ -19,7 +19,7 @@
     } @if(settingService.formFieldSettings().validations.showReadonly) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-        id="readonly"
+      appId="readonly"
         label="Solo lectura"
         tooltip="Habilita el modo de solo lectura si el campo no es obligatorio y no está deshabilitado"
       ></app-label-tooltip>
@@ -32,7 +32,7 @@
     } @if(settingService.formFieldSettings().validations.showDisabled) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-        id="disabled"
+      appId="disabled"
         label="Deshabilitado"
         tooltip="Desactiva el campo si no es obligatorio o está en modo de solo lectura"
       ></app-label-tooltip>
@@ -46,7 +46,7 @@
 
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-        id="min"
+      appId="min"
         label="Mínimo"
         tooltip="Especifica el valor mínimo permitido para este campo"
       ></app-label-tooltip>
@@ -61,7 +61,7 @@
 
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-        id="min"
+      appId="min"
         label="Max"
         tooltip="Especifica el valor mínimo permitido para este campo"
       ></app-label-tooltip>
@@ -77,7 +77,7 @@
 
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-        id="min"
+      appId="min"
         label="Mínimo"
         tooltip="Especifica el valor mínimo permitido para este campo"
       ></app-label-tooltip>
@@ -91,7 +91,7 @@
     } @if(settingService.formFieldSettings().validations.showMax) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-        id="max"
+      appId="max"
         label="Máximo"
         tooltip="Establece el valor máximo permitido para este campo"
       ></app-label-tooltip>
@@ -105,7 +105,7 @@
     } @if(settingService.formFieldSettings().validations.showMinLength) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-        id="minLength"
+      appId="minLength"
         label="Longitud mínima"
         tooltip="Define la cantidad mínima de caracteres permitidos en este campo"
       ></app-label-tooltip>
@@ -120,7 +120,7 @@
     } @if(settingService.formFieldSettings().validations.showMaxLength) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-        id="maxLength"
+      appId="maxLength"
         label="Longitud máxima"
         tooltip="Define la cantidad máxima de caracteres permitidos en este campo"
       ></app-label-tooltip>
@@ -134,7 +134,7 @@
     } @if(settingService.formFieldSettings().validations.showExactLength) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-        id="exactLength"
+      appId="exactLength"
         label="Longitud exacta"
         tooltip="Especifica la cantidad exacta de caracteres requerida para este campo"
       ></app-label-tooltip>
@@ -149,7 +149,7 @@
     } @if(settingService.formFieldSettings().validations.showPattern) {
     <div class="grid grid-cols-2 gap-2 justify-between items-center">
       <app-label-tooltip
-        id="pattern"
+      appId="pattern"
         label="Expresión regular"
         tooltip="Introduce una expresión regular para definir un patrón específico de entrada para este campo"
       ></app-label-tooltip>

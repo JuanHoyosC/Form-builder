@@ -1,21 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, model } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { HERO_ICONS } from '../../../../../../shared/icons';
 
 @Component({
-  selector: 'app-menu',
+  selector: 'app-form-panel-menu',
   standalone: true,
   imports: [CommonModule, NgIconComponent],
   providers: provideIcons(HERO_ICONS),
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css',
+  templateUrl: './form-panel-menu.component.html',
+  styleUrl: './form-panel-menu.component.css',
 })
-export class MenuComponent {
-  @Input() showFormPanelList = true;
-  @Input() activeTabIndex = 0;
-  @Output() showFormPanelListChange: EventEmitter<boolean> = new EventEmitter();
-  @Output() activeTabIndexChange: EventEmitter<number> = new EventEmitter();
+export class FormPanelMenuComponent {
+  showFormPanelList = model<boolean>(true);
+  activeTabIndex = model<number>(0);
   menu: Menu[] = [
     {
       icon: 'heroChevronLeft',
@@ -35,21 +33,18 @@ export class MenuComponent {
   ];
   
   toggleFormPanel() {
-    this.showFormPanelList = !this.showFormPanelList;
-    this.showFormPanelListChange.emit(this.showFormPanelList);
+    this.showFormPanelList.update((value) => !value);
     this.setMenuArrowIcon();
   }
   
   handleMenuClick(tabIndex: number) {
-    this.activeTabIndex = tabIndex;
-    this.showFormPanelList = true;
-    this.showFormPanelListChange.emit(this.showFormPanelList);
-    this.activeTabIndexChange.emit(tabIndex);
+    this.activeTabIndex.set(tabIndex);
+    this.showFormPanelList.set(true);
     this.setMenuArrowIcon();
   }
   
   setMenuArrowIcon() {
-    this.menu[0].icon = this.showFormPanelList ? 'heroChevronLeft' : 'heroChevronRight';
+    this.menu[0].icon = this.showFormPanelList() ? 'heroChevronLeft' : 'heroChevronRight';
   }
 }
 

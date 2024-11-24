@@ -7,7 +7,7 @@
       inputId="{{ field.id }}"
     />
     <app-label-tooltip
-      [id]="field.id"
+      appId="{{ field.id }}"
       [label]="props.label"
       [tooltip]="props['tooltip']"
       [required]="props.required"
@@ -15,7 +15,8 @@
     ></app-label-tooltip>
   </div>
 </fieldset>
+@if(props.description) {
 <app-field-description
   [description]="props.description"
-  *ngIf="props.description"
 ></app-field-description>
+}

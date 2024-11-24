@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, model} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { HERO_ICONS } from '../../../../../../shared/icons';
@@ -13,6 +13,5 @@ import { HERO_ICONS } from '../../../../../../shared/icons';
   styleUrl: './form-panel-search.component.css'
 })
 export class FormPanelSearchComponent {
-  @Input() searchComponent: string = '';
-  @Output() searchComponentChange: EventEmitter<string> = new EventEmitter();
+  search = model.required<string>();
 }
