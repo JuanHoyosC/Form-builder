@@ -24,7 +24,7 @@ export class SearchComponentPipe implements PipeTransform {
 
   /**
    * Checks if the search term is valid (non-empty and not just whitespace).
-   * 
+   *
    * @param search - The search term to validate.
    * @returns boolean - True if the search term is valid.
    */
@@ -34,37 +34,49 @@ export class SearchComponentPipe implements PipeTransform {
 
   /**
    * Filters the list of FormFieldList objects based on the search term.
-   * 
+   *
    * @param formFieldList - An array of FormFieldList objects.
    * @param search - The lowercased search term to filter by.
    * @returns FormFieldList[] - The filtered list of FormFieldList objects.
    */
-  private filterFieldLists(formFieldList: FormFieldList[], search: string): FormFieldList[] {
+  private filterFieldLists(
+    formFieldList: FormFieldList[],
+    search: string
+  ): FormFieldList[] {
     return formFieldList
-      .map(fieldList => this.getFilteredFieldList(fieldList, search))
+      .map((fieldList) => this.getFilteredFieldList(fieldList, search))
       .filter(Boolean) as FormFieldList[];
   }
 
   /**
    * Filters the items within a FormFieldList based on the search term.
-   * 
+   *
    * @param fieldList - A single FormFieldList object.
    * @param search - The lowercased search term to filter items by.
    * @returns FormFieldList | null - A new FormFieldList with filtered items or null if no items match.
    */
-  private getFilteredFieldList(fieldList: FormFieldList, search: string): FormFieldList | null {
+  private getFilteredFieldList(
+    fieldList: FormFieldList,
+    search: string
+  ): FormFieldList | null {
     const filteredItems = this.filterItems(fieldList.items, search);
-    return filteredItems.length > 0 ? { ...fieldList, items: filteredItems } : null;
+    return filteredItems.length > 0
+      ? { ...fieldList, items: filteredItems }
+      : null;
   }
 
   /**
    * Filters the FormFieldItem array to only include items that match the search term.
-   * 
+   *
    * @param items - An array of FormFieldItem objects.
    * @param search - The lowercased search term.
    * @returns FormFieldItem[] - The filtered list of FormFieldItem objects.
    */
   private filterItems(items: FormFieldItem[], search: string): FormFieldItem[] {
-    return items.filter(item => item.label?.toLowerCase().includes(search));
+    return items.filter(
+      (item) =>
+        item.label?.toLowerCase().includes(search) ||
+        item.description?.toLowerCase().includes(search)
+    );
   }
 }
