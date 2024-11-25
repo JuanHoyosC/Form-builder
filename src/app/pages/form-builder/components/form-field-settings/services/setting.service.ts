@@ -3,6 +3,7 @@ import {
   CustomFormlyFieldConfig,
   CustomFormlyFieldProps,
   FormType,
+  OptionProps,
 } from '../../../types/form-builder.types';
 import { FormBuilderTypesService } from '../../../services/form-builder.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -334,20 +335,53 @@ export class SettingService {
    * @returns Subscription object for 'props' changes.
    */
   private subscribeToPropsChanges(): Subscription {
-    return this.form.get('props')?.valueChanges.subscribe((newPropsValue) => {
-      this.updateDefaultSelectedField(newPropsValue);
-      this.updateDateValidation(newPropsValue);
-    }) as Subscription;
+    return this.form
+      .get('props')
+      ?.valueChanges.subscribe((newPropsValue: CustomFormlyFieldProps) => {
+        this.updateDefaultSelectedField(newPropsValue);
+        this.updateDateValidation(newPropsValue);
+        this.applySanitizedValue(newPropsValue);
+      }) as Subscription;
   }
 
-  private updateDefaultSelectedField(newPropsValue: any): void {
+  private applySanitizedValue(props: CustomFormlyFieldProps): void {
+    if (props.options) {
+      const defaultValue = this.defaultSelectedField().defaultValue;
+      const sanitizedValue = this.sanitizeDefaultValue(
+        defaultValue,
+        props.options
+      );
+      this.defaultSelectedField.update((value) => ({
+        ...value,
+        defaultValue: sanitizedValue,
+      }));
+    }
+  }
+
+  private sanitizeDefaultValue(
+    defaultValue: string | string[],
+    options: OptionProps[]
+  ): string | string[] | undefined {
+    const validValues = options.map((option) => option.value);
+    if (Array.isArray(defaultValue)) {
+      return defaultValue.filter((value) => validValues.includes(value));
+    } else if (typeof defaultValue === 'string') {
+      return validValues.includes(defaultValue) ? defaultValue : undefined;
+    }
+
+    return defaultValue;
+  }
+
+  private updateDefaultSelectedField(
+    newPropsValue: CustomFormlyFieldProps
+  ): void {
     this.defaultSelectedField.update((prevValue) => ({
       ...prevValue,
       props: { ...this.getDefaultProps(newPropsValue) },
     }));
   }
 
-  private updateDateValidation(newPropsValue: any) {
+  private updateDateValidation(newPropsValue: CustomFormlyFieldProps) {
     const { showMinDate, showMaxDate } = this.formFieldSettings().validations;
     if (showMinDate || showMaxDate) {
       this.dateValidation.set({

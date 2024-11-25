@@ -1,18 +1,18 @@
 @if(visibilityConfig().showMultiOptions) {
-  <p-multiSelect
-  [options]="field().props.options | formlyOptions"
+<p-multiSelect
+  [options]="options()"
   optionLabel="label"
   optionValue="value"
   appendTo="body"
   placeholder="Select an options"
-  [filter]="true" 
+  [filter]="true"
   [(ngModel)]="modelDefaultValue().defaultValue"
   (ngModelChange)="changeDefaultValue()"
   (onBlur)="onTouched()"
 />
 } @else if(visibilityConfig().showOptions) {
-  <p-dropdown
-  [options]="field().props.options | formlyOptions"
+<p-dropdown
+  [options]="options()"
   [(ngModel)]="modelDefaultValue().defaultValue"
   appendTo="body"
   class="block w-full"
@@ -21,10 +21,10 @@
   placeholder="Select an option"
   (ngModelChange)="changeDefaultValue()"
   (onBlur)="onTouched()"
-></p-dropdown>
+/>
 
 } @else {
-  <formly-form
+<formly-form
   [fields]="[field()]"
   [model]="modelDefaultValue()"
   (modelChange)="changeDefaultValue()"

@@ -213,8 +213,8 @@ p-inputnumber,
 
 
 .p-checkbox {
-  width: 1.25rem;
-  height: 1.25rem;
+  min-width: 1.25rem;
+  min-height: 1.25rem;
 }
 .p-checkbox .p-checkbox-box {
   width: 100%;
@@ -242,6 +242,7 @@ p-inputnumber,
 
 .p-checkbox-label {
   font-size: theme("fontSize.sm");
+  word-break: break-word;
 }
 
 .p-inputswitch {

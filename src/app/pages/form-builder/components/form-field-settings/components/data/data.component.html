@@ -14,6 +14,7 @@
       ></app-label-tooltip>
       <app-default-field
         [field]="settingService.defaultSelectedField()"
+        (fieldChange)="settingService.defaultSelectedField.set($event)"
         formControlName="defaultValue"
       ></app-default-field>
     </div>

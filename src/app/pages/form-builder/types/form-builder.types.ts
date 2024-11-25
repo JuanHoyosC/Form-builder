@@ -34,10 +34,13 @@ export type Color =
   | `#${string}`
   | `rgb(${number},${number},${number})`
   | `rgba(${number},${number},${number},${number})`;
+  
 
 export type SelectOption = Align | HeadingType | Severity | number | string;
 
 export type FieldGroup = CustomFormlyFieldConfig[]
+
+export type OptionProps = { label: string, value: string | string[] | number | boolean | undefined };
 
 export type Wrapper =
   | 'alertWrapper'
@@ -47,19 +50,19 @@ export type Wrapper =
   | 'paragraphWrapper'
   | 'titleWrapper';
 
-export interface FormFieldList {
+export type FormFieldList = {
   title: string;
   items: FormFieldItem[];
 }
 
-export interface FormFieldItem {
+export type FormFieldItem = {
   label: string;
   description: string;
   icon: string;
   field: CustomFormlyFieldConfig;
 }
 
-export interface FormFieldType {
+export type FormFieldType = {
   ALERT_WRAPPER: CustomFormlyFieldConfig;
   DIVIDER_WRAPPER: CustomFormlyFieldConfig;
   INPUT_CALENDAR: CustomFormlyFieldConfig;
@@ -93,4 +96,6 @@ export interface CustomFormlyFieldProps extends FormlyFieldProps {
   severity?: Severity;
   minDate?: Date;
   maxDate?: Date;
+  options?: OptionProps[]
 }
+
