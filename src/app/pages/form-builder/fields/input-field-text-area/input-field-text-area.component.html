@@ -1,0 +1,17 @@
+<textarea
+  id="{{ field.id }}"
+  rows="5"
+  cols="30"
+  pInputTextarea
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  [placeholder]="props.placeholder"
+  [readonly]="props.readonly"
+  [minLength]="props.minLength"
+  [maxlength]="props.maxLength!"
+  [pattern]="props.pattern!"
+  [autoResize]="true"
+></textarea>
+<small class="flex justify-end w-full text-xs"
+  >{{ formControl.value?.length ?? 0}} / {{ props.maxLength }}</small
+>
