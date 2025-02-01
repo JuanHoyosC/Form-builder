@@ -1,0 +1,11 @@
+<p-dropdown
+  [options]="props.options | formlyOptions"
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  optionLabel="label"
+  optionValue="value"
+  [placeholder]="props.placeholder ?? 'Select an option'"
+  [required]="props.required ?? false"
+  [readonly]="props.readonly ?? false"
+  [disabled]="props.disabled ?? false"
+/>
