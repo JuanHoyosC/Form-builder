@@ -1,0 +1,9 @@
+<div class="flex flex-col gap-2">
+  <p-slider
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    [min]="props.min"
+    [max]="props.max"
+  />
+  <span class="self-end">{{ formControl.value }}/{{ props.max }}</span>
+</div>
