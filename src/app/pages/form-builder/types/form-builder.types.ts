@@ -9,13 +9,18 @@ export enum FormType {
   email = 'email',
   grid = 'grid',
   group = 'group',
-  number = 'number',
   multicheckbox = 'multicheckbox',
+  multiselect = 'multiselect',
+  number = 'number',
   paragraph = 'paragraph',
   password = 'password',
   radio = 'radio',
+  signature = 'signature',
+  select = 'select',
+  slider = 'slider',
   tel = 'tel',
   text = 'text',
+  textarea = 'textarea',
   title = 'title',
 }
 
@@ -34,13 +39,15 @@ export type Color =
   | `#${string}`
   | `rgb(${number},${number},${number})`
   | `rgba(${number},${number},${number},${number})`;
-  
 
 export type SelectOption = Align | HeadingType | Severity | number | string;
 
-export type FieldGroup = CustomFormlyFieldConfig[]
+export type FieldGroup = CustomFormlyFieldConfig[];
 
-export type OptionProps = { label: string, value: string | string[] | number | boolean | undefined };
+export interface OptionProps {
+  label: string;
+  value: string | string[] | number | boolean | undefined;
+}
 
 export type Wrapper =
   | 'alertWrapper'
@@ -50,41 +57,47 @@ export type Wrapper =
   | 'paragraphWrapper'
   | 'titleWrapper';
 
-export type FormFieldList = {
+export interface FormFieldList {
   title: string;
   items: FormFieldItem[];
 }
 
-export type FormFieldItem = {
+export interface FormFieldItem {
   label: string;
   description: string;
   icon: string;
   field: CustomFormlyFieldConfig;
 }
 
-export type FormFieldType = {
+export interface FormFieldType {
   ALERT_WRAPPER: CustomFormlyFieldConfig;
   DIVIDER_WRAPPER: CustomFormlyFieldConfig;
   INPUT_CALENDAR: CustomFormlyFieldConfig;
   INPUT_CHECKBOX: CustomFormlyFieldConfig;
   INPUT_EMAIL: CustomFormlyFieldConfig;
-  INPUT_NUMBER: CustomFormlyFieldConfig;
+  INPUT_GROUP: CustomFormlyFieldConfig;
   INPUT_MULTICHECKBOX: CustomFormlyFieldConfig;
+  INPUT_MULTISELECT: CustomFormlyFieldConfig;
+  INPUT_NUMBER: CustomFormlyFieldConfig;
+  INPUT_PARAGRAPH: CustomFormlyFieldConfig;
   INPUT_PASSWORD: CustomFormlyFieldConfig;
   INPUT_RADIO: CustomFormlyFieldConfig;
+  INPUT_SIGNATURE: CustomFormlyFieldConfig;
+  INPUT_SELECT: CustomFormlyFieldConfig;
+  INPUT_SLIDER: CustomFormlyFieldConfig;
   INPUT_TEL: CustomFormlyFieldConfig;
   INPUT_TEXT: CustomFormlyFieldConfig;
+  INPUT_TEXTAREA: CustomFormlyFieldConfig;
   INPUT_TITLE: CustomFormlyFieldConfig;
-  INPUT_PARAGRAPH: CustomFormlyFieldConfig;
-  INPUT_GROUP: CustomFormlyFieldConfig;
 }
 
 //// **INTERFACES** ////
-export interface CustomFormlyFieldConfig extends Omit<FormlyFieldConfig, 'type'> {
+export interface CustomFormlyFieldConfig
+  extends Omit<FormlyFieldConfig, 'type'> {
   type: FormType | undefined; // Reemplaza el tipo existente
   wrappers?: Wrapper[];
   props: CustomFormlyFieldProps;
-  fieldGroup?: CustomFormlyFieldConfig[]
+  fieldGroup?: CustomFormlyFieldConfig[];
 }
 
 export interface CustomFormlyFieldProps extends FormlyFieldProps {
@@ -96,6 +109,5 @@ export interface CustomFormlyFieldProps extends FormlyFieldProps {
   severity?: Severity;
   minDate?: Date;
   maxDate?: Date;
-  options?: OptionProps[]
+  options?: OptionProps[];
 }
-

@@ -23,6 +23,11 @@ import { InputFieldMultiCheckboxComponent } from '../fields/input-field-multiche
 import { FormControlWrapperComponent } from '../wrappers/formControl/form-control.component';
 import { TitleWrapperComponent } from '../wrappers/title/title.component';
 import { Type } from '@angular/core';
+import { InputFieldTextAreaComponent } from '../fields/input-field-text-area/input-field-text-area.component';
+import { InputFieldSignatureComponent } from '../fields/input-field-signature/input-field-signature.component';
+import { InputFieldSelectComponent } from '../fields/input-field-select/input-field-select.component';
+import { InputFieldMultiselectComponent } from '../fields/input-field-multiselect/input-field-multiselect.component';
+import { InputFieldSliderComponent } from '../fields/input-field-slider/input-field-slider.component';
 
 export const FORM_FIELD_TYPES: FormFieldType = {
   ALERT_WRAPPER: {
@@ -86,6 +91,16 @@ export const FORM_FIELD_TYPES: FormFieldType = {
       options: undefined,
     },
   },
+  INPUT_MULTISELECT: {
+    key: '',
+    type: FormType.multiselect,
+    wrappers: ['fieldWrapper', 'formControlWrapper'],
+    props: {
+      label: 'Default Label',
+      description: '',
+      options: undefined,
+    },
+  },
   INPUT_PARAGRAPH: {
     key: '',
     type: FormType.paragraph,
@@ -115,6 +130,39 @@ export const FORM_FIELD_TYPES: FormFieldType = {
       options: undefined,
     },
   },
+  INPUT_SIGNATURE: {
+    key: '',
+    type: FormType.signature,
+    wrappers: ['fieldWrapper', 'formControlWrapper'],
+    props: {
+      label: 'Default Label',
+      description: '',
+      options: undefined,
+    },
+  },
+  INPUT_SELECT: {
+    key: '',
+    type: FormType.select,
+    wrappers: ['fieldWrapper', 'formControlWrapper'],
+    props: {
+      label: 'Default Label',
+      description: '',
+      options: undefined,
+    },
+  },
+  INPUT_SLIDER: {
+    key: '',
+    type: FormType.slider,
+    wrappers: ['fieldWrapper', 'formControlWrapper'],
+    defaultValue: 0,
+    props: {
+      label: 'Default Label',
+      description: '',
+      options: undefined,
+      min: 0,
+      max: 100,
+    },
+  },
   INPUT_TEL: {
     key: '',
     type: FormType.tel,
@@ -122,6 +170,22 @@ export const FORM_FIELD_TYPES: FormFieldType = {
     props: {
       label: 'Default Label',
       placeholder: '',
+    },
+  },
+  INPUT_TEXTAREA: {
+    key: '',
+    type: FormType.textarea,
+    wrappers: ['fieldWrapper', 'formControlWrapper'],
+    defaultValue: '',
+    props: {
+      label: 'Default Label',
+      placeholder: '',
+      tooltip: '',
+      required: false,
+      disabled: false,
+      readonly: false,
+      minLength: 0,
+      maxLength: 255,
     },
   },
   INPUT_TEXT: {
@@ -208,6 +272,12 @@ export const FORM_FIELD_LIST: FormFieldList[] = [
         description: 'A single-line text input field.',
       },
       {
+        label: 'Textarea',
+        icon: 'ionTextOutline',
+        field: FORM_FIELD_TYPES.INPUT_TEXTAREA,
+        description: 'A textarea input field.',
+      },
+      {
         label: 'Number',
         icon: 'heroHashtag',
         field: FORM_FIELD_TYPES.INPUT_NUMBER,
@@ -255,6 +325,30 @@ export const FORM_FIELD_LIST: FormFieldList[] = [
         field: FORM_FIELD_TYPES.INPUT_TEL,
         description: 'An input field for telephone numbers.',
       },
+      {
+        label: 'Signature',
+        icon: 'ionCallOutline',
+        field: FORM_FIELD_TYPES.INPUT_SIGNATURE,
+        description: 'An input field for telephone numbers.',
+      },
+      {
+        label: 'Select',
+        icon: 'ionCallOutline',
+        field: FORM_FIELD_TYPES.INPUT_SELECT,
+        description: 'A dropdown field for selecting a predefined option.',
+      },
+      {
+        label: 'Multiselect group',
+        icon: 'ionCheckboxOutline',
+        field: FORM_FIELD_TYPES.INPUT_MULTISELECT,
+        description: 'A group of checkboxes for multiple selections.',
+      },
+      {
+        label: 'Slider',
+        icon: 'ionCheckboxOutline',
+        field: FORM_FIELD_TYPES.INPUT_SLIDER,
+        description: 'A group of checkboxes for multiple selections.',
+      },
     ],
   },
   {
@@ -265,7 +359,12 @@ export const FORM_FIELD_LIST: FormFieldList[] = [
 
 export const defaultOptionsExtension: FormlyExtension = {
   prePopulate(field: CustomFormlyFieldConfig): void {
-    const fieldTypes = [FormType.radio, FormType.multicheckbox];
+    const fieldTypes = [
+      FormType.multicheckbox,
+      FormType.multiselect,
+      FormType.radio,
+      FormType.select,
+    ];
     const currentFielType = field.type as FormType;
     if (!fieldTypes.includes(currentFielType)) return;
     if (field.props?.options) return;
@@ -300,10 +399,15 @@ export const FORMLY_TYPES = [
   { name: 'group', component: InputFieldGroupComponent },
   { name: 'number', component: InputFieldNumberComponent },
   { name: 'multicheckbox', component: InputFieldMultiCheckboxComponent },
+  { name: 'multiselect', component: InputFieldMultiselectComponent },
   { name: 'password', component: InputFieldPasswordComponent },
   { name: 'radio', component: InputFieldRadioComponent },
   { name: 'tel', component: InputFieldTelComponent },
+  { name: 'textarea', component: InputFieldTextAreaComponent },
   { name: 'text', component: InputFieldTextComponent },
+  { name: 'select', component: InputFieldSelectComponent },
+  { name: 'slider', component: InputFieldSliderComponent },
+  { name: 'signature', component: InputFieldSignatureComponent },
 ];
 
 export const FORMLY_WRAPPERS: {
