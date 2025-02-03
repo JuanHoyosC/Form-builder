@@ -15,6 +15,7 @@ export enum FormType {
   paragraph = 'paragraph',
   password = 'password',
   radio = 'radio',
+  rating = 'rating',
   signature = 'signature',
   select = 'select',
   slider = 'slider',
@@ -34,6 +35,7 @@ export type TextFormattingOptions = TextFormattingOption[];
 
 export type Align = 'left' | 'center' | 'right' | 'justify';
 export type HeadingType = 'h1' | 'h2' | 'h3';
+export type RatingType = 'start' | 'numbers';
 export type Severity = 'info' | 'warn' | 'error' | 'success';
 export type Color =
   | `#${string}`
@@ -82,9 +84,10 @@ export interface FormFieldType {
   INPUT_PARAGRAPH: CustomFormlyFieldConfig;
   INPUT_PASSWORD: CustomFormlyFieldConfig;
   INPUT_RADIO: CustomFormlyFieldConfig;
+  INPUT_RATING: CustomFormlyFieldConfig;
+  INPUT_SLIDER: CustomFormlyFieldConfig;
   INPUT_SIGNATURE: CustomFormlyFieldConfig;
   INPUT_SELECT: CustomFormlyFieldConfig;
-  INPUT_SLIDER: CustomFormlyFieldConfig;
   INPUT_TEL: CustomFormlyFieldConfig;
   INPUT_TEXT: CustomFormlyFieldConfig;
   INPUT_TEXTAREA: CustomFormlyFieldConfig;
@@ -104,10 +107,14 @@ export interface CustomFormlyFieldProps extends FormlyFieldProps {
   textFormattingOptions?: TextFormattingOptions;
   tooltip?: string;
   headingType?: HeadingType;
+  ratingType?: RatingType;
   align?: Align;
   exactLength?: number;
+  stars?: number;
   severity?: Severity;
   minDate?: Date;
   maxDate?: Date;
   options?: OptionProps[];
+  leftText?: string;
+  rightText?: string;
 }

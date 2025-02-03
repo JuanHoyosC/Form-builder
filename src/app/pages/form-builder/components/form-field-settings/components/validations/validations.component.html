@@ -49,6 +49,23 @@
       ></app-label-tooltip>
       <input id="max" type="number" formControlName="max" pInputText />
     </div>
+    } @if(settingService.formFieldSettings().validations.showStarCount) {
+    <div class="grid grid-cols-2 gap-2 justify-between items-center">
+      <app-label-tooltip
+        appId="stars"
+        label="Cantidad de estrellas"
+        tooltip="Establece la cantidad de estrellas/numero maximo del rating (min: 2, max: 100)"
+      ></app-label-tooltip>
+      <input
+        id="stars"
+        name="stars"
+        type="number"
+        min="2"
+        max="100"
+        formControlName="stars"
+        pInputText
+      />
+    </div>
     } @if(settingService.formFieldSettings().validations.showMinDate) {
 
     <div class="grid grid-cols-2 gap-2 justify-between items-center">

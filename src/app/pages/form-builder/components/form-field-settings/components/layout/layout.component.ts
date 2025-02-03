@@ -2,15 +2,28 @@ import { Component, inject } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { provideIcons } from '@ng-icons/core';
-import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
+import {
+  ControlContainer,
+  FormGroupDirective,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { PanelModule } from 'primeng/panel';
 
-
-import { DisabledOption, SelectableOption, SelectButtonComponent } from '../../../../../../shared/components/select-button/select-button.component';
+import {
+  DisabledOption,
+  SelectableOption,
+  SelectButtonComponent,
+} from '../../../../../../shared/components/select-button/select-button.component';
 import { LabelTooltipComponent } from '../../../../../../shared/components/label-tooltip/label-tooltip.component';
 import { HERO_ICONS } from '../../../../../../shared/icons';
 import { SettingService } from '../../services/setting.service';
-import { Align, HeadingType, Severity, TextFormattingOption } from '../../../../types/form-builder.types';
+import {
+  Align,
+  HeadingType,
+  RatingType,
+  Severity,
+  TextFormattingOption,
+} from '../../../../types/form-builder.types';
 
 @Component({
   selector: 'app-layout',
@@ -20,12 +33,12 @@ import { Align, HeadingType, Severity, TextFormattingOption } from '../../../../
     PanelModule,
     SelectButtonComponent,
     LabelTooltipComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [
-    provideIcons(HERO_ICONS),
+  providers: [provideIcons(HERO_ICONS)],
+  viewProviders: [
+    { provide: ControlContainer, useExisting: FormGroupDirective },
   ],
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective}],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
@@ -37,6 +50,10 @@ export class LayoutComponent {
     { icon: 'heroBars3', value: 'center', disabled: false },
     { icon: 'heroBars4', value: 'justify', disabled: false },
     { icon: 'heroBars3BottomRight', value: 'right', disabled: false },
+  ];
+  ratingOptions: SelectableOption<RatingType>[] = [
+    { icon: 'heroStar', value: 'start', disabled: false },
+    { icon: 'heroChartBar', value: 'numbers', disabled: false },
   ];
 
   colsOptions: SelectableOption<number>[] = [
@@ -65,7 +82,12 @@ export class LayoutComponent {
       color: '#cc8925',
       disabled: false,
     },
-    { icon: 'ionCloseCircleOutline', value: 'error', color: '#ff5757', disabled: false },
+    {
+      icon: 'ionCloseCircleOutline',
+      value: 'error',
+      color: '#ff5757',
+      disabled: false,
+    },
     {
       icon: 'ionCheckmarkCircleOutline',
       value: 'success',

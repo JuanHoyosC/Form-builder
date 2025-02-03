@@ -34,30 +34,34 @@ export class SettingService {
       showOptions: false,
     },
     layout: {
-      showHeadingType: false,
       showAlign: false,
+      showCols: false,
+      showHeadingType: false,
+      showRatingType: false,
       showSeverity: false,
       showTextFormattingOptions: false,
-      showCols: false,
     },
     properties: {
-      showLabel: false,
-      showTooltip: false,
-      showPlaceholder: false,
       showDescription: false,
+      showLabel: false,
+      showLeftText: false,
+      showPlaceholder: false,
+      showRightText: false,
+      showTooltip: false,
     },
     validations: {
-      showRequired: false,
       showDisabled: false,
-      showReadonly: false,
-      showMin: false,
-      showMax: false,
-      showMinDate: false,
-      showMaxDate: false,
-      showMinLength: false,
-      showMaxLength: false,
       showExactLength: false,
+      showMax: false,
+      showMaxDate: false,
+      showMaxLength: false,
+      showMin: false,
+      showMinDate: false,
+      showMinLength: false,
       showPattern: false,
+      showReadonly: false,
+      showRequired: false,
+      showStarCount: false,
     },
   });
 
@@ -67,7 +71,7 @@ export class SettingService {
   }>({ minDate: undefined, maxDate: undefined });
 
   private subscriptions: Subscription[] = [];
-  private propertyConfigMap: PropertyConfigMap = {
+  private readonly propertyConfigMap: PropertyConfigMap = {
     properties: {
       showLabel: [
         FormType.calendar,
@@ -80,6 +84,7 @@ export class SettingService {
         FormType.multiselect,
         FormType.password,
         FormType.radio,
+        FormType.rating,
         FormType.select,
         FormType.slider,
         FormType.tel,
@@ -96,6 +101,7 @@ export class SettingService {
         FormType.multiselect,
         FormType.password,
         FormType.radio,
+        FormType.rating,
         FormType.select,
         FormType.tel,
         FormType.textarea,
@@ -122,12 +128,15 @@ export class SettingService {
         FormType.paragraph,
         FormType.password,
         FormType.radio,
+        FormType.rating,
         FormType.select,
         FormType.slider,
         FormType.tel,
         FormType.textarea,
         FormType.text,
       ],
+      showLeftText: [FormType.rating],
+      showRightText: [FormType.rating],
     },
     data: {
       showDefaultValue: [
@@ -154,6 +163,7 @@ export class SettingService {
     },
     layout: {
       showSeverity: [FormType.alert],
+      showRatingType: [FormType.rating],
       showAlign: [FormType.alert, FormType.paragraph, FormType.title],
       showTextFormattingOptions: [
         FormType.alert,
@@ -164,6 +174,7 @@ export class SettingService {
       showCols: [FormType.group],
     },
     validations: {
+      showStarCount: [FormType.rating],
       showMin: [FormType.number, FormType.slider],
       showMax: [FormType.number, FormType.slider],
       showMinDate: [FormType.calendar],
@@ -194,6 +205,7 @@ export class SettingService {
         FormType.number,
         FormType.password,
         FormType.radio,
+        FormType.rating,
         FormType.multicheckbox,
         FormType.multiselect,
         FormType.select,
@@ -212,7 +224,6 @@ export class SettingService {
         FormType.password,
         FormType.radio,
         FormType.select,
-        FormType.slider,
         FormType.tel,
         FormType.textarea,
         FormType.text,
@@ -227,7 +238,6 @@ export class SettingService {
         FormType.password,
         FormType.radio,
         FormType.select,
-        FormType.slider,
         FormType.tel,
         FormType.textarea,
         FormType.text,
@@ -273,6 +283,7 @@ export class SettingService {
       key,
       props: this.fb.group({
         align: [props.align],
+        stars: [props.stars],
         cols: [props.cols],
         description: [props.description],
         disabled: [
@@ -280,7 +291,9 @@ export class SettingService {
         ],
         exactLength: [props.exactLength],
         headingType: [props.headingType],
+        ratingType: [props.ratingType],
         label: [props.label],
+        leftText: [props.leftText],
         max: [props.max, Validators.min(props.min ?? 0)],
         maxDate: [props.maxDate],
         maxLength: [
@@ -302,6 +315,7 @@ export class SettingService {
         required: [
           { value: props.required, disabled: props.readonly || props.disabled },
         ],
+        rightText: [props.rightText],
         severity: [props.severity],
         textFormattingOptions: [props.textFormattingOptions],
         tooltip: [props.tooltip],
@@ -320,7 +334,7 @@ export class SettingService {
       { minControlName: 'props.minLength', maxControlName: 'props.maxLength' },
     ];
     return fieldPairs
-      .map(({ minControlName: minControl, maxControlName: maxControlName }) =>
+      .map(({ minControlName: minControl, maxControlName }) =>
         this.addMinMaxValidators(minControl, maxControlName)
       )
       .flat();

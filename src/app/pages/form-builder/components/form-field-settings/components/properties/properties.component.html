@@ -7,7 +7,7 @@
     @if(settingService.formFieldSettings().properties.showLabel) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
-      appId="label"
+        appId="label"
         label="Label"
         tooltip="Introduce el texto que aparecerá como etiqueta junto a tu campo"
       ></app-label-tooltip>
@@ -22,7 +22,7 @@
     } @if(settingService.formFieldSettings().properties.showTooltip) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
-      appId="tooltip"
+        appId="tooltip"
         label="Tooltip"
         tooltip="Escribe un mensaje breve de ayuda que se mostrará al pasar el cursor sobre el campo"
       ></app-label-tooltip>
@@ -37,7 +37,7 @@
     } @if(settingService.formFieldSettings().properties.showPlaceholder) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
-      appId="placeholder"
+        appId="placeholder"
         label="Placeholder"
         tooltip="Especifica el texto que aparecerá como sugerencia dentro del campo"
       ></app-label-tooltip>
@@ -52,7 +52,7 @@
     } @if(settingService.formFieldSettings().properties.showDescription) {
     <div class="grid grid-cols-2 justify-between items-center">
       <app-label-tooltip
-      appId="description"
+        appId="description"
         label="Descripción"
         tooltip="Añade una descripción o mensaje de ayuda que se mostrará debajo del campo (maximo 450 carácteres)"
       ></app-label-tooltip>
@@ -68,6 +68,36 @@
         (input)="adjustTextareaHeight()"
         #description
       ></textarea>
+    </div>
+    } @if(settingService.formFieldSettings().properties.showLeftText) {
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        appId="leftText"
+        label="Left text"
+        tooltip="Ingresa el texto de la parte izquierda"
+      ></app-label-tooltip>
+      <input
+        id="leftText"
+        type="text"
+        name="leftText"
+        formControlName="leftText"
+        pInputText
+      />
+    </div>
+    } @if(settingService.formFieldSettings().properties.showRightText) {
+    <div class="grid grid-cols-2 justify-between items-center">
+      <app-label-tooltip
+        appId="rightText"
+        label="Right text"
+        tooltip="Ingresa el texto de la parte derecha"
+      ></app-label-tooltip>
+      <input
+        id="rightText"
+        type="text"
+        name="rightText"
+        formControlName="rightText"
+        pInputText
+      />
     </div>
     }
   </section>

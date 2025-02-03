@@ -1,0 +1,24 @@
+<div class="max-w-fit">
+  @if(props['ratingType'] === 'numbers') {
+  <app-input-rating-number
+    [stars]="stars()"
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+  ></app-input-rating-number>
+  } @else {<p-rating
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    [cancel]="false"
+    [stars]="stars()"
+    [required]="props.required ?? false"
+    (click)="setRating(formControl.value)"
+    (keydown.enter)="setRating(formControl.value)"
+  />}
+  <div class="flex items-center justify-between">
+    @if(props['leftText']) {
+    <span class="text-xs text-gray-600">{{ props["leftText"] }}</span>
+    } @if(props['rightText']) {
+    <span class="text-xs text-gray-600 ml-auto">{{ props["rightText"] }}</span>
+    }
+  </div>
+</div>

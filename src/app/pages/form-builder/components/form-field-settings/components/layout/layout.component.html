@@ -7,7 +7,7 @@
     @if(settingService.formFieldSettings().layout.showHeadingType) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-      appId="headingType"
+        appId="headingType"
         label="heading Type"
         tooltip="heading Type"
       ></app-label-tooltip>
@@ -18,10 +18,24 @@
         formControlName="headingType"
       ></app-select-button>
     </div>
+    } @if(settingService.formFieldSettings().layout.showRatingType) {
+    <div class="flex justify-between items-center">
+      <app-label-tooltip
+        appId="ratingType"
+        label="rating Type"
+        tooltip="rating Type"
+      ></app-label-tooltip>
+      <app-select-button
+        appId="ratingType"
+        name="ratingType"
+        [options]="ratingOptions"
+        formControlName="ratingType"
+      ></app-select-button>
+    </div>
     } @if(settingService.formFieldSettings().layout.showAlign) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-      appId="alignText"
+        appId="alignText"
         label="Align types"
         tooltip="Alineación del texto"
       ></app-label-tooltip>
@@ -36,7 +50,7 @@
     } @if(settingService.formFieldSettings().layout.showSeverity) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-      appId="severity"
+        appId="severity"
         label="Severity types"
         tooltip="Tipo de alerta"
       ></app-label-tooltip>
@@ -50,7 +64,7 @@
     } @if(settingService.formFieldSettings().layout.showTextFormattingOptions) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-      appId="headingType"
+        appId="headingType"
         label="Font styles"
         tooltip="Agrega cisas"
       ></app-label-tooltip>
@@ -66,7 +80,7 @@
     } @if(settingService.formFieldSettings().layout.showCols) {
     <div class="flex justify-between items-center">
       <app-label-tooltip
-      appId="cols"
+        appId="cols"
         label="Columnas"
         tooltip="Cantidad de columnas del grupo"
       ></app-label-tooltip>

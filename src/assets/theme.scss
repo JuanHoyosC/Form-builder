@@ -25,8 +25,17 @@
 }
 
 .p-tabview .p-tabview-panels {
+  background-color: transparent;
   padding: 0;
   padding-top: 20px;
+}
+
+.p-tabview .p-tabview-nav-btn.p-link {
+  color: theme("colors.indigo.600");
+}
+
+.p-tabview-title {
+  font-size: 14px;
 }
 
 .p-tabview .p-tabview-nav {
@@ -51,9 +60,6 @@
   border-color: theme("colors.indigo.600");
 }
 
-.p-tabview .p-tabview-panels {
-  background-color: transparent;
-}
 
 .p-overlaypanel .p-overlaypanel-content {
   padding: 0;
@@ -127,6 +133,32 @@
   color: #fff;
 }
 
+.p-rating {
+  flex-wrap: wrap;
+  transition: transform 100ms linear;
+}
+
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
+  color: theme("colors.indigo.600");
+}
+
+.p-rating .p-rating-item .p-rating-icon.p-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.p-rating .p-rating-item .p-rating-icon {
+  color: theme("colors.indigo.500");
+  transition: transform 100ms linear;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+}
+
 .p-dropdown {
   width: 100%;
 }
@@ -142,6 +174,10 @@
 
 .p-dropdown:not(.p-disabled).p-focus {
   box-shadow: none;
+}
+
+.p-dropdown-panel .p-dropdown-items {
+  padding: 0;
 }
 
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item {

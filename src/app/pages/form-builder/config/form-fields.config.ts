@@ -28,6 +28,7 @@ import { InputFieldSignatureComponent } from '../fields/input-field-signature/in
 import { InputFieldSelectComponent } from '../fields/input-field-select/input-field-select.component';
 import { InputFieldMultiselectComponent } from '../fields/input-field-multiselect/input-field-multiselect.component';
 import { InputFieldSliderComponent } from '../fields/input-field-slider/input-field-slider.component';
+import { InputFieldRatingComponent } from '../fields/input-field-rating/input-field-rating.component';
 
 export const FORM_FIELD_TYPES: FormFieldType = {
   ALERT_WRAPPER: {
@@ -161,6 +162,18 @@ export const FORM_FIELD_TYPES: FormFieldType = {
       options: undefined,
       min: 0,
       max: 100,
+    },
+  },
+  INPUT_RATING: {
+    key: '',
+    type: FormType.rating,
+    wrappers: ['fieldWrapper', 'formControlWrapper'],
+    props: {
+      label: 'Default Label',
+      description: '',
+      options: undefined,
+      ratingType: 'start',
+      stars: 5
     },
   },
   INPUT_TEL: {
@@ -349,6 +362,12 @@ export const FORM_FIELD_LIST: FormFieldList[] = [
         field: FORM_FIELD_TYPES.INPUT_SLIDER,
         description: 'A group of checkboxes for multiple selections.',
       },
+      {
+        label: 'Rating',
+        icon: 'ionCheckboxOutline',
+        field: FORM_FIELD_TYPES.INPUT_RATING,
+        description: 'A group of checkboxes for multiple selections.',
+      },
     ],
   },
   {
@@ -393,21 +412,22 @@ export const FORMLY_EXTENSIONS = [
 ];
 
 export const FORMLY_TYPES = [
-  { name: 'calendar', component: InputFieldCalendarComponent },
-  { name: 'checkbox', component: InputFieldCheckboxComponent },
-  { name: 'email', component: InputFieldEmailComponent },
-  { name: 'group', component: InputFieldGroupComponent },
-  { name: 'number', component: InputFieldNumberComponent },
-  { name: 'multicheckbox', component: InputFieldMultiCheckboxComponent },
-  { name: 'multiselect', component: InputFieldMultiselectComponent },
-  { name: 'password', component: InputFieldPasswordComponent },
-  { name: 'radio', component: InputFieldRadioComponent },
-  { name: 'tel', component: InputFieldTelComponent },
-  { name: 'textarea', component: InputFieldTextAreaComponent },
-  { name: 'text', component: InputFieldTextComponent },
-  { name: 'select', component: InputFieldSelectComponent },
-  { name: 'slider', component: InputFieldSliderComponent },
-  { name: 'signature', component: InputFieldSignatureComponent },
+  { name: FormType.calendar, component: InputFieldCalendarComponent },
+  { name: FormType.checkbox, component: InputFieldCheckboxComponent },
+  { name: FormType.email, component: InputFieldEmailComponent },
+  { name: FormType.group, component: InputFieldGroupComponent },
+  { name: FormType.number, component: InputFieldNumberComponent },
+  { name: FormType.multicheckbox, component: InputFieldMultiCheckboxComponent },
+  { name: FormType.multiselect, component: InputFieldMultiselectComponent },
+  { name: FormType.password, component: InputFieldPasswordComponent },
+  { name: FormType.radio, component: InputFieldRadioComponent },
+  { name: FormType.rating, component: InputFieldRatingComponent },
+  { name: FormType.tel, component: InputFieldTelComponent },
+  { name: FormType.textarea, component: InputFieldTextAreaComponent },
+  { name: FormType.text, component: InputFieldTextComponent },
+  { name: FormType.select, component: InputFieldSelectComponent },
+  { name: FormType.slider, component: InputFieldSliderComponent },
+  { name: FormType.signature, component: InputFieldSignatureComponent },
 ];
 
 export const FORMLY_WRAPPERS: {
